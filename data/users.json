@@ -1,0 +1,20 @@
+[
+  {
+    "username": "user1",
+    "email": "user1@meteofony.test",
+    "password": "password",
+    "roles": ["ROLE_USER"]
+  },
+  {
+    "username": "moderator",
+    "email": "moderator@meteofony.test",
+    "password": "password",
+    "roles": ["ROLE_MODERATOR"]
+  },
+  {
+    "username": "admin",
+    "email": "admin@meteofony.test",
+    "password": "password",
+    "roles": ["ROLE_ADMIN"]
+  }
+]

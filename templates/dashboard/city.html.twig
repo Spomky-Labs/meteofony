@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Relevés de la ville de {{ city.name }}{% endblock %}
+
+{% block body %}
+    <div>
+        <div id="map" {{ stimulus_controller('map', {latitude: city.gpsLat, longitude: city.gpsLng}) }}></div>
+    </div>
+{% endblock %}

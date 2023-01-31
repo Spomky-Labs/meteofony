@@ -1,0 +1,33 @@
+{
+    "compilerOptions": {
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "lib": [
+            "dom",
+            "es2015"
+        ],
+        "module": "es2015",
+        "moduleResolution": "node",
+        "noUnusedLocals": true,
+        "rootDir": "assets",
+        "strict": true,
+        "strictPropertyInitialization": false,
+        "target": "es2017",
+        "removeComments": true,
+        "outDir": "dist",
+        "baseUrl": ".",
+        "noEmit": false,
+        "declaration": false,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "jsx": "react"
+    },
+    "exclude": [
+        "node_modules",
+        "vendor",
+        "**/*.test.ts"
+    ],
+    "include": [
+        "assets/**/*.ts"
+    ]
+}

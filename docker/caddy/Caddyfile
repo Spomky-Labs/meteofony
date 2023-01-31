@@ -1,32 +1,45 @@
 {
-    # Debug
-    {$CADDY_DEBUG}
+	# Debug
+	{$CADDY_DEBUG}
 }
 
-{$SERVER_NAME}
+{$SERVER_NAME} {
+	{$CADDY_EXTRA_CONFIG}
 
-{$CADDY_EXTRA_CONFIG}
+	tls {
+		client_auth {
+			mode verify_if_given
+			trusted_ca_cert_file /etc/caddy/certs/ca.pem
+		}
+	}
 
-log
+	log
 
-route {
-    root * /srv/app/public
-    mercure {
-        # Transport to use (default to Bolt)
-        transport_url {$MERCURE_TRANSPORT_URL:bolt:///data/mercure.db}
-        # Publisher JWT key
-        publisher_jwt {env.MERCURE_PUBLISHER_JWT_KEY} {env.MERCURE_PUBLISHER_JWT_ALG}
-        # Subscriber JWT key
-        subscriber_jwt {env.MERCURE_SUBSCRIBER_JWT_KEY} {env.MERCURE_SUBSCRIBER_JWT_ALG}
-        # Allow anonymous subscribers (double-check that it's what you want)
-        anonymous
-        # Enable the subscription API (double-check that it's what you want)
-        subscriptions
-        # Extra directives
-        {$MERCURE_EXTRA_DIRECTIVES}
-    }
-    vulcain
-    php_fastcgi unix//var/run/php/php-fpm.sock
-    encode zstd gzip
-    file_server
+	route {
+		root * /srv/app/public
+		mercure {
+			# Transport to use (default to Bolt)
+			transport_url {$MERCURE_TRANSPORT_URL:bolt:///data/mercure.db}
+			# Publisher JWT key
+			publisher_jwt {env.MERCURE_PUBLISHER_JWT_KEY} {env.MERCURE_PUBLISHER_JWT_ALG}
+			# Subscriber JWT key
+			subscriber_jwt {env.MERCURE_SUBSCRIBER_JWT_KEY} {env.MERCURE_SUBSCRIBER_JWT_ALG}
+			# Allow anonymous subscribers (double-check that it's what you want)
+			anonymous
+			# Enable the subscription API (double-check that it's what you want)
+			subscriptions
+			# Extra directives
+			{$MERCURE_EXTRA_DIRECTIVES}
+		}
+		vulcain
+		php_fastcgi unix//var/run/php/php-fpm.sock {
+            env SSL_CLIENT_S_FINGERPRINT {http.request.tls.client.fingerprint}
+            env SSL_CLIENT_S_CERTIFICATE {http.request.tls.client.certificate_der_base64}
+            env SSL_CLIENT_S_ISSUER {http.request.tls.client.issuer}
+            env SSL_CLIENT_S_SERIAL {http.request.tls.client.serial}
+            env SSL_CLIENT_S_DN {http.request.tls.client.subject}
+		}
+		encode zstd gzip
+		file_server
+	}
 }
