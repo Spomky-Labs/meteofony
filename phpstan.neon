@@ -1,0 +1,40 @@
+parameters:
+    level: max
+    paths:
+        - src
+    excludePaths:
+        - %currentWorkingDirectory%/src/Kernel.php
+    ignoreErrors:
+        - '#Cannot cast mixed to string\.#'
+        -
+            message: '#\.#'
+            path: src/Security/UsernamePasswordAuthenticator.php
+        -
+            message: '#\.#'
+            path: src/Controller/ResetPasswordController.php
+        -
+            message: '#Method App\\Repository\\CityRepository\:\:findByNameLike\(\) should return array\<App\\Entity\\City\> but returns mixed\.#'
+            path: src/Repository/CityRepository.php
+            count: 1
+        -
+            message: '#Parameter .* of class App\\Entity\\ResetPasswordRequest constructor expects App\\Entity\\User\|null\, object given\.#'
+            path: src/Repository/ResetPasswordRequestRepository.php
+            count: 1
+        -
+            message: '#Method App\\Entity\\ResetPasswordRequest\:\:getUser\(\) should return object but returns App\\Entity\\User\|null\.#'
+            path: src/Entity/ResetPasswordRequest.php
+            count: 1
+        -
+            message: '#Method App\\Repository\\UserRepository\:\:findOneByUsername\(\) should return .* but returns mixed\.#'
+            path: src/Repository/UserRepository.php
+            count: 1
+    checkGenericClassInNonGenericObjectType: false
+includes:
+    - vendor/phpstan/phpstan-phpunit/extension.neon
+    - vendor/phpstan/phpstan-phpunit/rules.neon
+    - vendor/phpstan/phpstan-strict-rules/rules.neon
+    - vendor/phpstan/phpstan-beberlei-assert/extension.neon
+    - vendor/phpstan/phpstan-deprecation-rules/rules.neon
+    - vendor/phpstan/phpstan-symfony/extension.neon
+    - vendor/phpstan/phpstan-symfony/rules.neon
+    - vendor/ekino/phpstan-banned-code/extension.neon

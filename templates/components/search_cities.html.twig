@@ -1,0 +1,26 @@
+<div{{ attributes }}>
+    <label for="form_city">Rechercher une ville</label>
+    <input
+        id="form_city"
+        type="text"
+        data-model="query"
+        placeholder="Ville"
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+    >
+
+    {% if this.cities|length > 0 %}
+        <div data-loading="addClass(opacity-50)" class="m-4">
+            <ul class="list-disc">
+                {% for city in this.cities %}
+                <li>
+                    <a href="{{ path('app_dashboard_city', {id: city.id}) }}">
+                        {{ city.name }}{% if city.zipCode is not null %} ({{ city.zipCode }}){% endif %}
+                    </a>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% else %}
+        <div>Aucune ville ne correspond à "{{ query }}"</div>
+    {% endif %}
+</div>

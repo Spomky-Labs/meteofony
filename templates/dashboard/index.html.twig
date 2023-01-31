@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Relevés communautaires{% endblock %}
+
+{% block content %}
+    <section class="bg-white border-b py-8">
+        <div class="container mx-auto flex flex-wrap p-4 pt-4 pb-12">
+            <h2 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">
+                    Choisissez une ville
+            </h2>
+            <div class="w-full mb-4">
+                <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
+            </div>
+            <div class="text-gray-800 w-fullp-6 flex flex-col flex-grow flex-shrink">
+            <p class="text-gray-800 text-base px-6 mb-5">
+                {{ component('search_cities') }}
+            </p>
+        </div>
+    </section>
+{% endblock %}

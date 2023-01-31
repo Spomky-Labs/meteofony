@@ -4,6 +4,11 @@
 # https://docs.docker.com/develop/develop-images/multistage-build/#stop-at-a-specific-build-stage
 # https://docs.docker.com/compose/compose-file/#target
 
+ARG PHP_VERSION=8.2
+ARG CADDY_VERSION=2.6
+ARG NODE_VERSION=19
+
+
 # Builder images
 FROM composer/composer:2-bin AS composer
 
@@ -19,7 +24,7 @@ RUN xcaddy build \
 	--with github.com/dunglas/vulcain/caddy
 
 # Prod image
-FROM php:8.2-fpm-alpine AS app_php
+FROM php:${PHP_VERSION}-fpm-alpine AS app_composer
 
 # Allow to use development versions of Symfony
 ARG STABILITY="stable"
@@ -51,9 +56,16 @@ RUN set -eux; \
     	zip \
     	apcu \
 		opcache \
+    	gd \
     ;
 
 ###> recipes ###
+###> doctrine/doctrine-bundle ###
+RUN apk add --no-cache --virtual .pgsql-deps postgresql-dev; \
+	docker-php-ext-install -j$(nproc) pdo_pgsql; \
+	apk add --no-cache --virtual .pgsql-rundeps so:libpq.so.5; \
+	apk del .pgsql-deps
+###< doctrine/doctrine-bundle ###
 ###< recipes ###
 
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
@@ -101,6 +113,43 @@ RUN set -eux; \
 		chmod +x bin/console; sync; \
     fi
 
+# node "stage"
+FROM node:${NODE_VERSION}-alpine AS symfony_node_base
+
+WORKDIR /app
+
+COPY package*.json ./
+
+FROM symfony_node_base as symfony_node_dev
+
+RUN --mount=type=cache,target=/usr/src/app/.npm \
+    npm set cache /user/src/app/.npm && \
+    npm install
+
+COPY --chown=node:node --link --from=app_composer /srv/app .
+
+CMD ["npm", "run", "dev"]
+
+FROM symfony_node_base as symfony_node_production
+
+ENV NODE_ENV production
+
+RUN --mount=type=cache,target=/usr/src/app/.npm \
+    npm set cache /user/src/app/.npm && \
+    npm ci --only=production
+
+USER node
+
+COPY --chown=node:node --link --from=app_composer /srv/app .
+
+EXPOSE 3000
+
+RUN npm run build
+
+FROM app_composer AS app_php
+COPY --from=symfony_node_production --link /app/public/build /srv/app/public/build/
+
+
 # Dev image
 FROM app_php AS app_php_dev
 
@@ -119,10 +168,15 @@ RUN set -eux; \
 RUN rm -f .env.local.php
 
 # Caddy image
-FROM caddy:2.6-alpine AS app_caddy
+FROM caddy:${CADDY_VERSION}-alpine AS app_caddy
+RUN apk add --no-cache \
+		nss-tools \
+	;
+
 
 WORKDIR /srv/app
 
 COPY --from=app_caddy_builder --link /usr/bin/caddy /usr/bin/caddy
 COPY --from=app_php --link /srv/app/public public/
 COPY --link docker/caddy/Caddyfile /etc/caddy/Caddyfile
+COPY --from=symfony_node_production --link /app/public/build /srv/app/public/build/

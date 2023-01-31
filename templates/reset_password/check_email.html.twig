@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Un courriel vient de vous être envoyé{% endblock %}
+
+{% block content %}
+    <p>
+        Si un compte correspondant à votre identifiant existe, un courriel vous sera adressé avec la suite de la procédure de réinitialisation.
+    </p>
+    <p>
+        Si vous ne recevez pas de courriel, veuillez vérifier votre dossier spam ou <a href="{{ path('app_forgot_password_request') }}">réessayer</a>.
+    </p>
+{% endblock %}
