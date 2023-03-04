@@ -5,13 +5,16 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Stringable;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`users`')]
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface, Stringable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -24,6 +27,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private array $roles = [];
 
+    /**
+     * @var Collection<int, AccessToken>|AccessToken[]
+     */
+    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: AccessToken::class, orphanRemoval: true)]
+    private Collection $accessTokens;
+
     public function __construct(
         #[ORM\Column(length: 180, unique: true)]
         private string $email,
@@ -35,6 +44,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         #[ORM\Column]
         private string $password
     ) {
+        $this->accessTokens = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return sprintf('%s (%s)', $this->username, $this->email);
     }
 
     public function getId(): ?int
@@ -138,6 +153,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             $this->roles = array_filter($this->roles, static fn (string $item): bool => $item !== $role);
         }
         $this->roles = array_unique($this->roles);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, AccessToken>
+     */
+    public function getAccessTokens(): Collection
+    {
+        return $this->accessTokens;
+    }
+
+    public function addAccessToken(AccessToken $accessToken): self
+    {
+        if (! $this->accessTokens->contains($accessToken)) {
+            $this->accessTokens->add($accessToken);
+            $accessToken->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAccessToken(AccessToken $accessToken): self
+    {
+        if ($this->accessTokens->removeElement($accessToken)) {
+            // set the owning side to null (unless already changed)
+            if ($accessToken->getOwner() === $this) {
+                $accessToken->setOwner(null);
+            }
+        }
 
         return $this;
     }
