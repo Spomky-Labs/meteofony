@@ -24,6 +24,10 @@ parameters:
             message: '#Method App\\Entity\\ResetPasswordRequest\:\:getUser\(\) should return object but returns App\\Entity\\User\|null\.#'
             path: src/Entity/ResetPasswordRequest.php
             count: 1
+        -
+            message: '#Method App\\Repository\\UserRepository\:\:findOneByEmail\(\) should return .* but returns mixed\.#'
+            path: src/Repository/UserRepository.php
+            count: 1
     checkGenericClassInNonGenericObjectType: false
 includes:
     - vendor/phpstan/phpstan-phpunit/extension.neon
