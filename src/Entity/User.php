@@ -8,6 +8,7 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use function in_array;
 use Stringable;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -83,6 +84,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Stringa
     {
         $roles = $this->roles;
         $roles[] = 'ROLE_USER';
+        if (in_array('ROLE_ADMIN', $roles, true)) {
+            unset($roles[array_search('ROLE_ADMIN', $roles, true)]);
+        }
 
         return array_unique($roles);
     }

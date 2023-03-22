@@ -7,6 +7,8 @@ security:
         # used to reload user from session & other features (e.g. switch_user)
         app_user_provider:
             id: App\Security\UserProvider
+        app_admin_provider:
+            id: App\Security\AdminProvider
 
     role_hierarchy:
         ROLE_MODERATOR:       ROLE_USER
@@ -17,10 +19,22 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
+        admin:
+            pattern: ^/admin
+            provider: app_admin_provider
+            x509:
+                user_identifier: CN
+        api:
+            pattern: ^/api
+            provider: app_user_provider
+            stateless: true
+            access_token:
+                token_handler: App\Security\AccessTokenHandler
         main:
             pattern: ^/
             lazy: true
             provider: app_user_provider
+            login_throttling: null
             custom_authenticator: App\Security\UsernamePasswordAuthenticator
             logout:
                 path: app_logout
@@ -38,6 +52,7 @@ security:
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/dashboard, roles: ROLE_USER }
+        - { path: ^/api, roles: ROLE_USER }
         - { path: ^/, roles: PUBLIC_ACCESS }
 
 when@test:
