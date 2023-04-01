@@ -46,8 +46,8 @@ final class UsernamePasswordAuthenticator extends AbstractLoginFormAuthenticator
 
         return new Passport(
             new UserBadge($username),
-            new PasswordCredentials($request->request->get('password', '')),
-            [new CsrfTokenBadge('authenticate', $request->request->get('_csrf_token'))]
+            new PasswordCredentials($password),
+            $badges
         );
     }
 

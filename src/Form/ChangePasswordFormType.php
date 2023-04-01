@@ -12,6 +12,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\NotCompromisedPassword;
 
 final class ChangePasswordFormType extends AbstractType
 {
@@ -39,6 +40,10 @@ final class ChangePasswordFormType extends AbstractType
                             'max' => 64,
                             'maxMessage' => 'Le maximum de caractères autorisé est de {{ limit }} caractères',
                         ]),
+                        new NotCompromisedPassword(),
+                        new PasswordStrength([
+                            'userData' => $userData,
+                        ])
                     ],
                     'label' => 'Nouveau mot de passe',
                 ],
