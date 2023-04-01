@@ -20,6 +20,7 @@ final readonly class UserProvider implements UserProviderInterface
 
     public function loadUserByIdentifier(string $identifier): UserInterface
     {
+        dump($identifier);
         $user = $this->userRepository->findOneByUsername($identifier);
         $user !== null || throw new UserNotFoundException('User not found');
 

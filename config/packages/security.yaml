@@ -7,6 +7,8 @@ security:
         # used to reload user from session & other features (e.g. switch_user)
         app_user_provider:
             id: App\Security\UserProvider
+        app_admin_provider:
+            id: App\Security\AdminProvider
 
     role_hierarchy:
         ROLE_MODERATOR:       ROLE_USER
@@ -17,11 +19,30 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
+        admin:
+            pattern: ^/admin
+            lazy: true
+            stateless: true
+            x509:
+                provider: app_admin_provider
+                user_identifier: CN
+        access_token:
+            pattern: ^/api
+            lazy: true
+            stateless: true
+            provider: app_user_provider
+            access_token:
+                token_handler: App\Security\AccessTokenHandler
         main:
             pattern: ^/
             lazy: true
+            login_throttling:
+                interval: 15 minutes
             provider: app_user_provider
             custom_authenticator: App\Security\UsernamePasswordAuthenticator
+            two_factor:
+                auth_form_path: 2fa_login
+                check_path: 2fa_login_check
             logout:
                 path: app_logout
                 # where to redirect after logout
@@ -38,6 +59,7 @@ security:
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/dashboard, roles: ROLE_USER }
+        - { path: ^/2fa, role: IS_AUTHENTICATED_2FA_IN_PROGRESS }
         - { path: ^/, roles: PUBLIC_ACCESS }
 
 when@test:

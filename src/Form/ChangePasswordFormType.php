@@ -16,6 +16,8 @@ final class ChangePasswordFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $userData = $options['userData'] ?? [];
+        dump($userData);
         $builder
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
@@ -51,6 +53,10 @@ final class ChangePasswordFormType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults([]);
+        $resolver->setDefaults([
+            'userData' => [],
+        ])
+            ->setAllowedTypes('userData', 'string[]')
+        ;
     }
 }
