@@ -8,13 +8,14 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Scheb\TwoFactorBundle\Model\Email\TwoFactorInterface;
 use Stringable;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`users`')]
-class User implements UserInterface, PasswordAuthenticatedUserInterface, Stringable
+class User implements UserInterface, PasswordAuthenticatedUserInterface, Stringable, TwoFactorInterface
 {
     /**
      * @var array<string>
@@ -44,7 +45,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Stringa
         #[ORM\Column(length: 200, unique: true)]
         private string $username,
         #[ORM\Column]
-        private string $password
+        private string $password,
+        #[ORM\Column(type: 'string', nullable: true)]
+        private ?string $authCode = null
     ) {
         $this->accessTokens = new ArrayCollection();
         $this->sessions = new ArrayCollection();
