@@ -24,7 +24,7 @@ final class DemoteUserCommand extends Command
 
     protected function configure(): void
     {
-        $this->addArgument('email', InputArgument::REQUIRED, 'Adresse email de l’utilisateur concerné');
+        $this->addArgument('email', InputArgument::REQUIRED, 'Email address of the user concerned');
         $this->addArgument('roles', InputArgument::IS_ARRAY | InputArgument::REQUIRED, 'Roles to be removed');
     }
 
@@ -37,13 +37,13 @@ final class DemoteUserCommand extends Command
             'email' => $email,
         ]);
         if ($user === null) {
-            $io->error('L’utilisateur n’a pas été trouvé');
+            $io->error('User not found');
             return self::FAILURE;
         }
 
         $roles = $input->getArgument('roles');
         if (! is_array($roles)) {
-            $io->error('Une liste de roles doit être choisie');
+            $io->error('A list of roles must be chosen');
             return self::FAILURE;
         }
         $roles = array_map(static function (string $role): string {
@@ -57,7 +57,7 @@ final class DemoteUserCommand extends Command
         $user->removeRole(...$roles);
         $this->userRepository->save($user, true);
 
-        $io->success('L’utilisateur a maintenant les roles suivants');
+        $io->success('The user now has the following roles');
         $io->listing($user->getRoles());
 
         return self::SUCCESS;

@@ -30,9 +30,9 @@ final class CreateAccessTokenCommand extends Command
         $io = new SymfonyStyle($input, $output);
 
         $users = $this->userRepository->findAll();
-        $user = $io->askQuestion(new ChoiceQuestion('Utilisateur', $users));
+        $user = $io->askQuestion(new ChoiceQuestion('User', $users));
         if (! $user instanceof User) {
-            $io->error('L’utilisateur n’existe pas');
+            $io->error('The user does not exist');
             return self::FAILURE;
         }
         $value = bin2hex(random_bytes(32));
@@ -40,7 +40,7 @@ final class CreateAccessTokenCommand extends Command
 
         $this->accessTokenRepository->save($accessToken, true);
 
-        $io->success(sprintf('L’access token a bien été créé. Sa valeur est : %s', $value));
+        $io->success(sprintf('The access token has been successfully created. Its value is: %s', $value));
 
         return self::SUCCESS;
     }

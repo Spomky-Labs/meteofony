@@ -1,13 +1,13 @@
-<h1>Bonjour 👋🏼</h1>
+<h1>Hello 👋🏼</h1>
 
 <p>
-    Nous avons reçu une demande de récupération de mot de passe.<br>
-    Si vous êtes a l’origine de cette demande, merci de cliquer sur le lien ci-dessous afin de
-    poursuivre le processus de réinitialisation
+    We received a password recovery request.<br>
+    If you are at the origin of this request, please click on the link below in order to
+    continue the reset process
 </p>
 
 <a href="{{ url('app_reset_password', {token: resetToken.token}) }}">{{ url('app_reset_password', {token: resetToken.token}) }}</a>
 
-<p>Ce lien expire dans {{ resetToken.expiresAt| ago }}.</p>
+<p>This link expires in {{ resetToken.expiresAt| ago }}.</p>
 
 <p>Cheers!</p>

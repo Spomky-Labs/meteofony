@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Connexion !{% endblock %}
+{% block title %}Login !{% endblock %}
 
 {% block content %}
     <section class="h-screen">
@@ -19,18 +19,18 @@
                             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                         {% endif %}
                         <div class="mb-6">
-                            <label for="inputUsername">Nom d'utilisateur</label>
+                            <label for="inputUsername">Username</label>
                             <input
                                 type="text"
                                 value="{{ last_username }}"
                                 name="username"
                                 id="inputUsername" autocomplete="username" required autofocus
                                 class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                placeholder="Nom d’utilisateur"
+                                placeholder="Username"
                             />
                         </div>
                         <div class="mb-6">
-                            <label for="inputPassword">Mot de passe</label>
+                            <label for="inputPassword">Password</label>
                             <input
                                 type="password"
                                 name="password"
@@ -43,7 +43,7 @@
                         </div>
 
                         <div class="flex justify-between items-center mb-6">
-                            <a href="{{ path('app_forgot_password_request') }}" class="text-gray-800">J’ai oublié mon mot de passe</a>
+                            <a href="{{ path('app_forgot_password_request') }}" class="text-gray-800">I forgot my password</a>
                         </div>
 
                         <div class="text-center lg:text-left">
@@ -51,11 +51,11 @@
                                 type="submit"
                                 class="mx-auto lg:mx-0 hover:underline font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out bg-white text-gray-800"
                             >
-                                Connexion
+                                Login
                             </button>
                             <p class="text-sm font-semibold mt-2 pt-1 mb-0">
-                                Vous n’avez pas de compte&nbsp;?
-                                Contactez-nous&nbsp;!
+                                Don't have an account?
+                                Contact us!
                             </p>
                         </div>
                         <input type="hidden" name="_csrf_token"

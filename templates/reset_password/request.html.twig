@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Réinitialisez votre mot de passe{% endblock %}
+{% block title %}Reset your password{% endblock %}
 
 {% block content %}
     <section class="h-screen">
@@ -24,8 +24,8 @@
                     </div>
                     <div>
                         <p>
-                            Saisissez votre adresse électronique et nous vous enverrons
-                            le démarche à suivre pour réinitialisez votre mot de passe.
+                            Enter your email address, and we'll send you
+                            the procedure for resetting your password.
                         </p>
                     </div>
 
@@ -33,7 +33,7 @@
                     <div class="text-center lg:text-left">
                         <button type="submit" class="mx-auto lg:mx-0 hover:underline font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out bg-white text-gray-800">Valider</button>
                         <p class="text-sm font-semibold mt-2 pt-1 mb-0">
-                            <a href="{{ path('app_login') }}">Revenir à la page de connexion</a>
+                            <a href="{{ path('app_login') }}">Return to the login page</a>
                         </p>
                     </div>
                     {{ form_end(requestForm) }}

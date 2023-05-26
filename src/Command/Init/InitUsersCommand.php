@@ -18,7 +18,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 use Symfony\Component\Uid\Ulid;
 
-#[AsCommand(name: 'app:init:users', description: 'Initialisation des utilisateurs',)]
+#[AsCommand(name: 'app:init:users', description: 'User initialization')]
 final class InitUsersCommand extends Command
 {
     public function __construct(
@@ -36,7 +36,7 @@ final class InitUsersCommand extends Command
 
         $data = file_get_contents($this->projectDirectory . '/data/users.json');
         is_string($data) || throw new RuntimeException(
-            'Impossible de trouver les données concernant les utilisateurs.'
+            'Unable to find user data.'
         );
         /** @var array<array{username: string, email: string, password: string, name: string, roles: array<string>}> $users */
         $users = json_decode($data, true, 512, JSON_THROW_ON_ERROR);

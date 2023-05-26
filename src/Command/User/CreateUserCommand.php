@@ -30,8 +30,8 @@ final class CreateUserCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
 
-        $username = (string) $io->askQuestion(new Question('Nom d’utilisateur'));
-        $email = (string) $io->askQuestion(new Question('Adresse email'));
+        $username = (string) $io->askQuestion(new Question('Username'));
+        $email = (string) $io->askQuestion(new Question('Email address'));
 
         try {
             $hasher = $this->hasherFactory->getPasswordHasher(User::class);
@@ -40,11 +40,11 @@ final class CreateUserCommand extends Command
             $user->setPassword($password);
             $this->userRepository->save($user, true);
         } catch (Throwable $e) {
-            $io->error(sprintf('Une erreur est survenue : %s', $e->getMessage()));
+            $io->error(sprintf('An error has occurred : %s', $e->getMessage()));
             return self::FAILURE;
         }
 
-        $io->success('L’utilisateur a bien été créé');
+        $io->success('The user has been successfully created');
 
         return self::SUCCESS;
     }
