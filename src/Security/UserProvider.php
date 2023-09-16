@@ -26,9 +26,7 @@ final readonly class UserProvider implements UserProviderInterface
         return $user;
     }
 
-    /**
-     * {@inheritdoc}
-     */
+
     public function refreshUser(UserInterface $user): UserInterface
     {
         if (! $this->supportsClass($user::class)) {

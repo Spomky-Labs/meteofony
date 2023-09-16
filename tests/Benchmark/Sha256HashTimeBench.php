@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Tests\Benchmark;
 
-use const PASSWORD_BCRYPT;
 use PhpBench\Benchmark\Metadata\Annotations\Revs;
+use const PASSWORD_BCRYPT;
 
 final class Sha256HashTimeBench
 {

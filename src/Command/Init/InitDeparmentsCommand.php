@@ -7,15 +7,15 @@ namespace App\Command\Init;
 use App\Entity\Department;
 use App\Repository\DepartmentRepository;
 use App\Repository\RegionRepository;
-use function count;
-use function is_string;
-use const JSON_THROW_ON_ERROR;
 use RuntimeException;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use function count;
+use function is_string;
+use const JSON_THROW_ON_ERROR;
 
 #[AsCommand(name: 'app:init:departments', description: 'Initialisation des départements',)]
 final class InitDeparmentsCommand extends Command

@@ -6,9 +6,6 @@ namespace App\Command\Init;
 
 use App\Entity\User;
 use App\Repository\UserRepository;
-use function count;
-use function is_string;
-use const JSON_THROW_ON_ERROR;
 use RuntimeException;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -17,6 +14,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 use Symfony\Component\Uid\Ulid;
+use function count;
+use function is_string;
+use const JSON_THROW_ON_ERROR;
 
 #[AsCommand(name: 'app:init:users', description: 'User initialization')]
 final class InitUsersCommand extends Command
@@ -35,9 +35,7 @@ final class InitUsersCommand extends Command
         $hasher = $this->hasherFactory->getPasswordHasher(User::class);
 
         $data = file_get_contents($this->projectDirectory . '/data/users.json');
-        is_string($data) || throw new RuntimeException(
-            'Unable to find user data.'
-        );
+        is_string($data) || throw new RuntimeException('Unable to find user data.');
         /** @var array<array{username: string, email: string, password: string, name: string, roles: array<string>}> $users */
         $users = json_decode($data, true, 512, JSON_THROW_ON_ERROR);
 

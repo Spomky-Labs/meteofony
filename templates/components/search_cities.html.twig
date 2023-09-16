@@ -21,6 +21,8 @@
             </ul>
         </div>
     {% else %}
-        <div>No city matches "{{ query }}"</div>
+        {% if not query == '' %}
+            <div>No city matches "{{ query }}"</div>
+        {% endif %}
     {% endif %}
 </div>
