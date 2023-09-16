@@ -6,7 +6,6 @@
 
 ARG PHP_VERSION=8.2
 ARG CADDY_VERSION=2.6
-ARG NODE_VERSION=19
 
 
 # Builder images
@@ -113,42 +112,6 @@ RUN set -eux; \
 		chmod +x bin/console; sync; \
     fi
 
-# node "stage"
-FROM node:${NODE_VERSION}-alpine AS symfony_node_base
-
-WORKDIR /app
-
-COPY package*.json ./
-
-FROM symfony_node_base as symfony_node_dev
-
-RUN --mount=type=cache,target=/usr/src/app/.npm \
-    npm set cache /user/src/app/.npm && \
-    npm install
-
-COPY --chown=node:node --link --from=app_composer /srv/app .
-
-CMD ["npm", "run", "dev"]
-
-FROM symfony_node_base as symfony_node_production
-
-ENV NODE_ENV production
-
-RUN --mount=type=cache,target=/usr/src/app/.npm \
-    npm set cache /user/src/app/.npm && \
-    npm ci --only=production
-
-USER node
-
-COPY --chown=node:node --link --from=app_composer /srv/app .
-
-EXPOSE 3000
-
-RUN npm run build
-
-FROM app_composer AS app_php
-COPY --from=symfony_node_production --link /app/public/build /srv/app/public/build/
-
 
 # Dev image
 FROM app_php AS app_php_dev
@@ -179,4 +142,3 @@ WORKDIR /srv/app
 COPY --from=app_caddy_builder --link /usr/bin/caddy /usr/bin/caddy
 COPY --from=app_php --link /srv/app/public public/
 COPY --link docker/caddy/Caddyfile /etc/caddy/Caddyfile
-COPY --from=symfony_node_production --link /app/public/build /srv/app/public/build/
