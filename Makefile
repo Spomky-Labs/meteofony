@@ -3,15 +3,12 @@ DOCKER_COMP = docker compose
 
 # Docker containers
 PHP_CONT = $(DOCKER_COMP) exec php
-NODE_CONT = $(DOCKER_COMP) exec node
 
 # Executables
 PHP      = $(PHP_CONT) php
 COMPOSER = $(PHP_CONT) composer
 SYMFONY  = $(PHP_CONT) bin/console
 PHPUNIT  = $(PHP_CONT) bin/phpunit
-NPM      = $(NODE_CONT) npm
-NPX      = $(NODE_CONT) npx
 
 # Misc
 .DEFAULT_GOAL = help
@@ -56,25 +53,6 @@ sf: ## List all Symfony commands or pass the parameter "c=" to run a given comma
 
 cc: c=c:c ## Clear the cache
 cc: sf
-
-## —— NPM/NPX 🎵 ———————————————————————————————————————————————————————————————
-npx: ## NPX commands with the parameter "c=" to run a given command, example: make npx c='install --force'
-	@$(eval c ?=)
-	@$(NPX) $(c)
-
-npm: ## NPM commands with the parameter "c=" to run a given command, example: make npm c='install --force'
-	@$(eval c ?=)
-	@$(NPM) $(c)
-
-npm-build: ## Build the frontend
-	@$(NPM) run build
-
-npm-watch: ## Watch mode
-	@$(NPM) run watch
-
-node_modules: ## Install node_modules according to the current package-lock.json file
-node_modules: c=install force
-node_modules: npm
 
 ## —— Phpunit 🎵 ———————————————————————————————————————————————————————————————
 test: ## Execute all tests

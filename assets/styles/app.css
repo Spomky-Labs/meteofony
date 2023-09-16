@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    background-color: #30b2af;
+}
+
+.gradient {
+    background: linear-gradient(90deg, #30b2af 0%, #79f8e0 100%);
+}
+
+#map {
+    display: block;
+    height: 75vh;
+    width: 100vw;
+}
