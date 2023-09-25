@@ -31,7 +31,11 @@ return static function (RectorConfig $rectorConfig): void {
     ]);
     $rectorConfig->phpVersion(PhpVersion::PHP_82);
     $rectorConfig->paths([__DIR__ . '/config', __DIR__ . '/src', __DIR__ . '/tests']);
-    $rectorConfig->skip([__DIR__ . '/config/bundles.php', RemoveExtraParametersRector::class]);
+    $rectorConfig->skip([
+        __DIR__ . '/config/bundles.php',
+        __DIR__ . '/importmap.php',
+        RemoveExtraParametersRector::class,
+    ]);
     $rectorConfig->parallel();
     $rectorConfig->importNames();
     $rectorConfig->importShortClasses();

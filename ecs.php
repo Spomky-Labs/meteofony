@@ -100,6 +100,7 @@ return static function (ECSConfig $config): void {
     $config->paths([__DIR__]);
     $config->skip([
         __DIR__ . '/src/Kernel.php',
+        __DIR__ . '/importmap.php',
         __DIR__ . '/assets',
         __DIR__ . '/bin',
         __DIR__ . '/config/bundles.php',

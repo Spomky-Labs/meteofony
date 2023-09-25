@@ -57,7 +57,10 @@ cc: sf
 build-assets: ## Compile assets
 	@$(SYMFONY) importmap:update
 	@$(SYMFONY) tailwind:build
-	@$(SYMFONY) asset-map:compile
+
+watch-assets: ## Watch assets
+	@$(SYMFONY) importmap:update
+	@$(SYMFONY) tailwind:build --watch
 
 ## —— Phpunit 🎵 ———————————————————————————————————————————————————————————————
 test: ## Execute all tests

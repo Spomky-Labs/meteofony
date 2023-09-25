@@ -7,8 +7,8 @@ namespace App\State;
 use ApiPlatform\Metadata\CollectionOperationInterface;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProviderInterface;
+use App\ApiResource\Measure;
 use App\Entity\City;
-use App\Entity\Measure;
 use App\Repository\CityRepository;
 use DateTimeImmutable;
 use LogicException;
@@ -44,7 +44,7 @@ class MeasureStateProvider implements ProviderInterface
     {
         $now = new DateTimeImmutable();
         foreach (range(1, 100) as $i) {
-            $date = $now->modify('-'.$i.' day');
+            $date = $now->modify('-' . $i . ' day');
             $temperature = random_int(-30, 30) + random_int(0, 100) / 100;
             yield new Measure(
                 id: Ulid::generate(),
