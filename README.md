@@ -16,10 +16,11 @@ Playground for improving the security of the Météofony application.
 
 4) Start the app
    From the root of the application
+    - cd meteofony
     - make build
-    - make build-assets
-    - make up
+    - make assets
     - make init
+    - make up
 
 5) From your browser
     https://localhost:8443
