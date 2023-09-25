@@ -18,7 +18,8 @@
                             {{ city.name }}{% if city.zipCode is not null %} ({{ city.zipCode }}){% endif %}
                         </div>
                         <span class="text-sm text-gray-500 dark:text-gray-400">
-                            Administrative department: {{ city.department.name }} ({{ city.department.id }})
+                            Administrative department: {{ city.department.name }} ({{ city.department.code }}) <br>
+                            Region: {{ city.department.region.name }}
                         </span>
                     </a>
                 </li>

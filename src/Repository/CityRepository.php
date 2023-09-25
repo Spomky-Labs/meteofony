@@ -59,7 +59,7 @@ final class CityRepository extends ServiceEntityRepository
     public function findByNameLike(string $query): array
     {
         return $this->createQueryBuilder('c')
-            ->andWhere('LOWER(c.name) LIKE :query')
+            ->andWhere('(LOWER(c.name) LIKE :query) OR (LOWER(c.zipCode) LIKE :query) OR (LOWER(c.inseeCode) LIKE :query)')
             ->setParameter('query', sprintf('%%%s%%', mb_strtolower($query)))
             ->orderBy('c.name', Criteria::ASC)
             ->setMaxResults(50)
