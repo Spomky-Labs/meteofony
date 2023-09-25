@@ -7,6 +7,9 @@ security:
         # used to reload user from session & other features (e.g. switch_user)
         app_user_provider:
             id: App\Security\UserProvider
+#        app_admin_provider:
+#            id: App\Security\AdminProvider
+
 
     role_hierarchy:
         ROLE_MODERATOR:       ROLE_USER
@@ -16,6 +19,12 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+
+#        admin:
+#            pattern: ^/admin
+#            provider: app_admin_provider
+#            x509:
+#                user_identifier: CN
 
         main:
             pattern: ^/
@@ -38,6 +47,7 @@ security:
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/dashboard, roles: ROLE_USER }
+        #- { path: ^/api, roles: ROLE_USER }
         - { path: ^/, roles: PUBLIC_ACCESS }
 
 when@test:

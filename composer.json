@@ -8,45 +8,52 @@
     "require": {
         "php": ">=8.2.1",
         "ext-ctype": "*",
+        "ext-gd": "*",
         "ext-iconv": "*",
+        "ext-sodium": "*",
+        "ext-zip": "*",
+        "api-platform/core": "^3.1",
         "doctrine/annotations": "^2.0",
         "doctrine/doctrine-bundle": "^2.8",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.14",
         "gregwar/captcha-bundle": "^2.2",
         "knplabs/knp-time-bundle": "^2.0",
+        "nelmio/cors-bundle": "^2.3",
         "phpdocumentor/reflection-docblock": "^5.3",
         "phpstan/phpdoc-parser": "^1.16",
-        "symfony/asset": "6.3.*",
-        "symfony/asset-mapper": "6.3.*",
-        "symfony/console": "6.3.*",
-        "symfony/doctrine-messenger": "6.3.*",
-        "symfony/dotenv": "6.3.*",
-        "symfony/expression-language": "6.3.*",
+        "runtime/frankenphp-symfony": "^0.1.0",
+        "symfony/asset": "6.4.*@dev",
+        "symfony/asset-mapper": "6.4.*@dev",
+        "symfony/console": "6.4.*@dev",
+        "symfony/doctrine-messenger": "6.4.*@dev",
+        "symfony/dotenv": "6.4.*@dev",
+        "symfony/expression-language": "6.4.*@dev",
         "symfony/flex": "^2",
-        "symfony/form": "6.3.*",
-        "symfony/framework-bundle": "6.3.*",
-        "symfony/http-client": "6.3.*",
-        "symfony/intl": "6.3.*",
-        "symfony/mailer": "6.3.*",
-        "symfony/mime": "6.3.*",
+        "symfony/form": "6.4.*@dev",
+        "symfony/framework-bundle": "6.4.*@dev",
+        "symfony/http-client": "6.4.*@dev",
+        "symfony/intl": "6.4.*@dev",
+        "symfony/mailer": "6.4.*@dev",
+        "symfony/mime": "6.4.*@dev",
         "symfony/monolog-bundle": "^3.0",
-        "symfony/notifier": "6.3.*",
-        "symfony/process": "6.3.*",
-        "symfony/property-access": "6.3.*",
-        "symfony/property-info": "6.3.*",
-        "symfony/runtime": "6.3.*",
-        "symfony/security-bundle": "6.3.*",
-        "symfony/serializer": "6.3.*",
+        "symfony/notifier": "6.4.*@dev",
+        "symfony/process": "6.4.*@dev",
+        "symfony/property-access": "6.4.*@dev",
+        "symfony/property-info": "6.4.*@dev",
+        "symfony/proxy-manager-bridge": "^6.3",
+        "symfony/runtime": "6.4.*@dev",
+        "symfony/security-bundle": "6.4.*@dev",
+        "symfony/serializer": "6.4.*@dev",
         "symfony/stimulus-bundle": "^2.11",
-        "symfony/string": "6.3.*",
-        "symfony/translation": "6.3.*",
-        "symfony/twig-bundle": "6.3.*",
-        "symfony/uid": "6.3.*",
+        "symfony/string": "6.4.*@dev",
+        "symfony/translation": "6.4.*@dev",
+        "symfony/twig-bundle": "6.4.*@dev",
+        "symfony/uid": "6.4.*@dev",
         "symfony/ux-live-component": "^2.7",
-        "symfony/validator": "6.3.*",
-        "symfony/web-link": "6.3.*",
-        "symfony/yaml": "6.3.*",
+        "symfony/validator": "6.4.*@dev",
+        "symfony/web-link": "6.4.*@dev",
+        "symfony/yaml": "6.4.*@dev",
         "symfonycasts/reset-password-bundle": "^1.17",
         "symfonycasts/tailwind-bundle": "^0.1.7",
         "twig/extra-bundle": "^2.12|^3.0",
@@ -57,7 +64,11 @@
             "symfony/flex": true,
             "symfony/runtime": true
         },
-        "sort-packages": true
+        "sort-packages": true,
+        "optimize-autoloader": true,
+        "preferred-install": {
+            "*": "dist"
+        }
     },
     "autoload": {
         "psr-4": {
@@ -76,7 +87,8 @@
         "symfony/polyfill-php73": "*",
         "symfony/polyfill-php74": "*",
         "symfony/polyfill-php80": "*",
-        "symfony/polyfill-php81": "*"
+        "symfony/polyfill-php81": "*",
+        "symfony/polyfill-php82": "*"
     },
     "scripts": {
         "auto-scripts": {
@@ -96,8 +108,11 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "6.3.*",
-            "docker": true
+            "require": "6.4.*@dev",
+            "docker": false
+        },
+        "runtime": {
+            "class": "Runtime\\FrankenPhpSymfony\\Runtime"
         }
     },
     "require-dev": {
@@ -113,13 +128,13 @@
         "phpunit/phpunit": "^10.0",
         "rector/rector": "^0.18",
         "roave/security-advisories": "dev-latest",
-        "symfony/browser-kit": "6.3.*",
-        "symfony/css-selector": "6.3.*",
-        "symfony/debug-bundle": "6.3.*",
+        "symfony/browser-kit": "6.4.*@dev",
+        "symfony/css-selector": "6.4.*@dev",
+        "symfony/debug-bundle": "6.4.*@dev",
         "symfony/maker-bundle": "^1.48",
         "symfony/phpunit-bridge": "^6.2",
-        "symfony/stopwatch": "6.3.*",
-        "symfony/web-profiler-bundle": "6.3.*",
+        "symfony/stopwatch": "6.4.*@dev",
+        "symfony/web-profiler-bundle": "6.4.*@dev",
         "symplify/easy-coding-standard": "^12.0"
     }
 }

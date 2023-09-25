@@ -8,100 +8,16 @@
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/inter@5.0.8/index.min.css">
             <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css">
         {% endblock %}
         {% block javascripts %}
             {{ importmap() }}
-            <script>
-                window.addEventListener('load', function () {
-                    var scrollpos = window.scrollY;
-                    var header = document.getElementById("header");
-                    var navcontent = document.getElementById("nav-content");
-                    var navaction = document.getElementById("navAction");
-                    var brandname = document.getElementById("brandname");
-                    var toToggle = document.querySelectorAll(".toggleColour");
-
-                    document.addEventListener("scroll", function () {
-                        /*Apply classes for slide in bar*/
-                        scrollpos = window.scrollY;
-
-                        if (scrollpos > 10) {
-                            header.classList.add("bg-white");
-                            navaction.classList.remove("bg-white");
-                            navaction.classList.add("gradient");
-                            navaction.classList.remove("text-gray-800");
-                            navaction.classList.add("text-white");
-                            //Use to switch toggleColour colours
-                            for (var i = 0; i < toToggle.length; i++) {
-                                toToggle[i].classList.add("text-gray-800");
-                                toToggle[i].classList.remove("text-white");
-                            }
-                            header.classList.add("shadow");
-                            navcontent.classList.remove("bg-gray-100");
-                            navcontent.classList.add("bg-white");
-                        } else {
-                            header.classList.remove("bg-white");
-                            navaction.classList.remove("gradient");
-                            navaction.classList.add("bg-white");
-                            navaction.classList.remove("text-white");
-                            navaction.classList.add("text-gray-800");
-                            //Use to switch toggleColour colours
-                            for (var i = 0; i < toToggle.length; i++) {
-                                toToggle[i].classList.add("text-white");
-                                toToggle[i].classList.remove("text-gray-800");
-                            }
-
-                            header.classList.remove("shadow");
-                            navcontent.classList.remove("bg-white");
-                            navcontent.classList.add("bg-gray-100");
-                        }
-                    });
-                })
-            </script>
-            <script>
-                window.addEventListener('load', function () {
-                    /*Toggle dropdown list*/
-                    /*https://gist.github.com/slavapas/593e8e50cf4cc16ac972afcbad4f70c8*/
-
-                    var navMenuDiv = document.getElementById("nav-content");
-                    var navMenu = document.getElementById("nav-toggle");
-
-                    document.onclick = check;
-                    function check(e) {
-                        var target = (e && e.target) || (event && event.srcElement);
-
-                        //Nav Menu
-                        if (!checkParent(target, navMenuDiv)) {
-                            // click NOT on the menu
-                            if (checkParent(target, navMenu)) {
-                                // click on the link
-                                if (navMenuDiv.classList.contains("hidden")) {
-                                    navMenuDiv.classList.remove("hidden");
-                                } else {
-                                    navMenuDiv.classList.add("hidden");
-                                }
-                            } else {
-                                // click both outside link and outside menu, hide menu
-                                navMenuDiv.classList.add("hidden");
-                            }
-                        }
-                    }
-                    function checkParent(t, elm) {
-                        while (t.parentNode) {
-                            if (t === elm) {
-                                return true;
-                            }
-                            t = t.parentNode;
-                        }
-                        return false;
-                    }
-                })
-            </script>
+            <script type="application/javascript" src="{{ asset('script/main.js') }}"></script>
         {% endblock %}
     </head>
-
-    <body {% block bodytags %}class="leading-normal tracking-normal text-white gradient" style="font-family: 'Source Sans Pro', sans-serif;"{% endblock %}>
+    <body {% block bodytags %}class="leading-normal tracking-normal text-white gradient"{% endblock %}>
         {% block nav %}
             <nav id="header" class="fixed w-full z-30 top-0 text-white">
                 <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
@@ -171,8 +87,19 @@
                             </ul>
                         </div>
                     </div>
+                    <div class="text-gray-500">
+                        <p>
+                            Made with ❤️,
+                            <a href="https://symfony.com/" target="_blank" rel="noreferrer nofollow noopener">Symfony
+                                <img src="https://symfony.com/logos/symfony_black_03.svg" alt="Symfony logo" width="32" height="32">
+                            </a>
+                            and
+                            <a href="https://frankenphp.dev/" target="_blank" rel="noreferrer nofollow noopener">FrankenPHP
+                                <img src="https://frankenphp.dev/img/elephant_cover.svg" alt="FrankenPHP logo" width="32" height="32">
+                            </a>
+                        </p>
+                    </div>
                 </div>
-                <a href="https://symfony.com/" target="_blank" rel="noreferrer nofollow noopener" class="text-gray-500">Made with ❤️ and ️Symfony</a>
             </footer>
         {% endblock %}
     </body>

@@ -7,7 +7,6 @@ namespace App\Controller;
 use App\Entity\City;
 use App\Entity\Department;
 use App\Entity\Region;
-use App\Entity\User;
 use App\Repository\CityRepository;
 use App\Repository\DepartmentRepository;
 use App\Repository\RegionRepository;
@@ -22,18 +21,6 @@ final class ApiController extends AbstractController
         private readonly DepartmentRepository $departmentRepository,
         private readonly CityRepository $cityRepository,
     ) {
-    }
-
-    #[Route('/api/me', name: 'app_api_me')]
-    public function me(): JsonResponse
-    {
-        $user = $this->getUser();
-        $user instanceof User || throw $this->createAccessDeniedException();
-
-        return new JsonResponse([
-            'username' => $user->getUserIdentifier(),
-            'email' => $user->getEmail(),
-        ]);
     }
 
     #[Route('/api/regions', name: 'app_api_regions')]

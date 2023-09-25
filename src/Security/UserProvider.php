@@ -26,7 +26,6 @@ final readonly class UserProvider implements UserProviderInterface
         return $user;
     }
 
-
     public function refreshUser(UserInterface $user): UserInterface
     {
         if (! $this->supportsClass($user::class)) {

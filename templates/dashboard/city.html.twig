@@ -5,27 +5,15 @@
 {% block body %}
 <section class="pt-24">
     <div class="container mx-auto flex flex-wrap">
-        <div id="map"></div>
+        <div
+            id="map"
+            {{ stimulus_controller('map', {
+                latitude: city.gpsLat,
+                longitude: city.gpsLng,
+                iconUrl: asset('images/marker-icon.png'),
+                shadowUrl: asset('images/marker-shadow.png')
+            }) }}
+        ></div>
     </div>
 </section>
 {% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    <script type="module">
-        import L from 'leaflet';
-        const mapbox = document.getElementById('map');
-        L.Marker.prototype.options.icon = L.icon({
-            iconUrl: '{{ asset('images/marker-icon.png') }}',
-            shadowUrl: '{{ asset('images/marker-shadow.png') }}',
-            iconSize: [24, 36],
-            iconAnchor: [12, 36]
-        });
-        const map = L.map(mapbox, { zoomControl: false }).setView([{{ city.gpsLat }}, {{ city.gpsLng }}], 13);
-        L.marker([{{ city.gpsLat }}, {{ city.gpsLng }}]).addTo(map);
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map);
-    </script>
-{% endblock javascripts %}

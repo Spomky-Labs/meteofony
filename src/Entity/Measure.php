@@ -4,127 +4,33 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiProperty;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Link;
+use App\State\MeasureStateProvider;
 use DateTimeImmutable;
 
+#[ApiResource(
+    uriTemplate: '/cities/{id}/measures',
+    operations: [new GetCollection(provider: MeasureStateProvider::class)],
+    uriVariables: [
+        'id' => new Link(toProperty: 'city', fromClass: City::class),
+    ],
+)]
 class Measure
 {
-    private float $temperature;
-
-    private float $temperatureFelt;
-
-    private int $humidity;
-
-    private int $windDirection;
-
-    private int $windSpeed;
-
-    private int $precipitation;
-
     public function __construct(
-        private readonly int $id,
-        private DateTimeImmutable $date,
-        private City $city
+        #[ApiProperty(identifier: true)]
+        public readonly string $id,
+        public DateTimeImmutable $date,
+        public City $city,
+        public float $temperature,
+        public float $temperatureFelt,
+        public int $humidity,
+        public int $windDirection,
+        public int $windSpeed,
+        public int $precipitation,
     ) {
-    }
-
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    public function getDate(): DateTimeImmutable
-    {
-        return $this->date;
-    }
-
-    public function setDate(DateTimeImmutable $date): self
-    {
-        $this->date = $date;
-
-        return $this;
-    }
-
-    public function getCity(): City
-    {
-        return $this->city;
-    }
-
-    public function setCity(City $city): self
-    {
-        $this->city = $city;
-
-        return $this;
-    }
-
-    public function getTemperature(): float
-    {
-        return $this->temperature;
-    }
-
-    public function setTemperature(float $temperature): self
-    {
-        $this->temperature = $temperature;
-
-        return $this;
-    }
-
-    public function getHumidity(): int
-    {
-        return $this->humidity;
-    }
-
-    public function setHumidity(int $humidity): self
-    {
-        $this->humidity = $humidity;
-
-        return $this;
-    }
-
-    public function getTemperatureFelt(): float
-    {
-        return $this->temperatureFelt;
-    }
-
-    public function setTemperatureFelt(float $temperatureFelt): self
-    {
-        $this->temperatureFelt = $temperatureFelt;
-
-        return $this;
-    }
-
-    public function getWindDirection(): int
-    {
-        return $this->windDirection;
-    }
-
-    public function setWindDirection(int $windDirection): self
-    {
-        $this->windDirection = $windDirection;
-
-        return $this;
-    }
-
-    public function getWindSpeed(): int
-    {
-        return $this->windSpeed;
-    }
-
-    public function setWindSpeed(int $windSpeed): self
-    {
-        $this->windSpeed = $windSpeed;
-
-        return $this;
-    }
-
-    public function getPrecipitation(): int
-    {
-        return $this->precipitation;
-    }
-
-    public function setPrecipitation(int $precipitation): self
-    {
-        $this->precipitation = $precipitation;
-
-        return $this;
     }
 }

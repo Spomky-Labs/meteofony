@@ -1,8 +1,6 @@
 name: CI
 
-on:
-    push:
-    pull_request:
+on: [push, pull_request]
 
 jobs:
     lint:
@@ -23,9 +21,9 @@ jobs:
             - name: Checkout
               uses: actions/checkout@v3
             - name: Pull images
-              run: docker compose pull
+              run: make build
             - name: Start services
-              run: docker compose up --build -d
+              run: make up
             - name: Wait for services
               run: |
                   while status="$(docker inspect --format="{{if .Config.Healthcheck}}{{print .State.Health.Status}}{{end}}" "$(docker compose ps -q php)")"; do
@@ -37,6 +35,6 @@ jobs:
                   done
                   exit 1
             - name: Check HTTP reachability
-              run: curl http://localhost
+              run: curl http://localhost:8080
             - name: Check HTTPS reachability
-              run: curl -k https://localhost
+              run: curl -k https://localhost:8443

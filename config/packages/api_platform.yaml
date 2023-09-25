@@ -1,0 +1,13 @@
+api_platform:
+    title: Meteofony API
+    version: 1.0.0
+    defaults:
+        #stateless: true
+        cache_headers:
+            vary: ['Content-Type', 'Authorization', 'Origin']
+        extra_properties:
+            standard_put: true
+    patch_formats:
+        json: ['application/merge-patch+json']
+    swagger:
+        versions: [3]
