@@ -1,4 +1,4 @@
-FROM dunglas/frankenphp as frankenphp
+FROM dunglas/frankenphp:latest as frankenphp
 
 RUN install-php-extensions \
     pdo_pgsql \
