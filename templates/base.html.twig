@@ -9,8 +9,9 @@
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/inter@5.0.8/index.min.css">
-            <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css">
+            <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
         {% endblock %}
         {% block javascripts %}
             {{ importmap() }}
@@ -18,89 +19,12 @@
         {% endblock %}
     </head>
     <body {% block bodytags %}class="leading-normal tracking-normal text-white gradient"{% endblock %}>
-        {% block nav %}
-            <nav id="header" class="fixed w-full z-30 top-0 text-white">
-                <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
-                    <div class="pl-4 flex items-center">
-                        <a class="toggleColour text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl" href="{{ path('app_homepage') }}">
-                            <i class="fa-solid fa-cloud-sun-rain"></i>
-                            Météofony
-                        </a>
-                    </div>
-                    <div class="block lg:hidden pr-4">
-                        <button id="nav-toggle" class="flex items-center p-1 text-pink-800 hover:text-gray-900 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                            <svg class="fill-current h-6 w-6" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <title>Menu</title>
-                                <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden mt-2 lg:mt-0 bg-white lg:bg-transparent text-black p-4 lg:p-0 z-20" id="nav-content">
-                        <ul class="list-reset lg:flex justify-end flex-1 items-center">
-                        </ul>
-                        {% if is_granted('ROLE_USER') %}
-                            <a href="{{ logout_path('main') }}"
-                               id="navAction"
-                               class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
-                            >
-                                Logout
-                            </a>
-                        {% else %}
-                            <a href="{{ path('app_login') }}"
-                               id="navAction"
-                               class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
-                            >
-                                Login
-                            </a>
-                        {% endif %}
-                    </div>
-                </div>
-                <hr class="border-b border-gray-100 opacity-25 my-0 py-0" />
-            </nav>
-        {% endblock %}
+        {% block nav %}{% include 'nav.html.twig' %}{% endblock %}
         {% block body %}
-        <div class="pt-24">
-            <div class="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center">
+            <div class="pt-24">
                 {% block content %}{% endblock %}
             </div>
-        </div>
         {% endblock %}
-        {% block footer %}
-            <footer class="bg-white">
-                <div class="container mx-auto px-8">
-                    <div class="w-full flex flex-col md:flex-row py-6">
-                        <div class="flex-1 mb-6 text-black">
-                            <a class="text-pink-600 no-underline hover:no-underline font-bold text-2xl lg:text-4xl" href="{{ path('app_homepage') }}">
-                                <i class="fa-solid fa-cloud-sun-rain"></i>
-                                Météofony
-                            </a>
-                        </div>
-                        <div class="flex-1">
-                            <p class="uppercase text-gray-500 md:mb-6">Links</p>
-                            <ul class="list-reset mb-6">
-                                <li class="mt-2 inline-block mr-2 md:block md:mr-0">
-                                    <a href="{{ path('app_privacy_policy') }}" class="no-underline hover:underline text-gray-800 hover:text-pink-500">Privacy policy</a>
-                                </li>
-                                <li class="mt-2 inline-block mr-2 md:block md:mr-0">
-                                    <a href="{{ path('app_terms_of_use') }}" class="no-underline hover:underline text-gray-800 hover:text-pink-500">Terms of use</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="text-gray-500">
-                        <p>
-                            Made with ❤️,
-                            <a href="https://symfony.com/" target="_blank" rel="noreferrer nofollow noopener">Symfony
-                                <img src="https://symfony.com/logos/symfony_black_03.svg" alt="Symfony logo" width="32" height="32">
-                            </a>
-                            and
-                            <a href="https://frankenphp.dev/" target="_blank" rel="noreferrer nofollow noopener">FrankenPHP
-                                <img src="https://frankenphp.dev/img/elephant_cover.svg" alt="FrankenPHP logo" width="32" height="32">
-                            </a>
-                        </p>
-                    </div>
-                </div>
-            </footer>
-        {% endblock %}
+        {% block footer %}{% include 'footer.html.twig' %}{% endblock %}
     </body>
 </html>

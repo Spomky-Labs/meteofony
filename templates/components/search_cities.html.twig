@@ -13,8 +13,13 @@
             <ul class="list-disc">
                 {% for city in this.cities %}
                 <li>
-                    <a href="{{ path('app_dashboard_city', {id: city.id}) }}">
-                        {{ city.name }}{% if city.zipCode is not null %} ({{ city.zipCode }}){% endif %}
+                    <a href="{{ path('app_dashboard_city', {id: city.id}) }}" class="block p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-900">
+                        <div class="font-semibold">
+                            {{ city.name }}{% if city.zipCode is not null %} ({{ city.zipCode }}){% endif %}
+                        </div>
+                        <span class="text-sm text-gray-500 dark:text-gray-400">
+                            Administrative department: {{ city.department.name }} ({{ city.department.id }})
+                        </span>
                     </a>
                 </li>
             {% endfor %}

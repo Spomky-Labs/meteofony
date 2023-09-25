@@ -50,6 +50,7 @@
         "symfony/translation": "6.4.*@dev",
         "symfony/twig-bundle": "6.4.*@dev",
         "symfony/uid": "6.4.*@dev",
+        "symfony/ux-chartjs": "^2.12",
         "symfony/ux-live-component": "^2.7",
         "symfony/validator": "6.4.*@dev",
         "symfony/web-link": "6.4.*@dev",

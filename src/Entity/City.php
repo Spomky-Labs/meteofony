@@ -20,21 +20,21 @@ class City
     public function __construct(
         #[ORM\Id]
         #[ORM\Column]
-        public int $id,
+        public int        $id,
         #[ORM\ManyToOne(inversedBy: 'cities')]
         public Department $department,
         #[ORM\Column(length: 10, nullable: true)]
-        public ?string $insee_code,
+        public ?string    $inseeCode,
         #[ORM\Column(length: 10, nullable: true)]
-        public ?string $zip_code,
+        public ?string    $zipCode,
         #[ORM\Column(length: 200)]
-        public string $name,
+        public string     $name,
         #[ORM\Column(length: 200)]
-        public string $slug,
+        public string     $slug,
         #[ORM\Column]
-        public float $gps_lat,
+        public float      $gpsLat,
         #[ORM\Column]
-        public float $gps_lng
+        public float $gpsLng
     ) {
     }
 }

@@ -30,4 +30,7 @@ return [
     '@symfony/stimulus-bridge' => [
         'url' => 'https://cdn.jsdelivr.net/npm/@symfony/stimulus-bridge@3.2.2/+esm',
     ],
+    'chart.js/auto' => [
+        'url' => 'https://cdn.jsdelivr.net/npm/chart.js@4.4.0/auto/+esm',
+    ],
 ];

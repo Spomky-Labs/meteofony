@@ -3,18 +3,24 @@
 {% block title %}Community records{% endblock %}
 
 {% block content %}
-    <section class="bg-white border-b py-8 my-6">
-        <div class="container mx-auto flex flex-wrap p-4">
-            <h2 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">
+    <section class="bg-white rounded-lg shadow dark:bg-gray-900 m-4">
+        <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
+            <h2 class="my-2 text-5xl font-bold leading-tight text-center text-gray-800">
                 Choose a city
             </h2>
-            <div class="w-full mb-4">
+            <div class="mb-4">
                 <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
             </div>
-            <div class="text-gray-800 w-fullp-6 flex flex-col flex-grow flex-shrink">
-                <p class="text-gray-800 text-base px-6 mb-5">
-                    {{ component('search_cities') }}
-                </p>
+            <div class="p-6 flex flex-col flex-grow flex-shrink">
+                <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden">
+                    <p class="text-gray-800 text-base px-6 mb-5">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, aliquam, quaerat, officia nisi
+                        totam modi aut voluptatum autem, fugiat minima ea doloribus. Nemo unde voluptas alias officiis
+                        corporis, voluptates magni. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo,
+                        aliquam, quaerat, officia nisi totam modi aut voluptatum autem, fugiat minima ea doloribus. Nemo
+                    </p>
+                </div>
+                {{ component('search_cities') }}
             </div>
         </div>
     </section>
