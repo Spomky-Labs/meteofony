@@ -17,6 +17,7 @@ Playground for improving the security of the Météofony application.
 4) Start the app
    From the root of the application
     - make build
+    - make build-assets
     - make up
     - make init
 
