@@ -8,3 +8,5 @@ RUN install-php-extensions \
     gd \
     intl \
     zip \
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer

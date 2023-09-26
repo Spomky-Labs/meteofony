@@ -18,9 +18,10 @@ Playground for improving the security of the Météofony application.
    From the root of the application
     - cd meteofony
     - make build
+    - make up
+    - make install
     - make assets
     - make init
-    - make up
 
 5) From your browser
     https://localhost:8443

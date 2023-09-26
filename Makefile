@@ -54,6 +54,9 @@ sf: ## List all Symfony commands or pass the parameter "c=" to run a given comma
 cc: c=c:c ## Clear the cache
 cc: sf
 
+install: ## Install dependencies
+	@$(COMPOSER) install
+
 assets: ## Compile assets
 	@$(SYMFONY) importmap:update
 	@$(SYMFONY) tailwind:build
