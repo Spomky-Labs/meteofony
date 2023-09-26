@@ -20,6 +20,8 @@ jobs:
         steps:
             - name: Checkout
               uses: actions/checkout@v3
+            - name: Check security
+              uses: symfonycorp/security-checker-action@v2
             - name: Pull images
               run: make build
             - name: Start services
