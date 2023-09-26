@@ -23,6 +23,8 @@ build: ## Builds the Docker images
 
 up: ## Start the docker hub in detached mode (no logs)
 	@$(DOCKER_COMP) up --detach
+	@$(SYMFONY) importmap:update
+	@$(SYMFONY) tailwind:build
 
 start: build up ## Build and start the containers
 
@@ -56,10 +58,6 @@ cc: sf
 
 install: ## Install dependencies
 	@$(COMPOSER) install
-
-compile-assets: ## Compile assets
-	@$(SYMFONY) importmap:update
-	@$(SYMFONY) tailwind:build
 
 watch: ## Watch assets
 	@$(SYMFONY) importmap:update

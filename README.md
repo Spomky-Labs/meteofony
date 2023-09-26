@@ -19,8 +19,6 @@ Playground for improving the security of the Météofony application.
     - cd meteofony
     - make build
     - make up
-    - make install
-    - make compile-assets
     - make init
 
 5) From your browser
