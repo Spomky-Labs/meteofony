@@ -34,6 +34,10 @@ jobs:
                     esac
                   done
                   exit 1
+            - name: Install dependencies
+              run: make install
+            - name: Compile assets
+              run: make assets
             - name: Check HTTP reachability
               run: curl http://localhost:8080
             - name: Check HTTPS reachability
