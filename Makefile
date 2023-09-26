@@ -57,7 +57,7 @@ cc: sf
 install: ## Install dependencies
 	@$(COMPOSER) install
 
-assets: ## Compile assets
+compile-assets: ## Compile assets
 	@$(SYMFONY) importmap:update
 	@$(SYMFONY) tailwind:build
 

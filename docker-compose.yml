@@ -8,6 +8,11 @@ services:
       target: frankenphp
     volumes:
       - ./:/app
+      - ./docker/php/conf.d/app.ini:/usr/local/etc/php/conf.d/app.ini:ro
+      - ./docker/php/conf.d/app.dev.ini:/usr/local/etc/php/conf.d/app.dev.ini:ro
+      - ./docker/php/conf.d/app.prod.ini:/usr/local/etc/php/conf.d/app.prod.ini:ro
+      - ./docker/caddy/certs:/etc/caddy/certs:ro
+      - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
     links:
       - redis
     environment:
@@ -16,6 +21,9 @@ services:
       # Run "composer require symfony/mercure-bundle" to install and configure the Mercure integration
 #      FRANKENPHP_CONFIG: worker /app/public/index.php
 #      APP_RUNTIME: Runtime\FrankenPhpSymfony\Runtime
+    extra_hosts:
+      # Ensure that host.docker.internal is correctly defined on Linux
+      - host.docker.internal:host-gateway
     ports:
       - target: 80
         published: 8080
@@ -49,6 +57,10 @@ services:
       - "6379:6379"
     volumes:
       - ./data/redis:/data/redis
+
+  mailer:
+    image: schickling/mailcatcher
+    ports: ["1025", "1080"]
 
 volumes:
   ###> doctrine/doctrine-bundle ###

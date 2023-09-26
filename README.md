@@ -20,7 +20,7 @@ Playground for improving the security of the Météofony application.
     - make build
     - make up
     - make install
-    - make assets
+    - make compile-assets
     - make init
 
 5) From your browser
