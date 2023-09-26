@@ -2,7 +2,7 @@ version: "3"
 
 services:
   php:
-#    image: dunglas/frankenphp
+    #    image: dunglas/frankenphp
     build:
       context: .
       target: frankenphp
@@ -11,31 +11,26 @@ services:
       - ./docker/php/conf.d/app.ini:/usr/local/etc/php/conf.d/app.ini:ro
       - ./docker/caddy/certs:/etc/caddy/certs:ro
       - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
-    links:
-      - redis
     environment:
       # Run "composer require symfony/orm-pack" to install and configure Doctrine ORM
       DATABASE_URL: postgresql://${POSTGRES_USER:-app}:${POSTGRES_PASSWORD:-!ChangeMe!}@database:5432/${POSTGRES_DB:-app}?serverVersion=${POSTGRES_VERSION:-14}
       # Run "composer require symfony/mercure-bundle" to install and configure the Mercure integration
-#      FRANKENPHP_CONFIG: worker /app/public/index.php
-#      APP_RUNTIME: Runtime\FrankenPhpSymfony\Runtime
-    extra_hosts:
-      # Ensure that host.docker.internal is correctly defined on Linux
-      - host.docker.internal:host-gateway
+    #      FRANKENPHP_CONFIG: worker /app/public/index.php
+    #      APP_RUNTIME: Runtime\FrankenPhpSymfony\Runtime
     ports:
       - target: 80
-        published: 8080
+        published: 80
         protocol: tcp
       # HTTPS
       - target: 443
-        published: 8443
+        published: 443
         protocol: tcp
       # HTTP/3
       - target: 443
-        published: 8443
+        published: 443
         protocol: udp
 
-  ###> doctrine/doctrine-bundle ###
+###> doctrine/doctrine-bundle ###
   database:
     image: postgres:${POSTGRES_VERSION:-15}-alpine
     environment:
@@ -47,22 +42,33 @@ services:
       - database_data:/var/lib/postgresql/data:rw
       # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
       # - ./docker/db/data:/var/lib/postgresql/data:rw
-    ports:
-      - "5432"
 ###< doctrine/doctrine-bundle ###
-
-  redis:
-    image: redis:alpine
-    ports:
-      - "6379:6379"
+  
+###> symfony/mercure-bundle ###
+  mercure:
+    image: dunglas/mercure
+    restart: unless-stopped
+    environment:
+      SERVER_NAME: ':80'
+      MERCURE_PUBLISHER_JWT_KEY: '!ChangeThisMercureHubJWTSecretKey!'
+      MERCURE_SUBSCRIBER_JWT_KEY: '!ChangeThisMercureHubJWTSecretKey!'
+      # Set the URL of your Symfony project (without trailing slash!) as value of the cors_origins directive
+      MERCURE_EXTRA_DIRECTIVES: |
+        cors_origins http://127.0.0.1:8000
+    # Comment the following line to disable the development mode
+    command: /usr/bin/caddy run --config /etc/caddy/Caddyfile.dev
     volumes:
-      - ./data/redis:/data/redis
-
-  mailer:
-    image: schickling/mailcatcher
-    ports: ["1025", "1080"]
+      - mercure_data:/data
+      - mercure_config:/config
+###< symfony/mercure-bundle ###
 
 volumes:
-  ###> doctrine/doctrine-bundle ###
+###> doctrine/doctrine-bundle ###
   database_data:
 ###< doctrine/doctrine-bundle ###
+  
+###> symfony/mercure-bundle ###
+  mercure_data:
+  mercure_config:
+###< symfony/mercure-bundle ###
+

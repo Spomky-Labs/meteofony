@@ -35,6 +35,8 @@
         "symfony/http-client": "6.4.*@dev",
         "symfony/intl": "6.4.*@dev",
         "symfony/mailer": "6.4.*@dev",
+        "symfony/mercure-bundle": "^0.3.7",
+        "symfony/messenger": "6.4.*@dev",
         "symfony/mime": "6.4.*@dev",
         "symfony/monolog-bundle": "^3.0",
         "symfony/notifier": "6.4.*@dev",
