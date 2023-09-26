@@ -1,46 +1,54 @@
 name: CI
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
+  pull_request: ~
+  workflow_dispatch: ~
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
 
 jobs:
-    lint:
-        name: Docker Lint
-        runs-on: ubuntu-latest
-        steps:
-          - name: Checkout
-            uses: actions/checkout@v3
-          - name: Lint Dockerfile
-            uses: hadolint/hadolint-action@master
-            with:
-                dockerfile: Dockerfile
-                ignore: DL3007,DL3018 # Ignore using latest on mlocati/php-extension-installer & version in apk add
-    build:
-        name: Docker build
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v3
-            - name: Check security
-              uses: symfonycorp/security-checker-action@v2
-            - name: Pull images
-              run: make build
-            - name: Start services
-              run: make up
-            - name: Wait for services
-              run: |
-                  while status="$(docker inspect --format="{{if .Config.Healthcheck}}{{print .State.Health.Status}}{{end}}" "$(docker compose ps -q php)")"; do
-                    case $status in
-                      starting) sleep 1;;
-                      healthy) exit 0;;
-                      unhealthy) exit 1;;
-                    esac
-                  done
-                  exit 1
-            - name: Install dependencies
-              run: make install
-            - name: Compile assets
-              run: make assets
-            - name: Check HTTP reachability
-              run: curl http://localhost:8080
-            - name: Check HTTPS reachability
-              run: curl -k https://localhost:8443
+  lint:
+    name: Docker Lint
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+      -
+        name: Lint Dockerfile
+        uses: hadolint/hadolint-action@v3.1.0
+  build:
+      name: Docker build
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v3
+        - name: Check security
+          uses: symfonycorp/security-checker-action@v2
+        - name: Pull images
+          run: make build
+        - name: Start services
+          run: make up
+        - name: Wait for services
+          run: |
+            while status="$(docker inspect --format="{{if .Config.Healthcheck}}{{print .State.Health.Status}}{{end}}" "$(docker compose ps -q php)")"; do
+              case $status in
+                starting) sleep 1;;
+                healthy) exit 0;;
+                unhealthy) exit 1;;
+              esac
+            done
+            exit 1
+        - name: Install dependencies
+          run: make install
+        - name: Compile assets
+          run: make assets
+        - name: Check HTTP reachability
+          run: curl http://localhost:8080
+        - name: Check HTTPS reachability
+          run: curl -k https://localhost:8443
