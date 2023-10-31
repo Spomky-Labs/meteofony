@@ -65,12 +65,14 @@ watch: ## Watch assets
 test: ## Execute all tests
 	@$(PHPUNIT)
 
+benchmark: ## Execute all benchmarks
+	php vendor/bin/phpbench run tests/Benchmark --report=simple
+
 ## —— Quality 🎵 ———————————————————————————————————————————————————————————————
 qa: ## Execute all Quality tools
 	@$(PHP) vendor/bin/rector process
 	@$(PHP) vendor/bin/ecs check --fix
 	@$(PHP) vendor/bin/phpstan analyse --memory-limit=512M
-
 
 ## —— Project 🎵 ———————————————————————————————————————————————————————————————
 init: ## Initialization of DB and the data
