@@ -7,7 +7,7 @@ namespace App\Tests\Benchmark;
 use PhpBench\Benchmark\Metadata\Annotations\Revs;
 use const PASSWORD_BCRYPT;
 
-final class Sha256HashTimeBench
+final class BcryptBench
 {
     /**
      * @Revs(100)
@@ -27,7 +27,7 @@ final class Sha256HashTimeBench
         password_hash('this is a very secret password', PASSWORD_BCRYPT);
     }
 
-    public function benchBcrypt15(): void
+    public function benchBcrypt13(): void
     {
         password_hash('this is a very secret password', PASSWORD_BCRYPT, [
             'cost' => 13,
