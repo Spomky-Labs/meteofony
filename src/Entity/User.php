@@ -43,7 +43,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Stringa
         $this->accessTokens = new ArrayCollection();
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return sprintf('%s (%s)', $this->username, $this->email);
     }

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Tests\Benchmark;
 
 use PhpBench\Benchmark\Metadata\Annotations\Revs;
-use const PASSWORD_BCRYPT;
 
 final class PBKDF2Bench
 {
@@ -16,6 +15,7 @@ final class PBKDF2Bench
     {
         hash_pbkdf2('sha256', 'this is a very secret password', random_bytes(16), 1_000, 64, true);
     }
+
     /**
      * @Revs(1)
      */

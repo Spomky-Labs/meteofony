@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace App\Tests\Benchmark;
 
 use PhpBench\Benchmark\Metadata\Annotations\Revs;
-use const PASSWORD_BCRYPT;
+use const PASSWORD_ARGON2I;
+use const PASSWORD_ARGON2ID;
 
 final class Argon2Bench
 {
