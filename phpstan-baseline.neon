@@ -1,0 +1,216 @@
+parameters:
+    ignoreErrors:
+        -
+            message: "#^Method App\\\\ApiResource\\\\User\\:\\:createFrom\\(\\) has no return type specified\\.$#"
+            count: 1
+            path: src/ApiResource/User.php
+
+        -
+            message: "#^Parameter \\#1 \\$username of class App\\\\ApiResource\\\\User constructor expects string, string\\|null given\\.$#"
+            count: 1
+            path: src/ApiResource/User.php
+
+        -
+            message: "#^Cannot cast mixed to string\\.$#"
+            count: 2
+            path: src/Command/User/CreateUserCommand.php
+
+        -
+            message: "#^Cannot cast mixed to string\\.$#"
+            count: 1
+            path: src/Command/User/DemoteUserCommand.php
+
+        -
+            message: "#^Parameter \\#1 \\$callback of function array_map expects \\(callable\\(mixed\\)\\: mixed\\)\\|null, Closure\\(string\\)\\: non\\-falsy\\-string given\\.$#"
+            count: 1
+            path: src/Command/User/DemoteUserCommand.php
+
+        -
+            message: "#^Cannot cast mixed to string\\.$#"
+            count: 1
+            path: src/Command/User/PromoteUserCommand.php
+
+        -
+            message: "#^Parameter \\#1 \\$callback of function array_map expects \\(callable\\(mixed\\)\\: mixed\\)\\|null, Closure\\(string\\)\\: non\\-falsy\\-string given\\.$#"
+            count: 1
+            path: src/Command/User/PromoteUserCommand.php
+
+        -
+            message: "#^Call to an undefined method App\\\\Entity\\\\City\\:\\:getGpsLat\\(\\)\\.$#"
+            count: 1
+            path: src/Controller/ApiController.php
+
+        -
+            message: "#^Call to an undefined method App\\\\Entity\\\\City\\:\\:getGpsLng\\(\\)\\.$#"
+            count: 1
+            path: src/Controller/ApiController.php
+
+        -
+            message: "#^Call to an undefined method App\\\\Entity\\\\City\\:\\:getId\\(\\)\\.$#"
+            count: 2
+            path: src/Controller/ApiController.php
+
+        -
+            message: "#^Call to an undefined method App\\\\Entity\\\\City\\:\\:getInseeCode\\(\\)\\.$#"
+            count: 2
+            path: src/Controller/ApiController.php
+
+        -
+            message: "#^Call to an undefined method App\\\\Entity\\\\City\\:\\:getName\\(\\)\\.$#"
+            count: 2
+            path: src/Controller/ApiController.php
+
+        -
+            message: "#^Call to an undefined method App\\\\Entity\\\\City\\:\\:getSlug\\(\\)\\.$#"
+            count: 1
+            path: src/Controller/ApiController.php
+
+        -
+            message: "#^Call to an undefined method App\\\\Entity\\\\City\\:\\:getZipCode\\(\\)\\.$#"
+            count: 2
+            path: src/Controller/ApiController.php
+
+        -
+            message: "#^Call to an undefined method App\\\\Entity\\\\Department\\:\\:getCities\\(\\)\\.$#"
+            count: 1
+            path: src/Controller/ApiController.php
+
+        -
+            message: "#^Call to an undefined method App\\\\Entity\\\\Department\\:\\:getCode\\(\\)\\.$#"
+            count: 1
+            path: src/Controller/ApiController.php
+
+        -
+            message: "#^Call to an undefined method App\\\\Entity\\\\Department\\:\\:getId\\(\\)\\.$#"
+            count: 3
+            path: src/Controller/ApiController.php
+
+        -
+            message: "#^Call to an undefined method App\\\\Entity\\\\Department\\:\\:getName\\(\\)\\.$#"
+            count: 1
+            path: src/Controller/ApiController.php
+
+        -
+            message: "#^Call to an undefined method App\\\\Entity\\\\Department\\:\\:getSlug\\(\\)\\.$#"
+            count: 1
+            path: src/Controller/ApiController.php
+
+        -
+            message: "#^Call to an undefined method App\\\\Entity\\\\Region\\:\\:getCode\\(\\)\\.$#"
+            count: 2
+            path: src/Controller/ApiController.php
+
+        -
+            message: "#^Call to an undefined method App\\\\Entity\\\\Region\\:\\:getDepartments\\(\\)\\.$#"
+            count: 2
+            path: src/Controller/ApiController.php
+
+        -
+            message: "#^Call to an undefined method App\\\\Entity\\\\Region\\:\\:getId\\(\\)\\.$#"
+            count: 2
+            path: src/Controller/ApiController.php
+
+        -
+            message: "#^Call to an undefined method App\\\\Entity\\\\Region\\:\\:getName\\(\\)\\.$#"
+            count: 2
+            path: src/Controller/ApiController.php
+
+        -
+            message: "#^Call to an undefined method App\\\\Entity\\\\Region\\:\\:getSlug\\(\\)\\.$#"
+            count: 2
+            path: src/Controller/ApiController.php
+
+        -
+            message: "#^Call to an undefined method object\\:\\:setPassword\\(\\)\\.$#"
+            count: 1
+            path: src/Controller/ResetPasswordController.php
+
+        -
+            message: "#^Only booleans are allowed in a negated boolean, App\\\\Entity\\\\User\\|null given\\.$#"
+            count: 1
+            path: src/Controller/ResetPasswordController.php
+
+        -
+            message: "#^Only booleans are allowed in an if condition, string\\|null given\\.$#"
+            count: 1
+            path: src/Controller/ResetPasswordController.php
+
+        -
+            message: "#^Parameter \\#1 \\$emailFormData of method App\\\\Controller\\\\ResetPasswordController\\:\\:processSendingPasswordResetEmail\\(\\) expects string, mixed given\\.$#"
+            count: 1
+            path: src/Controller/ResetPasswordController.php
+
+        -
+            message: "#^Parameter \\#1 \\$user of method Symfony\\\\Component\\\\PasswordHasher\\\\Hasher\\\\UserPasswordHasherInterface\\:\\:hashPassword\\(\\) expects Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\PasswordAuthenticatedUserInterface, object given\\.$#"
+            count: 1
+            path: src/Controller/ResetPasswordController.php
+
+        -
+            message: "#^Parameter \\#2 \\$plainPassword of method Symfony\\\\Component\\\\PasswordHasher\\\\Hasher\\\\UserPasswordHasherInterface\\:\\:hashPassword\\(\\) expects string, mixed given\\.$#"
+            count: 1
+            path: src/Controller/ResetPasswordController.php
+
+        -
+            message: "#^Method App\\\\Entity\\\\ResetPasswordRequest\\:\\:getUser\\(\\) should return object but returns App\\\\Entity\\\\User\\|null\\.$#"
+            count: 1
+            path: src/Entity/ResetPasswordRequest.php
+
+        -
+            message: "#^Class App\\\\Form\\\\ChangePasswordFormType extends generic class Symfony\\\\Component\\\\Form\\\\AbstractType but does not specify its types\\: TData$#"
+            count: 1
+            path: src/Form/ChangePasswordFormType.php
+
+        -
+            message: "#^Class App\\\\Form\\\\ResetPasswordRequestFormType extends generic class Symfony\\\\Component\\\\Form\\\\AbstractType but does not specify its types\\: TData$#"
+            count: 1
+            path: src/Form/ResetPasswordRequestFormType.php
+
+        -
+            message: "#^Method App\\\\Repository\\\\CityRepository\\:\\:findByNameLike\\(\\) should return array\\<App\\\\Entity\\\\City\\> but returns mixed\\.$#"
+            count: 1
+            path: src/Repository/CityRepository.php
+
+        -
+            message: "#^Parameter \\#2 \\$user of class App\\\\Entity\\\\ResetPasswordRequest constructor expects App\\\\Entity\\\\User\\|null, object given\\.$#"
+            count: 1
+            path: src/Repository/ResetPasswordRequestRepository.php
+
+        -
+            message: "#^Class App\\\\Repository\\\\UserRepository implements generic interface Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\PasswordUpgraderInterface but does not specify its types\\: TUser$#"
+            count: 1
+            path: src/Repository/UserRepository.php
+
+        -
+            message: "#^Method App\\\\Repository\\\\UserRepository\\:\\:findOneByUsername\\(\\) should return App\\\\Entity\\\\User\\|null but returns mixed\\.$#"
+            count: 1
+            path: src/Repository/UserRepository.php
+
+        -
+            message: "#^Parameter \\#1 \\$password of class Symfony\\\\Component\\\\Security\\\\Http\\\\Authenticator\\\\Passport\\\\Credentials\\\\PasswordCredentials constructor expects string, bool\\|float\\|int\\|string given\\.$#"
+            count: 1
+            path: src/Security/UsernamePasswordAuthenticator.php
+
+        -
+            message: "#^Parameter \\#1 \\$userIdentifier of class Symfony\\\\Component\\\\Security\\\\Http\\\\Authenticator\\\\Passport\\\\Badge\\\\UserBadge constructor expects string, bool\\|float\\|int\\|string given\\.$#"
+            count: 1
+            path: src/Security/UsernamePasswordAuthenticator.php
+
+        -
+            message: "#^Parameter \\#2 \\$csrfToken of class Symfony\\\\Component\\\\Security\\\\Http\\\\Authenticator\\\\Passport\\\\Badge\\\\CsrfTokenBadge constructor expects string\\|null, bool\\|float\\|int\\|string\\|null given\\.$#"
+            count: 1
+            path: src/Security/UsernamePasswordAuthenticator.php
+
+        -
+            message: "#^Call to an undefined method App\\\\Repository\\\\CityRepository\\:\\:findOneById\\(\\)\\.$#"
+            count: 1
+            path: src/State/MeasureStateProvider.php
+
+        -
+            message: "#^Class App\\\\State\\\\MeasureStateProvider implements generic interface ApiPlatform\\\\State\\\\ProviderInterface but does not specify its types\\: T$#"
+            count: 1
+            path: src/State/MeasureStateProvider.php
+
+        -
+            message: "#^Class App\\\\State\\\\UserDtoProvider implements generic interface ApiPlatform\\\\State\\\\ProviderInterface but does not specify its types\\: T$#"
+            count: 1
+            path: src/State/UserDtoProvider.php
