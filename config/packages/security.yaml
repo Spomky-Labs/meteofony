@@ -24,6 +24,7 @@ security:
             pattern: ^/
             lazy: true
             provider: app_user_provider
+
             custom_authenticator: App\Security\UsernamePasswordAuthenticator
             logout:
                 path: app_logout
@@ -41,6 +42,8 @@ security:
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/dashboard, roles: ROLE_USER }
+        - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/login, roles: PUBLIC_ACCESS }
         #- { path: ^/api, roles: ROLE_USER }
         - { path: ^/, roles: PUBLIC_ACCESS }
 
