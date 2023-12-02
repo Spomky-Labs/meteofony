@@ -18,12 +18,18 @@
                 <a href="{{ path('app_login') }}" class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
                     Log in
                 </a>
-                {% else %}
+                {% endif %}
+                {% if is_granted('ROLE_USER') %}
                     <a href="{{ path('app_profile') }}" class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
                         Profile
                     </a>
                     <a href="{{ path('app_dashboard') }}" class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
                         Dashboard
+                    </a>
+                {% endif %}
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('app_admin') }}" class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                        Admin
                     </a>
                 {% endif %}
             </div>
@@ -176,9 +182,13 @@
                             <button class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
                                 {% if not is_granted('ROLE_USER') %}
                                     <a href="{{ path('app_login') }}">Log in</a>
-                                {% else %}
+                                {% endif %}
+                                {% if is_granted('ROLE_USER') %}
                                     <a href="{{ path('app_profile') }}">Profile</a>
                                     <a href="{{ path('app_dashboard') }}">Dashboard</a>
+                                {% endif %}
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <a href="{{ path('app_admin') }}">Admin</a>
                                 {% endif %}
                             </button>
                         </div>

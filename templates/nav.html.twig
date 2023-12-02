@@ -38,6 +38,13 @@
                         </a>
                     </li>
                 {% endif %}
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li>
+                        <a href="{{ path('app_admin') }}" class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0" aria-current="page">
+                            Admin
+                        </a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </div>
