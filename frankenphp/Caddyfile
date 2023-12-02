@@ -15,8 +15,7 @@
 
 
 {$SERVER_NAME:localhost} {
-	#tls /etc/caddy/certs/tls.pem /etc/caddy/certs/tls.key
-	#tls /etc/caddy/certs/tls.pem /etc/caddy/certs/tls.key {
+	#tls {
 	#	client_auth {
 	#		mode verify_if_given
 	#		trusted_ca_cert_file /etc/caddy/certs/ca.pem
