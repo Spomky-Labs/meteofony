@@ -17,6 +17,7 @@ services:
       MERCURE_EXTRA_DIRECTIVES: demo
       # See https://xdebug.org/docs/all_settings#mode
       XDEBUG_MODE: "${XDEBUG_MODE:-off}"
+      MAILER_DSN: smtp://mailer:${MAILER_SMTP_PORT:-1025}
     extra_hosts:
       # Ensure that host.docker.internal is correctly defined on Linux
       - host.docker.internal:host-gateway
@@ -24,3 +25,14 @@ services:
 
 ###> symfony/mercure-bundle ###
 ###< symfony/mercure-bundle ###
+    
+    
+###> symfony/mailer ###
+  mailer:
+      image: schickling/mailcatcher
+      ports:
+          - target: 1025
+            published: ${MAILER_SMTP_PORT:-1025}
+          - target: 1080
+            published: ${MAILER_HTTP_PORT:-1080}
+###< symfony/mailer ###
