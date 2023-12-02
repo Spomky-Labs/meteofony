@@ -15,7 +15,7 @@
  */
 return [
     'app' => [
-        'path' => 'app.js',
+        'path' => './assets/app.js',
         'entrypoint' => true,
     ],
     '@symfony/stimulus-bundle' => [
