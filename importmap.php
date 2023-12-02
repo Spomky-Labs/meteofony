@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Returns the import map for this application.
+ * Returns the importmap for this application.
  *
  * - "path" is a path inside the asset mapper system. Use the
  *     "debug:asset-map" command to see the full list of paths.
  *
- * - "preload" set to true for any modules that are loaded on the initial
- *     page load to help the browser download them earlier.
+ * - "entrypoint" (JavaScript only) set to true for any module that will
+ *     be used as an "entrypoint" (and passed to the importmap() Twig function).
  *
  * The "importmap:require" command can be used to add new entries to this file.
  *
@@ -22,15 +22,22 @@ return [
         'path' => '@symfony/stimulus-bundle/loader.js',
     ],
     '@hotwired/stimulus' => [
-        'url' => 'https://cdn.jsdelivr.net/npm/@hotwired/stimulus@3.2.2/+esm',
+        'version' => '3.2.2',
     ],
     'leaflet' => [
-        'url' => 'https://cdn.jsdelivr.net/npm/leaflet@1.9.4/+esm',
+        'version' => '1.9.4',
     ],
     '@symfony/stimulus-bridge' => [
-        'url' => 'https://cdn.jsdelivr.net/npm/@symfony/stimulus-bridge@3.2.2/+esm',
+        'version' => '3.2.2',
     ],
     'chart.js/auto' => [
-        'url' => 'https://cdn.jsdelivr.net/npm/chart.js@4.4.0/auto/+esm',
+        'version' => '4.4.0',
+    ],
+    '@kurkle/color' => [
+        'version' => '0.3.2',
+    ],
+    'leaflet/dist/leaflet.min.css' => [
+        'version' => '1.9.4',
+        'type' => 'css',
     ],
 ];

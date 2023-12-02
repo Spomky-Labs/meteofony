@@ -22,17 +22,18 @@ RUN apk add --no-cache \
 		file \
 		gettext \
 		git \
+		make \
 	;
 
 RUN set -eux; \
-    install-php-extensions \
+	install-php-extensions \
 		apcu \
 		intl \
 		opcache \
 		zip \
 		pdo_pgsql \
 		gd \
-    ;
+	;
 
 ###> recipes ###
 ###< recipes ###
@@ -49,7 +50,7 @@ ENV PATH="${PATH}:/root/.composer/vendor/bin"
 
 COPY --from=composer_upstream --link /composer /usr/bin/composer
 
-HEALTHCHECK CMD wget --no-verbose --tries=1 --spider http://localhost:2019/metrics || exit 1
+HEALTHCHECK --start-period=60s CMD curl -f http://localhost:2019/metrics || exit 1
 CMD [ "frankenphp", "run", "--config", "/etc/caddy/Caddyfile" ]
 
 # Dev FrankenPHP image
@@ -62,8 +63,8 @@ RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
 RUN set -eux; \
 	install-php-extensions \
-    	xdebug \
-    ;
+		xdebug \
+	;
 
 COPY --link frankenphp/conf.d/app.dev.ini $PHP_INI_DIR/conf.d/
 
