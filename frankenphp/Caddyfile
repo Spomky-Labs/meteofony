@@ -14,14 +14,14 @@
 {$CADDY_EXTRA_CONFIG}
 
 
-#tls {
-#	client_auth {
-#		mode verify_if_given
-#		trusted_ca_cert_file /etc/caddy/certs/ca.pem
-#	}
-#}
-
 {$SERVER_NAME:localhost} {
+	#tls /etc/caddy/certs/tls.pem /etc/caddy/certs/tls.key
+	#tls /etc/caddy/certs/tls.pem /etc/caddy/certs/tls.key {
+	#	client_auth {
+	#		mode verify_if_given
+	#		trusted_ca_cert_file /etc/caddy/certs/ca.pem
+	#	}
+	#}
 	log {
 		# Redact the authorization query parameter that can be set by Mercure
 		format filter {
@@ -58,8 +58,7 @@
 	header ?Permissions-Policy "browsing-topics=()"
 
 	php_server
-	#@phpFiles path *.php
-	#php_server @phpFiles {
+	#php_server {
 	#	env SSL_CLIENT_S_FINGERPRINT {http.request.tls.client.fingerprint}
 	#	env SSL_CLIENT_S_CERTIFICATE {http.request.tls.client.certificate_der_base64}
 	#	env SSL_CLIENT_S_ISSUER {http.request.tls.client.issuer}
