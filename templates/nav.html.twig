@@ -8,9 +8,11 @@
         </a>
         <div class="flex md:order-2">
             {% if is_granted('ROLE_USER') %}
-                <a href="{{ logout_path('main') }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0">
-                    Logout
-                </a>
+                <form action="{{ logout_path('main') }}" method="post">
+                    <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0">
+                        Logout
+                    </button>
+                </form>
             {% else %}
                 <a href="{{ path('app_login') }}" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0">
                     Login

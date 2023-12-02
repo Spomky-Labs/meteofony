@@ -27,7 +27,7 @@ security:
 
             custom_authenticator: App\Security\UsernamePasswordAuthenticator
             logout:
-                path: app_logout
+                path: /logout
                 # where to redirect after logout
                 target: app_homepage
 
