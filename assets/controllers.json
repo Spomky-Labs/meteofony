@@ -14,6 +14,12 @@
                     "@symfony/ux-live-component/dist/live.min.css": true
                 }
             }
+        },
+        "@web-auth/webauthn-stimulus": {
+            "webauthn": {
+                "enabled": true,
+                "fetch": "eager"
+            }
         }
     },
     "entrypoints": []

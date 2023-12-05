@@ -23,4 +23,7 @@ return [
     Symfony\UX\Chartjs\ChartjsBundle::class => ['all' => true],
     Symfony\Bundle\MercureBundle\MercureBundle::class => ['all' => true],
     Scheb\TwoFactorBundle\SchebTwoFactorBundle::class => ['all' => true],
+    SpomkyLabs\CborBundle\SpomkyLabsCborBundle::class => ['all' => true],
+    Webauthn\Bundle\WebauthnBundle::class => ['all' => true],
+    Webauthn\Stimulus\WebauthnStimulusBundle::class => ['all' => true],
 ];

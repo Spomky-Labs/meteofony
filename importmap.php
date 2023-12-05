@@ -40,4 +40,7 @@ return [
         'version' => '1.9.4',
         'type' => 'css',
     ],
+    '@simplewebauthn/browser' => [
+        'version' => '8.3.4',
+    ],
 ];
