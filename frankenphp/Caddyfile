@@ -15,12 +15,12 @@
 
 
 {$SERVER_NAME:localhost} {
-	#tls {
-	#	client_auth {
-	#		mode verify_if_given
-	#		trusted_ca_cert_file /etc/caddy/certs/ca.pem
-	#	}
-	#}
+	tls {
+		client_auth {
+			mode verify_if_given
+			trusted_ca_cert_file /etc/caddy/certs/ca.pem
+		}
+	}
 	log {
 		# Redact the authorization query parameter that can be set by Mercure
 		format filter {
@@ -56,12 +56,12 @@
 	# Disable Topics tracking if not enabled explicitly: https://github.com/jkarlin/topics
 	header ?Permissions-Policy "browsing-topics=()"
 
-	php_server
-	#php_server {
-	#	env SSL_CLIENT_S_FINGERPRINT {http.request.tls.client.fingerprint}
-	#	env SSL_CLIENT_S_CERTIFICATE {http.request.tls.client.certificate_der_base64}
-	#	env SSL_CLIENT_S_ISSUER {http.request.tls.client.issuer}
-	#	env SSL_CLIENT_S_SERIAL {http.request.tls.client.serial}
-	#	env SSL_CLIENT_S_DN {http.request.tls.client.subject}
-	#}
+	#php_server
+	php_server {
+		env SSL_CLIENT_S_FINGERPRINT {http.request.tls.client.fingerprint}
+		env SSL_CLIENT_S_CERTIFICATE {http.request.tls.client.certificate_der_base64}
+		env SSL_CLIENT_S_ISSUER {http.request.tls.client.issuer}
+		env SSL_CLIENT_S_SERIAL {http.request.tls.client.serial}
+		env SSL_CLIENT_S_DN {http.request.tls.client.subject}
+	}
 }
