@@ -16,6 +16,7 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordC
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\SecurityRequestAttributes;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
+use function Symfony\Component\String\u;
 
 final class UsernamePasswordAuthenticator extends AbstractLoginFormAuthenticator
 {
@@ -30,7 +31,7 @@ final class UsernamePasswordAuthenticator extends AbstractLoginFormAuthenticator
 
     public function authenticate(Request $request): Passport
     {
-        $username = $request->request->get('username', '');
+        $username = u($request->request->get('username', ''))->ascii()->lower()->toString();
 
         $request->getSession()
             ->set(SecurityRequestAttributes::LAST_USERNAME, $username);

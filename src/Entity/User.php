@@ -8,19 +8,23 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Scheb\TwoFactorBundle\Model\Email\TwoFactorInterface;
 use Stringable;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`users`')]
-class User implements UserInterface, PasswordAuthenticatedUserInterface, Stringable
+class User implements UserInterface, PasswordAuthenticatedUserInterface, Stringable, TwoFactorInterface
 {
     /**
      * @var array<string>
      */
     #[ORM\Column]
     private array $roles = [];
+
+    #[ORM\Column(length: 200, type: 'string', nullable: true)]
+    private ?string $emailCode = null;
 
     /**
      * @var Collection<int, AccessToken>|AccessToken[]
@@ -159,5 +163,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Stringa
     public function getAccessTokens(): Collection
     {
         return $this->accessTokens;
+    }
+
+    public function isEmailAuthEnabled(): bool
+    {
+        return true;
+    }
+
+    public function getEmailAuthRecipient(): string
+    {
+        return $this->email;
+    }
+
+    public function getEmailAuthCode(): string|null
+    {
+        return $this->emailCode;
+    }
+
+    public function setEmailAuthCode(string $authCode): void
+    {
+        $this->emailCode = $authCode;
     }
 }

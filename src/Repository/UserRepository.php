@@ -69,7 +69,7 @@ final class UserRepository extends ServiceEntityRepository implements PasswordUp
     public function findOneByUsername(string $identifier): ?User
     {
         return $this->createQueryBuilder('o')
-            ->where('o.username = :identifier')
+            ->where('LOWER(o.username) = :identifier')
             ->setParameter('identifier', $identifier)
             ->getQuery()
             ->getOneOrNullResult()
