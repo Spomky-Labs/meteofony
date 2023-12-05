@@ -32,6 +32,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Stringa
     #[ORM\OneToMany(mappedBy: 'owner', targetEntity: AccessToken::class, orphanRemoval: true)]
     private Collection $accessTokens;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: UserSession::class, orphanRemoval: true)]
+    private Collection $sessions;
+
     public function __construct(
         #[ORM\Id]
         #[ORM\GeneratedValue(strategy: 'NONE')]
@@ -45,6 +48,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Stringa
         private string $password
     ) {
         $this->accessTokens = new ArrayCollection();
+        $this->sessions = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -183,5 +187,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Stringa
     public function setEmailAuthCode(string $authCode): void
     {
         $this->emailCode = $authCode;
+    }
+
+    public function getSessions(): Collection
+    {
+        return $this->sessions;
     }
 }

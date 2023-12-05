@@ -15,6 +15,9 @@
                 <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden">
                     <p class="text-gray-800 text-base px-6 mb-5">
                         {{ dump(app.user, app.token) }}
+                        {% for session in app.user.sessions %}
+                            {{ dump(session) }}
+                        {% endfor %}
                     </p>
                 </div>
             </div>
