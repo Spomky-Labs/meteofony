@@ -8,7 +8,6 @@ class Admin implements UserInterface
 {
     public function __construct(private string $identifier)
     {
-        $this->identifier = $identifier;
     }
 
     public function getRoles(): array
