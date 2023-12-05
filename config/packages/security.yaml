@@ -50,7 +50,7 @@ security:
         - { path: ^/dashboard, roles: ROLE_USER }
         - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/login, roles: PUBLIC_ACCESS }
-        -{ path: ^/2fa, role: IS_AUTHENTICATED_2FA_IN_PROGRESS }
+        - { path: ^/2fa, role: IS_AUTHENTICATED_2FA_IN_PROGRESS }
         #- { path: ^/api, roles: ROLE_USER }
         - { path: ^/, roles: PUBLIC_ACCESS }
 
