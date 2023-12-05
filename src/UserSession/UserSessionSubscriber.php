@@ -1,13 +1,6 @@
 <?php
 
-/*
- * This file is part of the Symfony package.
- *
- * (c) Fabien Potencier <fabien@symfony.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+declare(strict_types=1);
 
 namespace App\UserSession;
 
@@ -41,14 +34,14 @@ final readonly class UserSessionSubscriber implements EventSubscriberInterface
             ->getSession()
             ->getId();
         $userSession = $this->userSessionRepository->findOneById($userSessionId);
-        if (null !== $userSession) {
+        if ($userSession !== null) {
             $this->userSessionRepository->remove($userSession);
         }
     }
 
     public function onRequest(RequestEvent $event): void
     {
-        if (!$event->isMainRequest()) {
+        if (! $event->isMainRequest()) {
             return;
         }
         $user = $this->security->getUser();
@@ -62,16 +55,14 @@ final readonly class UserSessionSubscriber implements EventSubscriberInterface
 
     public function onLogin(LoginSuccessEvent $event): void
     {
-        $this->associatedSessionToUser(
-            $event->getRequest()->getSession()->getId(),
-            $event->getUser())
+        $this->associatedSessionToUser($event->getRequest() ->getSession() ->getId(), $event->getUser())
         ;
     }
 
     private function associatedSessionToUser(string $userSessionId, UserInterface $user): void
     {
         $userSession = $this->userSessionRepository->findOneById($userSessionId);
-        if (null === $userSession || null !== $userSession->getUser()) {
+        if ($userSession === null || $userSession->getUser() !== null) {
             return;
         }
         $userSession->setUser($user);

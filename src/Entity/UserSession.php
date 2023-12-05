@@ -16,13 +16,19 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class UserSession implements UserSessionInterface
 {
     public function __construct(
-        #[ORM\Id] #[ORM\Column] #[ORM\GeneratedValue(strategy: 'NONE')] public string $id,
+        #[ORM\Id]
+        #[ORM\Column]
+        #[ORM\GeneratedValue(strategy: 'NONE')]
+        public string $id,
         #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER', inversedBy: 'sessions')]
         #[ORM\JoinColumn(nullable: true)]
         public null|UserInterface $user,
-        #[ORM\Column(type: Types::BLOB)] public $data,
-        #[ORM\Column(type: Types::INTEGER)] public int $lifetime,
-        #[ORM\Column(type: Types::INTEGER)] public int $time,
+        #[ORM\Column(type: Types::BLOB)]
+        public $data,
+        #[ORM\Column(type: Types::INTEGER)]
+        public int $lifetime,
+        #[ORM\Column(type: Types::INTEGER)]
+        public int $time,
     ) {
     }
 

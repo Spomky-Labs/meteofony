@@ -18,6 +18,9 @@
                         {% for session in app.user.sessions %}
                             {{ dump(session) }}
                         {% endfor %}
+                        {% for event in events %}
+                            {{ dump(event) }}
+                        {% endfor %}
                     </p>
                 </div>
             </div>

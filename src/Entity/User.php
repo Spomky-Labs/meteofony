@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Scheb\TwoFactorBundle\Model\Email\TwoFactorInterface;
 use Stringable;
@@ -23,7 +25,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Stringa
     #[ORM\Column]
     private array $roles = [];
 
-    #[ORM\Column(length: 200, type: 'string', nullable: true)]
+    #[ORM\Column(length: 200, type: Types::STRING, nullable: true)]
     private ?string $emailCode = null;
 
     /**
@@ -32,8 +34,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Stringa
     #[ORM\OneToMany(mappedBy: 'owner', targetEntity: AccessToken::class, orphanRemoval: true)]
     private Collection $accessTokens;
 
+    /**
+     * @var Collection<int, UserSession>|UserSession[]
+     */
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: UserSession::class, orphanRemoval: true)]
     private Collection $sessions;
+
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
+    private ?DateTimeImmutable $lastLoginAt = null;
 
     public function __construct(
         #[ORM\Id]
@@ -171,7 +179,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Stringa
 
     public function isEmailAuthEnabled(): bool
     {
-        return true;
+        //return true;
+        return false; // For testing purpose only
     }
 
     public function getEmailAuthRecipient(): string
@@ -192,5 +201,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Stringa
     public function getSessions(): Collection
     {
         return $this->sessions;
+    }
+
+    public function getLastLoginAt(): ?DateTimeImmutable
+    {
+        return $this->lastLoginAt;
+    }
+
+    public function setLastLoginAt(DateTimeImmutable $lastLoginAt): void
+    {
+        $this->lastLoginAt = $lastLoginAt;
     }
 }

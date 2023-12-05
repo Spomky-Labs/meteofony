@@ -25,8 +25,7 @@ final class UserSessionRepository extends ServiceEntityRepository implements Use
     public function __construct(
         ManagerRegistry                 $registry,
         private readonly ClockInterface $clock
-    )
-    {
+    ) {
         parent::__construct($registry, UserSession::class);
     }
 

@@ -1,18 +1,13 @@
 <?php
 
-/*
- * This file is part of the Symfony package.
- *
- * (c) Fabien Potencier <fabien@symfony.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+declare(strict_types=1);
 
 namespace App\UserSession;
 
 use Psr\Clock\ClockInterface;
+use SensitiveParameter;
 use Symfony\Component\HttpFoundation\Session\Storage\Handler\AbstractSessionHandler;
+use function is_resource;
 
 class UserSessionHandler extends AbstractSessionHandler
 {
@@ -41,7 +36,7 @@ class UserSessionHandler extends AbstractSessionHandler
             ->getTimestamp();
         $expiry = $now + $this->ttl;
         $userSession = $this->userSessionRepository->findOneById($id);
-        if (null !== $userSession) {
+        if ($userSession !== null) {
             $userSession->setLifetime($expiry);
             $this->userSessionRepository->save($userSession);
         }
@@ -49,30 +44,31 @@ class UserSessionHandler extends AbstractSessionHandler
         return true;
     }
 
-    protected function doRead(#[\SensitiveParameter] string $userSessionId): string
+    protected function doRead(#[SensitiveParameter] string $userSessionId): string
     {
         $userSession = $this->userSessionRepository->findOneById($userSessionId);
-        if (null === $userSession) {
+        if ($userSession === null) {
             return '';
         }
 
         $data = $userSession->getData();
 
-        return \is_resource($data) ? stream_get_contents($data) : $data;
+        return is_resource($data) ? stream_get_contents($data) : $data;
     }
 
-    protected function doWrite(#[\SensitiveParameter] string $userSessionId, string $data): bool
+    protected function doWrite(#[SensitiveParameter] string $userSessionId, string $data): bool
     {
         $now = $this->clock->now()
             ->getTimestamp();
         $userSession = $this->userSessionRepository->findOneById($userSessionId);
-        if (null === $userSession) {
+        if ($userSession === null) {
             $maxLifetime = $now + $this->ttl;
             $userSession = $this->userSessionRepository->create(
                 $userSessionId,
                 $data,
                 $maxLifetime,
-                $this->clock->now()->getTimestamp()
+                $this->clock->now()
+                    ->getTimestamp()
             );
         } else {
             $userSession->setData($data);
@@ -82,10 +78,10 @@ class UserSessionHandler extends AbstractSessionHandler
         return true;
     }
 
-    protected function doDestroy(#[\SensitiveParameter] string $userSessionId): bool
+    protected function doDestroy(#[SensitiveParameter] string $userSessionId): bool
     {
         $userSession = $this->userSessionRepository->findOneById($userSessionId);
-        if (null !== $userSession) {
+        if ($userSession !== null) {
             $this->userSessionRepository->remove($userSession);
         }
 
