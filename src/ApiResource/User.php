@@ -8,9 +8,7 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use App\State\UserDtoProvider;
 
-#[ApiResource(
-    operations: [new Get('/me', provider: UserDtoProvider::class)],
-)]
+#[ApiResource(operations: [new Get('/me', provider: UserDtoProvider::class)],)]
 final readonly class User
 {
     public function __construct(

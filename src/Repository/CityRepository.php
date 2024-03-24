@@ -6,7 +6,7 @@ namespace App\Repository;
 
 use App\Entity\City;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Collections\Criteria;
+use Doctrine\Common\Collections\Order;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -63,7 +63,7 @@ final class CityRepository extends ServiceEntityRepository
                 '(LOWER(c.name) LIKE :query) OR (LOWER(c.zipCode) LIKE :query) OR (LOWER(c.inseeCode) LIKE :query)'
             )
             ->setParameter('query', sprintf('%%%s%%', mb_strtolower($query)))
-            ->orderBy('c.name', Criteria::ASC)
+            ->orderBy('c.name', Order::Ascending->value)
             ->setMaxResults(50)
             ->getQuery()
             ->getResult()

@@ -14,9 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: DepartmentRepository::class)]
 #[ORM\Table(name: '`departments`')]
-#[ApiResource(
-    operations: [new GetCollection(), new Get()]
-)]
+#[ApiResource(operations: [new GetCollection(), new Get()])]
 class Department
 {
     /**

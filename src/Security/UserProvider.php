@@ -11,6 +11,9 @@ use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
+/**
+ * @implements UserProviderInterface<User>
+ */
 final readonly class UserProvider implements UserProviderInterface
 {
     public function __construct(
@@ -21,7 +24,7 @@ final readonly class UserProvider implements UserProviderInterface
     public function loadUserByIdentifier(string $identifier): UserInterface
     {
         $user = $this->userRepository->findOneByUsername($identifier);
-        $user !== null || throw new UserNotFoundException('User not found');
+        $user instanceof UserInterface || throw new UserNotFoundException('User not found');
 
         return $user;
     }

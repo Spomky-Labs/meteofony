@@ -12,27 +12,25 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CityRepository::class)]
 #[ORM\Table(name: '`cities`')]
-#[ApiResource(
-    operations: [new GetCollection(), new Get()]
-)]
+#[ApiResource(operations: [new GetCollection(), new Get()])]
 class City
 {
     public function __construct(
         #[ORM\Id]
         #[ORM\Column]
-        public int        $id,
+        public int $id,
         #[ORM\ManyToOne(inversedBy: 'cities')]
         public Department $department,
         #[ORM\Column(length: 10, nullable: true)]
-        public ?string    $inseeCode,
+        public ?string $inseeCode,
         #[ORM\Column(length: 10, nullable: true)]
-        public ?string    $zipCode,
+        public ?string $zipCode,
         #[ORM\Column(length: 200)]
-        public string     $name,
+        public string $name,
         #[ORM\Column(length: 200)]
-        public string     $slug,
+        public string $slug,
         #[ORM\Column]
-        public float      $gpsLat,
+        public float $gpsLat,
         #[ORM\Column]
         public float $gpsLng
     ) {
