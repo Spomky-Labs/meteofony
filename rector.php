@@ -17,7 +17,7 @@ return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->sets([
         SetList::DEAD_CODE,
         LevelSetList::UP_TO_PHP_82,
-        SymfonyLevelSetList::UP_TO_SYMFONY_63,
+        SymfonyLevelSetList::UP_TO_SYMFONY_64,
         SymfonySetList::SYMFONY_CODE_QUALITY,
         SymfonySetList::SYMFONY_CONSTRUCTOR_INJECTION,
         SymfonySetList::ANNOTATIONS_TO_ATTRIBUTES,
@@ -28,7 +28,7 @@ return static function (RectorConfig $rectorConfig): void {
         PHPUnitSetList::PHPUNIT_CODE_QUALITY,
         PHPUnitSetList::ANNOTATIONS_TO_ATTRIBUTES,
     ]);
-    $rectorConfig->phpVersion(PhpVersion::PHP_82);
+    $rectorConfig->phpVersion(PhpVersion::PHP_83);
     $rectorConfig->paths([__DIR__ . '/config', __DIR__ . '/src', __DIR__ . '/tests']);
     $rectorConfig->skip([
         __DIR__ . '/config/bundles.php',
