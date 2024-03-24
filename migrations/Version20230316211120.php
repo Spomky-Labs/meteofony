@@ -7,9 +7,6 @@ namespace DoctrineMigrations;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
-/**
- * Auto-generated Migration: Please modify to your needs!
- */
 final class Version20230316211120 extends AbstractMigration
 {
     public function getDescription(): string
@@ -19,7 +16,6 @@ final class Version20230316211120 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-        // this up() migration is auto-generated, please modify it to your needs
         $this->addSql(
             'CREATE TABLE access_token (value VARCHAR(255) NOT NULL, owner_id VARCHAR(255) NOT NULL, PRIMARY KEY(value))'
         );
@@ -58,21 +54,5 @@ final class Version20230316211120 extends AbstractMigration
         $this->addSql(
             'ALTER TABLE reset_password_request ADD CONSTRAINT FK_7CE748AA76ED395 FOREIGN KEY (user_id) REFERENCES "users" (id) NOT DEFERRABLE INITIALLY IMMEDIATE'
         );
-    }
-
-    public function down(Schema $schema): void
-    {
-        // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE SCHEMA public');
-        $this->addSql('ALTER TABLE access_token DROP CONSTRAINT FK_B6A2DD687E3C61F9');
-        $this->addSql('ALTER TABLE "cities" DROP CONSTRAINT FK_D95DB16BAE80F5DF');
-        $this->addSql('ALTER TABLE "departments" DROP CONSTRAINT FK_16AEB8D498260155');
-        $this->addSql('ALTER TABLE reset_password_request DROP CONSTRAINT FK_7CE748AA76ED395');
-        $this->addSql('DROP TABLE access_token');
-        $this->addSql('DROP TABLE "cities"');
-        $this->addSql('DROP TABLE "departments"');
-        $this->addSql('DROP TABLE "regions"');
-        $this->addSql('DROP TABLE reset_password_request');
-        $this->addSql('DROP TABLE "users"');
     }
 }
