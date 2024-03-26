@@ -23,7 +23,12 @@ security:
             pattern: ^/
             lazy: true
             provider: app_user_provider
-
+            webauthn:
+                authentication:
+                    routes:
+                        options_path: '/assertion/options'
+                        result_path: '/assertion/result'
+                    
             custom_authenticator: App\Security\UsernamePasswordAuthenticator
             logout:
                 path: /logout
@@ -42,6 +47,7 @@ security:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/dashboard, roles: ROLE_USER }
         - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/assertion, roles: PUBLIC_ACCESS }
         - { path: ^/login, roles: PUBLIC_ACCESS }
         #- { path: ^/api, roles: ROLE_USER }
         - { path: ^/, roles: PUBLIC_ACCESS }

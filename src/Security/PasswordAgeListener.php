@@ -35,7 +35,7 @@ class PasswordAgeListener implements EventSubscriberInterface
         }
         $lastPasswordChange = $user->getLastPasswordChange();
         if (null === $lastPasswordChange || $lastPasswordChange->diff(new \DateTime())->days < 365) {
-            throw new PasswordIsTooOldException();
+            //throw new PasswordIsTooOldException();
         }
 
         $badge->markAsResolved();

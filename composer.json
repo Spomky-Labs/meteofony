@@ -15,7 +15,7 @@
         "doctrine/annotations": "^2.0",
         "doctrine/doctrine-bundle": "^2.8",
         "doctrine/doctrine-migrations-bundle": "^3.2",
-        "doctrine/orm": "^2.14|^3.0",
+        "doctrine/orm": "^2.14",
         "knplabs/knp-time-bundle": "^2.0",
         "nelmio/cors-bundle": "^2.3",
         "phpdocumentor/reflection-docblock": "^5.3",
@@ -60,6 +60,7 @@
         "symfonycasts/tailwind-bundle": "^0.5",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0",
+        "web-auth/webauthn-stimulus": "^4.8",
         "web-auth/webauthn-symfony-bundle": "^4.8"
     },
     "config": {

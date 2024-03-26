@@ -41,8 +41,8 @@ final class UsernamePasswordAuthenticator extends AbstractLoginFormAuthenticator
             new PasswordCredentials($request->request->get('password', '')),
             [
                 new CsrfTokenBadge('authenticate', $request->request->get('_csrf_token')),
-                new NotCompromisedPasswordBadge($request->request->get('password', '')),
-                new PasswordStrengthBadge($request->request->get('password', '')),
+                //new NotCompromisedPasswordBadge($request->request->get('password', '')),
+                //new PasswordStrengthBadge($request->request->get('password', '')),
             ]
         );
     }
