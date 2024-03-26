@@ -21,4 +21,6 @@ return [
     Nelmio\CorsBundle\NelmioCorsBundle::class => ['all' => true],
     Symfony\UX\Chartjs\ChartjsBundle::class => ['all' => true],
     Symfony\Bundle\MercureBundle\MercureBundle::class => ['all' => true],
+    Webauthn\Bundle\WebauthnBundle::class => ['all' => true],
+    Webauthn\Stimulus\WebauthnStimulusBundle::class => ['all' => true],
 ];
