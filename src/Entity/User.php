@@ -11,11 +11,15 @@ use Doctrine\ORM\Mapping as ORM;
 use Stringable;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Scheb\TwoFactorBundle\Model\Email\TwoFactorInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`users`')]
-class User implements UserInterface, PasswordAuthenticatedUserInterface, Stringable
+class User implements UserInterface, PasswordAuthenticatedUserInterface, Stringable, TwoFactorInterface
 {
+    #[ORM\Column(type: 'string', nullable: true)]
+    private ?string $authCode;
+
     /**
      * @var array<string>
      */
@@ -167,5 +171,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Stringa
     public function getLastPasswordChange(): ?\DateTimeImmutable
     {
         return $this->lastPasswordChange;
+    }
+    public function isEmailAuthEnabled(): bool
+    {
+        return true;
+    }
+
+    public function getEmailAuthRecipient(): string
+    {
+        return $this->getEmail();
+    }
+
+    public function getEmailAuthCode(): string
+    {
+        if (null === $this->authCode) {
+            throw new \LogicException('The email authentication code was not set');
+        }
+
+        return $this->authCode;
+    }
+
+    public function setEmailAuthCode(string $authCode): void
+    {
+        $this->authCode = $authCode;
     }
 }

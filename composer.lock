@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b81068a64523782a7b87cb2aef97d65a",
+    "content-hash": "8b9038fee9e59d449b140a61021e0047",
     "packages": [
         {
             "name": "api-platform/core",
@@ -3312,6 +3312,122 @@
                 }
             ],
             "time": "2023-12-12T12:06:11+00:00"
+        },
+        {
+            "name": "scheb/2fa-bundle",
+            "version": "v7.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/scheb/2fa-bundle.git",
+                "reference": "3eac1a44af1707056426197eda3c7a54a5ac9719"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/scheb/2fa-bundle/zipball/3eac1a44af1707056426197eda3c7a54a5ac9719",
+                "reference": "3eac1a44af1707056426197eda3c7a54a5ac9719",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": "~8.2.0 || ~8.3.0",
+                "symfony/config": "^6.4 || ^7.0",
+                "symfony/dependency-injection": "^6.4 || ^7.0",
+                "symfony/event-dispatcher": "^6.4 || ^7.0",
+                "symfony/framework-bundle": "^6.4 || ^7.0",
+                "symfony/http-foundation": "^6.4 || ^7.0",
+                "symfony/http-kernel": "^6.4 || ^7.0",
+                "symfony/property-access": "^6.4 || ^7.0",
+                "symfony/security-bundle": "^6.4 || ^7.0",
+                "symfony/twig-bundle": "^6.4 || ^7.0"
+            },
+            "conflict": {
+                "scheb/two-factor-bundle": "*"
+            },
+            "suggest": {
+                "scheb/2fa-backup-code": "Emergency codes when you have no access to other methods",
+                "scheb/2fa-email": "Send codes by email",
+                "scheb/2fa-google-authenticator": "Google Authenticator support",
+                "scheb/2fa-totp": "Temporary one-time password (TOTP) support (Google Authenticator compatible)",
+                "scheb/2fa-trusted-device": "Trusted devices support"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Scheb\\TwoFactorBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Scheb",
+                    "email": "me@christianscheb.de"
+                }
+            ],
+            "description": "A generic interface to implement two-factor authentication in Symfony applications",
+            "homepage": "https://github.com/scheb/2fa",
+            "keywords": [
+                "2fa",
+                "Authentication",
+                "symfony",
+                "two-factor",
+                "two-step"
+            ],
+            "support": {
+                "source": "https://github.com/scheb/2fa-bundle/tree/v7.2.0"
+            },
+            "time": "2024-01-26T17:30:55+00:00"
+        },
+        {
+            "name": "scheb/2fa-email",
+            "version": "v7.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/scheb/2fa-email.git",
+                "reference": "de479da6497dd90c7b4a6db5a04d48edec42b786"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/scheb/2fa-email/zipball/de479da6497dd90c7b4a6db5a04d48edec42b786",
+                "reference": "de479da6497dd90c7b4a6db5a04d48edec42b786",
+                "shasum": ""
+            },
+            "require": {
+                "php": "~8.2.0 || ~8.3.0",
+                "scheb/2fa-bundle": "self.version"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Scheb\\TwoFactorBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Scheb",
+                    "email": "me@christianscheb.de"
+                }
+            ],
+            "description": "Extends scheb/2fa-bundle with two-factor authentication via email",
+            "homepage": "https://github.com/scheb/2fa",
+            "keywords": [
+                "2fa",
+                "Authentication",
+                "email",
+                "symfony",
+                "two-factor",
+                "two-step"
+            ],
+            "support": {
+                "source": "https://github.com/scheb/2fa-email/tree/v7.2.0"
+            },
+            "time": "2024-01-18T20:20:03+00:00"
         },
         {
             "name": "spomky-labs/cbor-php",
