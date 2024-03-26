@@ -77,4 +77,9 @@ final class UserRepository extends ServiceEntityRepository implements PasswordUp
             ->getOneOrNullResult()
         ;
     }
+
+    public function findOneById(string $userHandle): ?User
+    {
+        return $this->findOneBy(['id' => $userHandle]);
+    }
 }
