@@ -22,6 +22,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Stringa
     #[ORM\Column]
     private array $roles = [];
 
+    #[ORM\Column(type: 'datetime_immutable', nullable: true)]
+    private \DateTimeImmutable|null $lastPasswordChange = null;
+
     /**
      * @var Collection<int, AccessToken>|AccessToken[]
      */
@@ -159,5 +162,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Stringa
     public function getAccessTokens(): Collection
     {
         return $this->accessTokens;
+    }
+
+    public function getLastPasswordChange(): ?\DateTimeImmutable
+    {
+        return $this->lastPasswordChange;
     }
 }

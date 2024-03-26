@@ -10,6 +10,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
+use function Symfony\Component\String\u;
 
 /**
  * @extends ServiceEntityRepository<User>
@@ -68,8 +69,9 @@ final class UserRepository extends ServiceEntityRepository implements PasswordUp
 
     public function findOneByUsername(string $identifier): ?User
     {
+        u($identifier)->lower();
         return $this->createQueryBuilder('o')
-            ->where('o.username = :identifier')
+            ->where('LOWER(o.username) = :identifier')
             ->setParameter('identifier', $identifier)
             ->getQuery()
             ->getOneOrNullResult()
