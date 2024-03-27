@@ -24,4 +24,5 @@ return [
     Webauthn\Bundle\WebauthnBundle::class => ['all' => true],
     Webauthn\Stimulus\WebauthnStimulusBundle::class => ['all' => true],
     Scheb\TwoFactorBundle\SchebTwoFactorBundle::class => ['all' => true],
+    Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle::class => ['all' => true],
 ];

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Repository\WebauthnCredentialRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\GeneratedValue;
@@ -22,7 +23,7 @@ use Webauthn\TrustPath\TrustPath;
 class WebauthnCredential extends PublicKeyCredentialSource
 {
     #[Id]
-    #[Column(unique: true)]
+    #[Column(unique: true, Types::ARRAY)]
     #[GeneratedValue(strategy: "NONE")]
     private string $id;
 

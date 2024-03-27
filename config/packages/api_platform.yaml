@@ -18,3 +18,8 @@ api_platform:
     event_listeners_backward_compatibility_layer: false
     keep_legacy_inflector: false
     show_webby: false
+    swagger:
+        api_keys:
+            JWT:
+                name: Authorization
+                type: header
