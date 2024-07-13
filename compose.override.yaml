@@ -36,3 +36,9 @@ services:
           - target: 1080
             published: ${MAILER_HTTP_PORT:-1080}
 ###< symfony/mailer ###
+
+###> doctrine/doctrine-bundle ###
+  database:
+    ports:
+      - "5432"
+###< doctrine/doctrine-bundle ###
