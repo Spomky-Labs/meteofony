@@ -13,7 +13,7 @@
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css">
         {% endblock %}
         {% block javascripts %}
-            {{ importmap('app') }}
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
             <script type="application/javascript" src="{{ asset('script/main.js') }}"></script>
         {% endblock %}
     </head>
