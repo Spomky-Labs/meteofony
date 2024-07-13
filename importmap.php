@@ -32,7 +32,7 @@ return [
         'version' => '3.2.2',
     ],
     'chart.js/auto' => [
-        'version' => '4.4.2',
+        'version' => '4.4.3',
     ],
     '@kurkle/color' => [
         'version' => '0.3.2',
@@ -42,6 +42,6 @@ return [
         'type' => 'css',
     ],
     'chart.js' => [
-        'version' => '3.9.1',
+        'version' => '4.4.3',
     ],
 ];
