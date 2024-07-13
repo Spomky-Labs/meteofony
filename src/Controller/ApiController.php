@@ -12,7 +12,7 @@ use App\Repository\DepartmentRepository;
 use App\Repository\RegionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 final class ApiController extends AbstractController
 {

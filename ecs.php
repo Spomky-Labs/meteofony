@@ -26,7 +26,6 @@ use PhpCsFixer\Fixer\Strict\DeclareStrictTypesFixer;
 use PhpCsFixer\Fixer\Strict\StrictComparisonFixer;
 use PhpCsFixer\Fixer\Strict\StrictParamFixer;
 use PhpCsFixer\Fixer\Whitespace\ArrayIndentationFixer;
-use PhpCsFixer\Fixer\Whitespace\CompactNullableTypehintFixer;
 use Symplify\EasyCodingStandard\Config\ECSConfig;
 use Symplify\EasyCodingStandard\ValueObject\Set\SetList;
 
@@ -60,7 +59,6 @@ return static function (ECSConfig $config): void {
     $config->rule(LinebreakAfterOpeningTagFixer::class);
     $config->rule(CombineConsecutiveIssetsFixer::class);
     $config->rule(CombineConsecutiveUnsetsFixer::class);
-    $config->rule(CompactNullableTypehintFixer::class);
     $config->rule(NoSuperfluousElseifFixer::class);
     $config->rule(NoSuperfluousPhpdocTagsFixer::class);
     $config->rule(PhpdocTrimConsecutiveBlankLineSeparationFixer::class);
