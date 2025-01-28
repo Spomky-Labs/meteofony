@@ -31,9 +31,9 @@ jobs:
         - name: Check security
           uses: symfonycorp/security-checker-action@v2
         - name: Pull images
-          run: make build
+          run: castor build
         - name: Start services
-          run: make up
+          run: castor start
         - name: Wait for services
           run: |
             while status="$(docker inspect --format="{{if .Config.Healthcheck}}{{print .State.Health.Status}}{{end}}" "$(docker compose ps -q php)")"; do
@@ -44,11 +44,7 @@ jobs:
               esac
             done
             exit 1
-        - name: Install dependencies
-          run: make install
-        - name: Compile assets
-          run: make assets
         - name: Check HTTP reachability
-          run: curl http://localhost:8080
+          run: curl http://localhost
         - name: Check HTTPS reachability
-          run: curl -k https://localhost:8443
+          run: curl -k https://localhost

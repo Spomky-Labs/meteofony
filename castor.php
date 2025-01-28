@@ -226,7 +226,7 @@ function start(string $xdebugMode = 'develop', bool $fixtures = false): void
     if ($fixtures) {
         console(['doctrine:fixtures:load', '--no-interaction']);
     }
-    frontend(true);
+    frontend();
 }
 
 #[AsTask(description: 'Build the images.')]
