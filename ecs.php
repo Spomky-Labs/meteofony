@@ -26,6 +26,7 @@ use PhpCsFixer\Fixer\Strict\DeclareStrictTypesFixer;
 use PhpCsFixer\Fixer\Strict\StrictComparisonFixer;
 use PhpCsFixer\Fixer\Strict\StrictParamFixer;
 use PhpCsFixer\Fixer\Whitespace\ArrayIndentationFixer;
+use PhpCsFixer\Fixer\Whitespace\CompactNullableTypehintFixer;
 use Symplify\EasyCodingStandard\Config\ECSConfig;
 use Symplify\EasyCodingStandard\ValueObject\Set\SetList;
 
@@ -59,6 +60,7 @@ return static function (ECSConfig $config): void {
     $config->rule(LinebreakAfterOpeningTagFixer::class);
     $config->rule(CombineConsecutiveIssetsFixer::class);
     $config->rule(CombineConsecutiveUnsetsFixer::class);
+    $config->rule(CompactNullableTypehintFixer::class);
     $config->rule(NoSuperfluousElseifFixer::class);
     $config->rule(NoSuperfluousPhpdocTagsFixer::class);
     $config->rule(PhpdocTrimConsecutiveBlankLineSeparationFixer::class);
@@ -95,17 +97,14 @@ return static function (ECSConfig $config): void {
     );
 
     $config->parallel();
-    $config->paths([__DIR__]);
-    $config->skip([
-        __DIR__ . '/src/Kernel.php',
-        __DIR__ . '/importmap.php',
-        __DIR__ . '/assets',
-        __DIR__ . '/bin',
-        __DIR__ . '/config/bundles.php',
-        __DIR__ . '/heroku',
-        __DIR__ . '/public',
-        __DIR__ . '/var',
-        PhpUnitTestClassRequiresCoversFixer::class,
-    ])
+    $config->paths([
+        __DIR__ . '/src',
+        __DIR__ . '/tests',
+        __DIR__ . '/config',
+        __DIR__ . '/castor.php',
+        __DIR__ . '/rector.php',
+        __DIR__ . '/ecs.php',
+    ]);
+    $config->skip([__DIR__ . '/src/Kernel.php', PhpUnitTestClassRequiresCoversFixer::class])
     ;
 };

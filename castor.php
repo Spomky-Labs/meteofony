@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 use Castor\Attribute\AsRawTokens;
 use Castor\Attribute\AsTask;
-
 use Castor\Context;
 use function Castor\context;
 use function Castor\io;
@@ -12,18 +11,27 @@ use function Castor\notify;
 use function Castor\run;
 
 #[AsTask(description: 'Run tests')]
-function test(bool $coverageHtml = false, bool $coverageText = false, bool $gitlab = false, null|string $coverageCobertura = null, null|string $logJunit = null, null|string $group = null): void
-{
+function test(
+    bool $coverageHtml = false,
+    bool $coverageText = false,
+    bool $gitlab = false,
+    null|string $coverageCobertura = null,
+    null|string $logJunit = null,
+    null|string $group = null
+): void {
     io()->title('Running tests');
-    if (!$gitlab) {
-        run(['docker', 'exec', '-it', 'chp-database-1', 'mariadb', '-p!ChangeMe!', '-e', 'CREATE DATABASE  IF NOT EXISTS app_test; GRANT ALL ON app_test.* TO \'app\'@\'%\'; flush privileges;']);
+    if (! $gitlab) {
+        run(
+            [
+                'docker', 'exec', '-it', 'chp-database-1', 'mariadb', '-p!ChangeMe!', '-e', 'CREATE DATABASE  IF NOT EXISTS app_test; GRANT ALL ON app_test.* TO \'app\'@\'%\'; flush privileges;']
+        );
         console(['doctrine:migrations:migrate', '--env=test', '--no-interaction']);
     }
     $command = ['vendor/bin/phpunit', '--color'];
     if ($coverageText) {
         $command = ['vendor/bin/phpunit'];
     }
-    $xdebugMode = "Off";
+    $xdebugMode = 'Off';
     if ($coverageHtml) {
         $command[] = '--coverage-html=build/coverage';
         $xdebugMode = 'coverage';
@@ -44,11 +52,15 @@ function test(bool $coverageHtml = false, bool $coverageText = false, bool $gitl
         $command[] = sprintf('--group=%s', $group);
     }
     if ($gitlab) {
-        $command[] = "--stop-on-defect";
-        run($command, context: context()->withEnvironment(['XDEBUG_MODE' => $xdebugMode]));
+        $command[] = '--stop-on-defect';
+        run($command, context: context()->withEnvironment([
+            'XDEBUG_MODE' => $xdebugMode,
+        ]));
         return;
     }
-    php($command, context: context()->withEnvironment(['XDEBUG_MODE' => $xdebugMode]));
+    php($command, context: context()->withEnvironment([
+        'XDEBUG_MODE' => $xdebugMode,
+    ]));
 }
 
 #[AsTask(description: 'Coding standards check')]
@@ -63,10 +75,14 @@ function cs(bool $fix = false, bool $clearCache = false, bool $gitlab = false): 
         $command[] = '--clear-cache';
     }
     if ($gitlab) {
-        run($command, context: context()->withEnvironment(['XDEBUG_MODE' => 'off']));
+        run($command, context: context()->withEnvironment([
+            'XDEBUG_MODE' => 'off',
+        ]));
         return;
     }
-    php($command, context: context()->withEnvironment(['XDEBUG_MODE' => 'off']));
+    php($command, context: context()->withEnvironment([
+        'XDEBUG_MODE' => 'off',
+    ]));
 }
 
 #[AsTask(description: 'Running PHPStan')]
@@ -79,10 +95,14 @@ function stan(bool $baseline = false, bool $gitlab = false): void
     }
     $command = ['vendor/bin/phpstan', ...$options];
     if ($gitlab) {
-        run($command, context: context()->withEnvironment(['XDEBUG_MODE' => 'off']));
+        run($command, context: context()->withEnvironment([
+            'XDEBUG_MODE' => 'off',
+        ]));
         return;
     }
-    php($command, context: context()->withEnvironment(['XDEBUG_MODE' => 'off']));
+    php($command, context: context()->withEnvironment([
+        'XDEBUG_MODE' => 'off',
+    ]));
 }
 
 #[AsTask(description: 'Validate Composer configuration')]
@@ -90,10 +110,14 @@ function validate(): void
 {
     io()->title('Validating Composer configuration');
     $command = ['composer', 'validate', '--strict'];
-    run($command, context: context()->withEnvironment(['XDEBUG_MODE' => 'off']));
+    run($command, context: context()->withEnvironment([
+        'XDEBUG_MODE' => 'off',
+    ]));
 
     $command = ['composer', 'dump-autoload', '--optimize', '--strict-psr'];
-    run($command, context: context()->withEnvironment(['XDEBUG_MODE' => 'off']));
+    run($command, context: context()->withEnvironment([
+        'XDEBUG_MODE' => 'off',
+    ]));
 }
 
 #[AsTask(description: 'Composer audit')]
@@ -102,7 +126,9 @@ function audit(): void
     io()->title('Running composer audit');
     $command = ['composer', 'audit'];
 
-    run($command, context: context()->withEnvironment(['XDEBUG_MODE' => 'off']));
+    run($command, context: context()->withEnvironment([
+        'XDEBUG_MODE' => 'off',
+    ]));
 }
 
 #[AsTask(description: 'Run Rector')]
@@ -117,10 +143,14 @@ function rector(bool $fix = false, bool $clearCache = false, bool $gitlab = fals
         $command[] = '--clear-cache';
     }
     if ($gitlab) {
-        run($command, context: context()->withEnvironment(['XDEBUG_MODE' => 'off']));
+        run($command, context: context()->withEnvironment([
+            'XDEBUG_MODE' => 'off',
+        ]));
         return;
     }
-    php($command, context: context()->withEnvironment(['XDEBUG_MODE' => 'off']));
+    php($command, context: context()->withEnvironment([
+        'XDEBUG_MODE' => 'off',
+    ]));
 }
 
 #[AsTask(description: 'Run Deptrac')]
@@ -132,10 +162,14 @@ function deptrac(bool $show = false, bool $gitlab = false): void
         $command[] = '--report-uncovered';
     }
     if ($gitlab) {
-        run($command, context: context()->withEnvironment(['XDEBUG_MODE' => 'off']));
+        run($command, context: context()->withEnvironment([
+            'XDEBUG_MODE' => 'off',
+        ]));
         return;
     }
-    php($command, context: context()->withEnvironment(['XDEBUG_MODE' => 'off']));
+    php($command, context: context()->withEnvironment([
+        'XDEBUG_MODE' => 'off',
+    ]));
 }
 
 #[AsTask(description: 'Restart the containers.')]
@@ -179,7 +213,9 @@ function stop(): void
 #[AsTask(description: 'Wakes up the containers.')]
 function up(string $xdebugMode = 'develop'): void
 {
-    run(['docker', 'compose', 'up', '-d', '--wait'], context: context()->withEnvironment(['XDEBUG_MODE' => $xdebugMode]));
+    run(['docker', 'compose', 'up', '-d', '--wait'], context: context()->withEnvironment([
+        'XDEBUG_MODE' => $xdebugMode,
+    ]));
 }
 
 #[AsTask(description: 'Starts the containers.')]

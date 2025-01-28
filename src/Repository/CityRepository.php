@@ -8,6 +8,7 @@ use App\Entity\City;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\Order;
 use Doctrine\Persistence\ManagerRegistry;
+use function sprintf;
 
 /**
  * @extends ServiceEntityRepository<City>

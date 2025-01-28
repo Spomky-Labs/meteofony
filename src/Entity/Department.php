@@ -18,7 +18,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Department
 {
     /**
-     * @var Collection<int, City>|City[]
+     * @var Collection<int, City>
      */
     #[ORM\OneToMany(mappedBy: 'department', targetEntity: City::class, fetch: 'EXTRA_LAZY')]
     public Collection $cities;

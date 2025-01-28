@@ -21,6 +21,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\ResetPassword\Controller\ResetPasswordControllerTrait;
 use SymfonyCasts\Bundle\ResetPassword\Exception\ResetPasswordExceptionInterface;
 use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface;
+use function sprintf;
 
 #[\Symfony\Component\Routing\Attribute\Route('/reset-password')]
 final class ResetPasswordController extends AbstractController

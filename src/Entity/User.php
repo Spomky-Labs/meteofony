@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Stringable;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use function sprintf;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`users`')]
@@ -23,7 +24,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Stringa
     private array $roles = [];
 
     /**
-     * @var Collection<int, AccessToken>|AccessToken[]
+     * @var Collection<int, AccessToken>
      */
     #[ORM\OneToMany(mappedBy: 'owner', targetEntity: AccessToken::class, orphanRemoval: true)]
     private Collection $accessTokens;

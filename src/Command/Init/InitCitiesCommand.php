@@ -15,6 +15,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use function count;
 use function is_string;
+use function sprintf;
 use const JSON_THROW_ON_ERROR;
 
 #[AsCommand(name: 'app:init:cities', description: 'Initialisation des villes',)]

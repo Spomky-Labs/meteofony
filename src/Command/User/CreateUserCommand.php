@@ -15,6 +15,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 use Symfony\Component\Uid\Ulid;
 use Throwable;
+use function sprintf;
 
 #[AsCommand('app:user:create')]
 final class CreateUserCommand extends Command
