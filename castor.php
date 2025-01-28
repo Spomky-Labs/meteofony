@@ -264,3 +264,14 @@ function php(#[AsRawTokens] array $args = [], ?Context $context = null): void
 {
     run(['docker', 'compose', 'exec', '-T', 'php', ...$args], context: $context);
 }
+
+#[AsTask(description: 'Initialize the database and fixtures.')]
+function init(): void
+{
+    console(['d:d:c', '--if-not-exists']);
+    console(['d:m:m', '-n']);
+    console(['app:init:users']);
+    console(['app:init:regions']);
+    console(['app:init:departments']);
+    console(['app:init:cities']);
+}

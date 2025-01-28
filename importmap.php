@@ -29,19 +29,19 @@ return [
         'version' => '1.9.4',
     ],
     '@symfony/stimulus-bridge' => [
-        'version' => '3.2.2',
+        'version' => '3.2.3',
     ],
     'chart.js/auto' => [
-        'version' => '4.4.3',
+        'version' => '4.4.7',
     ],
     '@kurkle/color' => [
-        'version' => '0.3.2',
+        'version' => '0.3.4',
     ],
     'leaflet/dist/leaflet.min.css' => [
         'version' => '1.9.4',
         'type' => 'css',
     ],
     'chart.js' => [
-        'version' => '4.4.3',
+        'version' => '4.4.7',
     ],
 ];
