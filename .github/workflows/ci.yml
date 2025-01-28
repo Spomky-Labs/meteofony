@@ -18,7 +18,7 @@ jobs:
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       -
         name: Lint Dockerfile
         uses: hadolint/hadolint-action@v3.1.0
@@ -27,9 +27,14 @@ jobs:
       runs-on: ubuntu-latest
       steps:
         - name: Checkout
-          uses: actions/checkout@v3
+          uses: actions/checkout@v4
+        - name: Setup PHP
+          uses: shivammathur/setup-php@v2
+          with:
+            php-version: '8.3'
+            tools: castor
         - name: Check security
-          uses: symfonycorp/security-checker-action@v2
+          uses: symfonycorp/security-checker-action@v5
         - name: Pull images
           run: castor build
         - name: Start services
