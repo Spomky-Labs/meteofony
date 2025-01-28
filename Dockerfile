@@ -1,6 +1,7 @@
 #syntax=docker/dockerfile:1
 
 FROM dunglas/frankenphp:builder AS frankenphp_builder
+LABEL builder=true
 
 COPY --from=caddy:builder /usr/bin/xcaddy /usr/bin/xcaddy
 
@@ -22,6 +23,7 @@ RUN CGO_ENABLED=1 \
         --with github.com/corazawaf/coraza-caddy/v2
 
 FROM dunglas/frankenphp AS frankenphp_runner
+LABEL builder=true
 
 # Replace the official binary by the one contained your custom modules
 COPY --from=frankenphp_builder /usr/local/bin/frankenphp /usr/local/bin/frankenphp
@@ -29,6 +31,7 @@ COPY --from=frankenphp_builder /usr/local/bin/frankenphp /usr/local/bin/frankenp
 
 # Versions
 FROM frankenphp_runner AS frankenphp_upstream
+LABEL builder=true
 
 # The different stages of this Dockerfile are meant to be built into separate images
 # https://docs.docker.com/develop/develop-images/multistage-build/#stop-at-a-specific-build-stage
@@ -37,6 +40,7 @@ FROM frankenphp_runner AS frankenphp_upstream
 
 # Base FrankenPHP image
 FROM frankenphp_upstream AS frankenphp_base
+LABEL builder=true
 
 WORKDIR /app
 
@@ -84,6 +88,7 @@ CMD [ "frankenphp", "run", "--config", "/etc/caddy/Caddyfile" ]
 
 # Dev FrankenPHP image
 FROM frankenphp_base AS frankenphp_dev
+LABEL builder=false
 
 ENV APP_ENV=dev XDEBUG_MODE=off
 
@@ -100,6 +105,7 @@ CMD [ "frankenphp", "run", "--config", "/etc/caddy/Caddyfile", "--watch" ]
 
 # Prod FrankenPHP image
 FROM frankenphp_base AS frankenphp_prod
+LABEL builder=false
 
 ENV APP_ENV=prod
 ENV FRANKENPHP_CONFIG="import worker.Caddyfile"
