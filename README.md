@@ -17,17 +17,17 @@ Playground for improving the security of the Météofony application.
 4) Start the app
    From the root of the application
     - cd meteofony
-    - make build
-    - make up
-    - make init
+    - castor build
+    - castor start
+    - castor init
 
 5) From your browser
     https://localhost:8443
 
 This is a basic application on top of:
 
-* PHP 8.2
-* Symfony 6.4
+* PHP 8.3
+* Symfony 7.2
 * Symfony UX + AssetMapper + Tailwind
 * API Platform
 * FrankenPHP
