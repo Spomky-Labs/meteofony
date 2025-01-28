@@ -7,39 +7,25 @@ services:
     volumes:
       - ./:/app
       - ./frankenphp/Caddyfile:/etc/caddy/Caddyfile:ro
-      - ./frankenphp/conf.d/app.dev.ini:/usr/local/etc/php/conf.d/app.dev.ini:ro
-      - ./frankenphp/certs:/etc/caddy/certs:ro
+      - ./frankenphp/conf.d/20-app.dev.ini:/usr/local/etc/php/app.conf.d/20-app.dev.ini:ro
       # If you develop on Mac or Windows you can remove the vendor/ directory
       #  from the bind-mount for better performance by enabling the next line:
       #- /app/vendor
+      - ./../advanced-authentication-bundle/:/app/vendor/authwire/advanced-authentication-bundle:ro
     environment:
-      #CADDY_EXTRA_CONFIG: "tls /etc/caddy/certs/tls.pem /etc/caddy/certs/tls.key"
+      SERVER_NAME: ${SERVER_NAME:-localhost}, php:80
       MERCURE_EXTRA_DIRECTIVES: demo
       # See https://xdebug.org/docs/all_settings#mode
-      XDEBUG_MODE: "${XDEBUG_MODE:-off}"
-      MAILER_DSN: smtp://mailer:${MAILER_SMTP_PORT:-1025}
+      XDEBUG_MODE: "${XDEBUG_MODE:-develop}"
     extra_hosts:
       # Ensure that host.docker.internal is correctly defined on Linux
       - host.docker.internal:host-gateway
     tty: true
-
 ###> symfony/mercure-bundle ###
 ###< symfony/mercure-bundle ###
-    
-    
-###> symfony/mailer ###
-  mailer:
-    image: axllent/mailpit
-    ports:
-      - "1025"
-      - "8025"
-    environment:
-      MP_SMTP_AUTH_ACCEPT_ANY: 1
-      MP_SMTP_AUTH_ALLOW_INSECURE: 1
-###< symfony/mailer ###
 
 ###> doctrine/doctrine-bundle ###
   database:
     ports:
-      - "5432"
+      - "3306:3306"
 ###< doctrine/doctrine-bundle ###

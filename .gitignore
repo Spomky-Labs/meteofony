@@ -25,3 +25,5 @@
 ###> phpstan/phpstan ###
 phpstan.neon
 ###< phpstan/phpstan ###
+
+/.castor.stub.php

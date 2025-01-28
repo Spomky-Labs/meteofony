@@ -1,18 +1,12 @@
 {
 	{$CADDY_GLOBAL_OPTIONS}
-
+	order coraza_waf first
 	frankenphp {
 		{$FRANKENPHP_CONFIG}
 	}
-
-	# https://caddyserver.com/docs/caddyfile/directives#sorting-algorithm
-	order mercure after encode
-	order vulcain after reverse_proxy
-	order php_server before file_server
 }
 
 {$CADDY_EXTRA_CONFIG}
-
 
 {$SERVER_NAME:localhost} {
 	#tls {
@@ -24,17 +18,14 @@
 	log {
 		# Redact the authorization query parameter that can be set by Mercure
 		format filter {
-			wrap console
-			fields {
-				uri query {
-					replace authorization REDACTED
-				}
+			request>uri query {
+				replace authorization REDACTED
 			}
 		}
 	}
 
 	root * /app/public
-	encode zstd gzip
+	encode zstd br gzip
 
 	mercure {
 		# Transport to use (default to Bolt)
@@ -52,6 +43,8 @@
 	}
 
 	vulcain
+
+	{$CADDY_SERVER_EXTRA_DIRECTIVES}
 
 	# Disable Topics tracking if not enabled explicitly: https://github.com/jkarlin/topics
 	header ?Permissions-Policy "browsing-topics=()"
