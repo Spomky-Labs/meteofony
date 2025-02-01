@@ -29,7 +29,7 @@ return [
         'version' => '1.9.4',
     ],
     '@symfony/stimulus-bridge' => [
-        'version' => '3.2.3',
+        'version' => '4.0.0',
     ],
     'chart.js/auto' => [
         'version' => '4.4.7',
@@ -45,6 +45,6 @@ return [
         'version' => '4.4.7',
     ],
     '@hotwired/turbo' => [
-        'version' => '7.3.0',
+        'version' => '8.0.12',
     ],
 ];
