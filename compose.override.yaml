@@ -8,12 +8,12 @@ services:
       - ./:/app
       - ./frankenphp/Caddyfile:/etc/caddy/Caddyfile:ro
       - ./frankenphp/conf.d/20-app.dev.ini:/usr/local/etc/php/app.conf.d/20-app.dev.ini:ro
+      - ./frankenphp/certs:/etc/caddy/certs:ro
       # If you develop on Mac or Windows you can remove the vendor/ directory
       #  from the bind-mount for better performance by enabling the next line:
       #- /app/vendor
-      - ./../advanced-authentication-bundle/:/app/vendor/authwire/advanced-authentication-bundle:ro
     environment:
-      SERVER_NAME: ${SERVER_NAME:-localhost}, php:80
+      SERVER_NAME: ${SERVER_NAME:-localhost, php:443}
       MERCURE_EXTRA_DIRECTIVES: demo
       # See https://xdebug.org/docs/all_settings#mode
       XDEBUG_MODE: "${XDEBUG_MODE:-develop}"

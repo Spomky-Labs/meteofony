@@ -9,17 +9,22 @@
 {$CADDY_EXTRA_CONFIG}
 
 {$SERVER_NAME:localhost} {
-	#tls {
-	#	client_auth {
-	#		mode verify_if_given
-	#		trusted_ca_cert_file /etc/caddy/certs/ca.pem
-	#	}
-	#}
+#	tls /etc/caddy/certs/tls.pem /etc/caddy/certs/tls.key {
+#		client_auth {
+#			mode verify_if_given
+#			trust_pool file {
+#				pem_file /etc/caddy/certs/ca.pem
+#			}
+#		}
+#		#protocols tls1.3
+#		#ca_root /etc/caddy/certs/ca.pem
+#		#key_type rsa4096
+#	}
 	log {
 		# Redact the authorization query parameter that can be set by Mercure
 		format filter {
 			request>uri query {
-				replace authorization REDACTED
+				replace authcorization REDACTED
 			}
 		}
 	}

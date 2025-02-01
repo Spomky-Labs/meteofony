@@ -30,6 +30,9 @@ security:
                 # where to redirect after logout
                 target: app_homepage
 
+#            x509:
+#                provider: app_admin_provider
+#                user_identifier: CN
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
 
