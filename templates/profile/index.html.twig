@@ -15,9 +15,22 @@
                 <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden">
                     <p class="text-gray-800 text-base px-6 mb-5">
                         {{ dump(app.user, app.token) }}
+                        {# {{ dump(credentials) }} #}
                     </p>
                 </div>
             </div>
+            {# <button
+                {{ stimulus_controller(
+                    '@web-auth/webauthn-stimulus',
+                    {
+                        creationResultUrl: path('webauthn.controller.creation.response.from_user_account'),
+                        creationOptionsUrl: path('webauthn.controller.creation.request.from_user_account')
+                    }
+                ) }}
+                {{ stimulus_action('@web-auth/webauthn-stimulus', 'signup') }}
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0">
+                Add a Webauthn Authenticator
+            </button> #}
         </div>
     </section>
 {% endblock %}

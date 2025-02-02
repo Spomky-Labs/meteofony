@@ -63,6 +63,39 @@
                                value="{{ csrf_token('authenticate') }}"
                         >
                     </form>
+                    {#<form class="space-y-4 md:space-y-6" {{ stimulus_controller(
+                        '@web-auth/webauthn-stimulus',
+                        {
+                            requestResultUrl: path('webauthn.controller.security.main.request.result'),
+                            requestOptionsUrl: path('webauthn.controller.security.main.request.options'),
+                            requestSuccessRedirectUri: path('app_dashboard'),
+                            useBrowserAutofill: true
+                        }
+                    ) }}>
+                        <div class="mb-6">
+                            <label
+                                for="username"
+                                >
+                                Username
+                            </label>
+                            <input
+                                type="text"
+                                name="username"
+                                id="username"
+                                autofocus
+                                class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                placeholder="Username"
+                                   autocomplete="webauthn"
+                            >
+                        </div>
+                        <button
+                            type="submit"
+                            {{ stimulus_action('@web-auth/webauthn-stimulus', 'signin') }}
+                            class="mx-auto lg:mx-0 hover:underline font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out bg-white text-gray-800"
+                        >
+                            Login
+                        </button>#}
+                    </form>
                 </div>
             </div>
         </div>

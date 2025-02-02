@@ -29,7 +29,12 @@ security:
                 path: /logout
                 # where to redirect after logout
                 target: app_homepage
-
+            
+#            webauthn:
+#                authentication:
+#                    routes:
+#                        options_path: '/assertion/options'
+#                        result_path: '/assertion/result'
 #            x509:
 #                provider: app_admin_provider
 #                user_identifier: CN
