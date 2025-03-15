@@ -24,7 +24,7 @@
 		# Redact the authorization query parameter that can be set by Mercure
 		format filter {
 			request>uri query {
-				replace authcorization REDACTED
+				replace authorization REDACTED
 			}
 		}
 	}
