@@ -1,6 +1,6 @@
 {
 	{$CADDY_GLOBAL_OPTIONS}
-	#order coraza_waf first
+	order coraza_waf first
 	frankenphp {
 		{$FRANKENPHP_CONFIG}
 	}

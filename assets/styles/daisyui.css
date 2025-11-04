@@ -1,0 +1,104 @@
+
+@plugin "../vendor/daisyui/daisyui.index.js" {
+    exclude: rootscrollgutter;
+}
+
+@plugin "../vendor/daisyui/theme.js" {
+    name: "light";
+    default: true;
+    color-scheme: light;
+
+    /* Layout */
+    --root-bg: #f0f6fb;
+    --layout-sidebar-background: #ffffff;
+    --layout-topbar-background: #ffffff;
+
+    /* Base */
+    --color-base-100: #ffffff;
+    --color-base-200: #d3e9f4;  /* Light Blue Gray */
+    --color-base-300: #bcc9d5;  /* Medium Gray */
+    --color-base-content: #1e2328;
+
+    /* Couleurs principales */
+    --color-primary: #0082de;      /* Medium Blue */
+    --color-primary-content: #ffffff;
+    --color-secondary: #00ace8;    /* Light Blue */
+    --color-secondary-content: #ffffff;
+    --color-accent: #42c8be;       /* Blue Green */
+    --color-accent-content: #003336;
+    --color-neutral: #22304e;      /* Navy Blue */
+    --color-neutral-content: #ffffff;
+
+    /* Autres */
+    --color-info: #4799c5;         /* Gray Blue */
+    --color-success: #00833f;      /* Meadow Green */
+    --color-warning: #f9cf00;      /* Yellow */
+    --color-error: #ff4b6b;        /* Raspberry */
+
+    --color-info-content: #ffffff;
+    --color-success-content: #ffffff;
+    --color-warning-content: #1e2328;
+    --color-error-content: #ffffff;
+
+    /* Styles */
+    --radius-selector: 0.25rem;
+    --radius-field: 0.25rem;
+    --radius-box: 0.25rem;
+    --size-selector: 0.25rem;
+    --size-field: 0.25rem;
+    --border: 2px;
+    --card-p: 20px;
+    --card-fs: var(--text-base);
+    --depth: 1;
+    --noise: 1;
+}
+
+@plugin "../vendor/daisyui/theme.js" {
+    name: "dark";
+    color-scheme: dark;
+    prefersdark: true;
+
+    /* Layout */
+    --root-bg: #001221;
+    --layout-sidebar-background: #00204b;
+    --layout-topbar-background: #00204b;
+
+    /* Base */
+    --color-base-100: #00204b;
+    --color-base-200: #22304e;
+    --color-base-300: #2a3547;
+    --color-base-content: #f0f4f8;
+
+    /* Couleurs principales */
+    --color-primary: #0082de;      /* Medium Blue */
+    --color-primary-content: #ffffff;
+    --color-secondary: #00ace8;    /* Light Blue */
+    --color-secondary-content: #ffffff;
+    --color-accent: #42c8be;       /* Blue Green */
+    --color-accent-content: #003336;
+    --color-neutral: #dce1e6;
+    --color-neutral-content: #1e2832;
+
+    /* Autres */
+    --color-info: #4799c5;
+    --color-success: #00833f;
+    --color-warning: #f9cf00;
+    --color-error: #ff4b6b;
+
+    --color-info-content: #ffffff;
+    --color-success-content: #ffffff;
+    --color-warning-content: #1e2328;
+    --color-error-content: #ffffff;
+
+    /* Styles */
+    --radius-selector: 0.25rem;
+    --radius-field: 0.25rem;
+    --radius-box: 0.25rem;
+    --size-selector: 0.25rem;
+    --size-field: 0.25rem;
+    --border: 2px;
+    --card-p: 20px;
+    --card-fs: var(--text-base);
+    --depth: 1;
+    --noise: 1;
+}

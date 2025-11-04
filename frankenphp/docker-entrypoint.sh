@@ -81,8 +81,8 @@ if [ "$1" = 'frankenphp' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 		#echo "📜 Running geoip2:update..."
 		#php bin/console geoip2:update
 
-		echo "📜 Running app:browscap:update..."
-		php bin/console app:browscap:update
+		#echo "📜 Running app:browscap:update..."
+		#php bin/console app:browscap:update
 	fi
 
 	echo "🔐 Setting permissions on var/"
