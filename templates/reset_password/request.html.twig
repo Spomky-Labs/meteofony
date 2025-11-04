@@ -1,44 +1,65 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Reset your password{% endblock %}
+{% block title %}Reset Your Password{% endblock %}
 
 {% block content %}
-    <section class="h-screen">
-        <div class="px-6 h-full text-gray-800">
-            <div class="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6">
-                <div class="grow-0 shrink-1 md:shrink-0 basis-auto xl:w-6/12 lg:w-6/12 md:w-9/12 mb-12 md:mb-0">
-                    <img
-                        src="{{ asset('images/undraw_forgot_password_re_hxwm.svg') }}"
-                        class="w-full"
-                        alt="Sample image"
-                    />
-                </div>
-                <div class="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
-                    {% for flash_error in app.flashes('reset_password_error') %}
-                        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-                    {% endfor %}
-                    {{ form_start(requestForm) }}
-                    <div class="mb-6">
-                        {{ form_label(requestForm.username) }}
-                        {{ form_widget(requestForm.username, {attr: {autofocus: 'autofocus', class: 'form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none'}}) }}
-                    </div>
-                    <div>
-                        <p>
-                            Enter your email address, and we'll send you
-                            the procedure for resetting your password.
-                        </p>
-                    </div>
+    <div class="hero min-h-screen bg-base-200">
+        <div class="hero-content flex-col lg:flex-row-reverse max-w-6xl w-full">
+            <div class="flex-1 text-center lg:text-left">
+                <img
+                    src="{{ asset('images/undraw_forgot_password_re_hxwm.svg') }}"
+                    class="max-w-lg mx-auto drop-shadow-2xl"
+                    alt="Forgot password illustration"
+                />
+            </div>
+            <div class="flex-1">
+                <div class="card bg-base-100 shadow-2xl">
+                    <div class="card-body">
+                        <h1 class="text-4xl font-bold text-center mb-6">
+                            <i class="fa-solid fa-key text-primary"></i>
+                            Reset Password
+                        </h1>
 
+                        {% for flash_error in app.flashes('reset_password_error') %}
+                            <div class="alert alert-error mb-4">
+                                <i class="fa-solid fa-circle-exclamation"></i>
+                                <span>{{ flash_error }}</span>
+                            </div>
+                        {% endfor %}
 
-                    <div class="text-center lg:text-left">
-                        <button type="submit" class="mx-auto lg:mx-0 hover:underline font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out bg-white text-gray-800">Valider</button>
-                        <p class="text-sm font-semibold mt-2 pt-1 mb-0">
-                            <a href="{{ path('app_login') }}">Return to the login page</a>
-                        </p>
+                        <div class="alert alert-info mb-6">
+                            <i class="fa-solid fa-circle-info"></i>
+                            <div>
+                                <p class="text-sm">Enter your email address, and we'll send you the procedure for resetting your password.</p>
+                            </div>
+                        </div>
+
+                        {{ form_start(requestForm) }}
+                            <div class="form-control">
+                                {{ form_label(requestForm.username, null, {label_attr: {class: 'label'}}) }}
+                                <span class="label-text font-semibold">{{ form_label(requestForm.username) }}</span>
+                                {{ form_widget(requestForm.username, {attr: {autofocus: 'autofocus', class: 'input input-bordered input-primary', placeholder: 'Enter your email'}}) }}
+                            </div>
+
+                            <div class="form-control mt-6">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                    Send Reset Link
+                                </button>
+                            </div>
+
+                            <div class="divider">OR</div>
+
+                            <div class="text-center">
+                                <a href="{{ path('app_login') }}" class="link link-primary">
+                                    <i class="fa-solid fa-arrow-left"></i>
+                                    Return to the login page
+                                </a>
+                            </div>
+                        {{ form_end(requestForm) }}
                     </div>
-                    {{ form_end(requestForm) }}
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 {% endblock %}

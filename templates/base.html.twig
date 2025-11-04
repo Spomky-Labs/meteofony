@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,12 +16,12 @@
             <script type="application/javascript" src="{{ asset('script/main.js') }}"></script>
         {% endblock %}
     </head>
-    <body {% block bodytags %}class="leading-normal tracking-normal text-white gradient"{% endblock %}>
+    <body {% block bodytags %}class="bg-base-100 min-h-screen"{% endblock %}>
         {% block nav %}{% include 'nav.html.twig' %}{% endblock %}
         {% block body %}
-            <div class="pt-24">
+            <main class="pt-16">
                 {% block content %}{% endblock %}
-            </div>
+            </main>
         {% endblock %}
         {% block footer %}{% include 'footer.html.twig' %}{% endblock %}
     </body>

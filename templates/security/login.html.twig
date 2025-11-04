@@ -1,67 +1,82 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Login !{% endblock %}
+{% block title %}Login{% endblock %}
 
 {% block content %}
 
-    <section class="h-screen">
-        <div class="px-6 h-full text-gray-800">
-            <div class="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6">
-                <div class="grow-0 shrink-1 md:shrink-0 basis-auto xl:w-6/12 lg:w-6/12 md:w-9/12 mb-12 md:mb-0">
-                    <img
-                        src="{{ asset('images/Authentication-bro.svg') }}"
-                        class="w-5/6"
-                        alt="Sample image"
-                    />
-                </div>
-                <div class="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
-                    <form method="post">
+    <div class="hero min-h-screen bg-base-200">
+        <div class="hero-content flex-col lg:flex-row-reverse max-w-6xl w-full">
+            <div class="flex-1 text-center lg:text-left">
+                <img
+                    src="{{ asset('images/Authentication-bro.svg') }}"
+                    class="max-w-lg mx-auto drop-shadow-2xl"
+                    alt="Authentication illustration"
+                />
+            </div>
+            <div class="flex-1">
+                <div class="card bg-base-100 shadow-2xl">
+                    <form method="post" class="card-body">
+                        <h1 class="text-4xl font-bold text-center mb-6">Welcome Back!</h1>
+
                         {% if error %}
-                            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                            <div class="alert alert-error mb-4">
+                                <i class="fa-solid fa-circle-exclamation"></i>
+                                <span>{{ error.messageKey|trans(error.messageData, 'security') }}</span>
+                            </div>
                         {% endif %}
-                        <div class="mb-6">
-                            <label for="inputUsername">Username</label>
+
+                        <div class="form-control">
+                            <label class="label" for="inputUsername">
+                                <span class="label-text font-semibold">Username</span>
+                            </label>
                             <input
                                 type="text"
                                 value="{{ last_username }}"
                                 name="username"
-                                id="inputUsername" autocomplete="username" required autofocus
-                                class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                placeholder="Username"
+                                id="inputUsername"
+                                autocomplete="username"
+                                required
+                                autofocus
+                                class="input input-bordered input-primary"
+                                placeholder="Enter your username"
                             />
                         </div>
-                        <div class="mb-6">
-                            <label for="inputPassword">Password</label>
+
+                        <div class="form-control">
+                            <label class="label" for="inputPassword">
+                                <span class="label-text font-semibold">Password</span>
+                            </label>
                             <input
                                 type="password"
                                 name="password"
                                 id="inputPassword"
                                 autocomplete="current-password"
                                 required
-                                class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                placeholder="Password"
+                                class="input input-bordered input-primary"
+                                placeholder="Enter your password"
                             />
+                            <label class="label">
+                                <a href="{{ path('app_forgot_password_request') }}" class="label-text-alt link link-hover link-primary">
+                                    I forgot my password
+                                </a>
+                            </label>
                         </div>
 
-                        <div class="flex justify-between items-center mb-6">
-                            <a href="{{ path('app_forgot_password_request') }}" class="text-gray-800">I forgot my password</a>
-                        </div>
-
-                        <div class="text-center lg:text-left">
-                            <button
-                                type="submit"
-                                class="mx-auto lg:mx-0 hover:underline font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out bg-white text-gray-800"
-                            >
+                        <div class="form-control mt-6">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fa-solid fa-right-to-bracket"></i>
                                 Login
                             </button>
-                            <p class="text-sm font-semibold mt-2 pt-1 mb-0">
-                                Don't have an account?
-                                Contact us!
-                            </p>
                         </div>
-                        <input type="hidden" name="_csrf_token"
-                               value="{{ csrf_token('authenticate') }}"
-                        >
+
+                        <div class="divider">OR</div>
+
+                        <p class="text-center text-sm">
+                            Don't have an account?
+                            <span class="font-semibold text-primary">Contact us to get started!</span>
+                        </p>
+
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                     </form>
                     {#<form class="space-y-4 md:space-y-6" {{ stimulus_controller(
                         '@web-auth/webauthn-stimulus',

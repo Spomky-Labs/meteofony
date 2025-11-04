@@ -29,23 +29,23 @@ return [
         'version' => '1.9.4',
     ],
     '@symfony/stimulus-bridge' => [
-        'version' => '4.0.0',
+        'version' => '4.0.1',
     ],
     'chart.js/auto' => [
-        'version' => '4.4.7',
+        'version' => '4.5.1',
     ],
     '@kurkle/color' => [
-        'version' => '0.3.4',
+        'version' => '0.4.0',
     ],
     'leaflet/dist/leaflet.min.css' => [
         'version' => '1.9.4',
         'type' => 'css',
     ],
     'chart.js' => [
-        'version' => '4.4.7',
+        'version' => '4.5.1',
     ],
     '@hotwired/turbo' => [
-        'version' => '8.0.12',
+        'version' => '8.0.20',
     ],
     'tailwindcss' => [
         'version' => '4.1.16',
@@ -55,13 +55,13 @@ return [
         'type' => 'css',
     ],
     'daisyui' => [
-        'version' => '5.3.10',
+        'version' => '5.4.3',
     ],
     'daisyui/daisyui.min.css' => [
-        'version' => '5.3.10',
+        'version' => '5.4.3',
         'type' => 'css',
     ],
     'daisyui/theme' => [
-        'version' => '5.3.10',
+        'version' => '5.4.3',
     ],
 ];

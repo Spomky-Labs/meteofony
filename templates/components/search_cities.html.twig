@@ -1,34 +1,58 @@
-<div{{ attributes }}>
-    <label for="form_city">Search for a city</label>
-    <input
-        id="form_city"
-        type="text"
-        data-model="query"
-        placeholder="City"
-        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-    >
+<div{{ attributes }} class="w-full">
+    <div class="form-control mb-6">
+        <label for="form_city" class="label">
+            <span class="label-text font-semibold text-lg">
+                <i class="fa-solid fa-magnifying-glass text-primary"></i>
+                Search for a city
+            </span>
+        </label>
+        <input
+            id="form_city"
+            type="text"
+            data-model="query"
+            placeholder="Enter city name..."
+            class="input input-bordered input-primary input-lg w-full"
+        >
+    </div>
 
     {% if this.cities|length > 0 %}
-        <div data-loading="addClass(opacity-50)" class="m-4">
-            <ul class="list-disc">
-                {% for city in this.cities %}
-                <li>
-                    <a href="{{ path('app_dashboard_city', {id: city.id}) }}" class="block p-3 rounded-lg hover:bg-gray-100 text-gray-900">
-                        <div class="font-semibold">
-                            {{ city.name }}{% if city.zipCode is not null %} ({{ city.zipCode }}){% endif %}
+        <div data-loading="addClass(opacity-50)" class="grid gap-4">
+            {% for city in this.cities %}
+                <a href="{{ path('app_dashboard_city', {id: city.id}) }}" class="card bg-base-200 hover:bg-base-300 transition-colors shadow-md hover:shadow-lg">
+                    <div class="card-body">
+                        <h3 class="card-title text-xl">
+                            <i class="fa-solid fa-location-dot text-primary"></i>
+                            {{ city.name }}
+                            {% if city.zipCode is not null %}
+                                <div class="badge badge-primary">{{ city.zipCode }}</div>
+                            {% endif %}
+                        </h3>
+                        <div class="flex flex-col gap-1 text-sm">
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-building text-secondary"></i>
+                                <span><strong>Department:</strong> {{ city.department.name }} ({{ city.department.code }})</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-map text-accent"></i>
+                                <span><strong>Region:</strong> {{ city.department.region.name }}</span>
+                            </div>
                         </div>
-                        <span class="text-sm text-gray-500">
-                            Administrative department: {{ city.department.name }} ({{ city.department.code }}) <br>
-                            Region: {{ city.department.region.name }}
-                        </span>
-                    </a>
-                </li>
+                        <div class="card-actions justify-end mt-2">
+                            <button class="btn btn-primary btn-sm">
+                                View Data
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </a>
             {% endfor %}
-            </ul>
         </div>
     {% else %}
         {% if not query == '' %}
-            <div>No city matches "{{ query }}"</div>
+            <div class="alert alert-warning">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <span>No city matches "{{ query }}"</span>
+            </div>
         {% endif %}
     {% endif %}
 </div>
