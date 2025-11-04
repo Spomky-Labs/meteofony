@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
+use function assert;
 
 final class ProfileController extends AbstractController
 {
@@ -24,7 +25,7 @@ final class ProfileController extends AbstractController
         $user = $this->getUser();
         assert($user instanceof UserInterface);
         //$credentials = $this->webauthnCredentialRepository->findAllForUserHandle($user->getId());
-        return $this->render('profile/index.html.twig',[
+        return $this->render('profile/index.html.twig', [
             //'credentials' => $credentials,
         ]);
     }

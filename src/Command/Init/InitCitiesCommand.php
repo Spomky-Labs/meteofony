@@ -10,8 +10,6 @@ use App\Repository\DepartmentRepository;
 use RuntimeException;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use function count;
 use function is_string;
@@ -19,19 +17,17 @@ use function sprintf;
 use const JSON_THROW_ON_ERROR;
 
 #[AsCommand(name: 'app:init:cities', description: 'Initialisation des villes',)]
-final class InitCitiesCommand extends Command
+final readonly class InitCitiesCommand
 {
     public function __construct(
-        private readonly string $projectDirectory,
-        private readonly CityRepository $cityRepository,
-        private readonly DepartmentRepository $departmentRepository,
+        private string $projectDirectory,
+        private CityRepository $cityRepository,
+        private DepartmentRepository $departmentRepository
     ) {
-        parent::__construct();
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): int
+    public function __invoke(SymfonyStyle $io): int
     {
-        $io = new SymfonyStyle($input, $output);
         $data = file_get_contents($this->projectDirectory . '/data/cities.json');
         is_string($data) || throw new RuntimeException('Impossible de trouver les données concernant les villes.');
         /** @var array<array{id: int, department_code: string, insee_code: string, zip_code: string, name: string, slug: string, gps_lat: float, gps_lng: float}> $cities */
@@ -80,7 +76,6 @@ final class InitCitiesCommand extends Command
         }
         $io->progressFinish();
         $this->cityRepository->flush();
-
         return Command::SUCCESS;
     }
 }

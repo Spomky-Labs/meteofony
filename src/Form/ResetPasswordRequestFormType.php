@@ -20,11 +20,7 @@ final class ResetPasswordRequestFormType extends AbstractType
                     'autocomplete' => 'username',
                 ],
                 'label' => 'Your username',
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Enter your username',
-                    ]),
-                ],
+                'constraints' => [new NotBlank(message: 'Enter your username')],
             ])
         ;
     }

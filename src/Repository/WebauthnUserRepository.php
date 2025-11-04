@@ -1,17 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository;
 
 use Webauthn\Bundle\Repository\PublicKeyCredentialUserEntityRepositoryInterface;
 use Webauthn\PublicKeyCredentialUserEntity;
 
-final readonly class WebauthnUserRepository/* implements PublicKeyCredentialUserEntityRepositoryInterface*/
+final readonly class WebauthnUserRepository /* implements PublicKeyCredentialUserEntityRepositoryInterface*/
 {
-
     public function __construct(
         private UserRepository $userRepository
-    )
-    {
+    ) {
     }
 
     public function findOneByUsername(string $username): ?PublicKeyCredentialUserEntity

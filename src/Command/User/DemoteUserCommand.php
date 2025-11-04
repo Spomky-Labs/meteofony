@@ -5,35 +5,27 @@ declare(strict_types=1);
 namespace App\Command\User;
 
 use App\Repository\UserRepository;
+use Symfony\Component\Console\Attribute\Argument;
 use Symfony\Component\Console\Attribute\AsCommand;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use function is_array;
 use function sprintf;
 
 #[AsCommand('app:user:demote')]
-final class DemoteUserCommand extends Command
+final readonly class DemoteUserCommand
 {
     public function __construct(
-        private readonly UserRepository $userRepository,
+        private UserRepository $userRepository
     ) {
-        parent::__construct();
     }
 
-    protected function configure(): void
-    {
-        $this->addArgument('email', InputArgument::REQUIRED, 'Email address of the user concerned');
-        $this->addArgument('roles', InputArgument::IS_ARRAY | InputArgument::REQUIRED, 'Roles to be removed');
-    }
-
-    protected function execute(InputInterface $input, OutputInterface $output): int
-    {
-        $io = new SymfonyStyle($input, $output);
-
-        $email = (string) $input->getArgument('email');
+    public function __invoke(
+        #[Argument(name: 'email', description: 'Email address of the user concerned')]
+        string $email,
+        #[Argument(name: 'roles', description: 'Roles to be removed')]
+        array $roles,
+        SymfonyStyle $io
+    ): int {
         $user = $this->userRepository->findOneBy([
             'email' => $email,
         ]);
@@ -41,8 +33,6 @@ final class DemoteUserCommand extends Command
             $io->error('User not found');
             return self::FAILURE;
         }
-
-        $roles = $input->getArgument('roles');
         if (! is_array($roles)) {
             $io->error('A list of roles must be chosen');
             return self::FAILURE;
@@ -54,13 +44,10 @@ final class DemoteUserCommand extends Command
 
             return sprintf('ROLE_%s', $role);
         }, $roles);
-
         $user->removeRole(...$roles);
         $this->userRepository->save($user, true);
-
         $io->success('The user now has the following roles');
         $io->listing($user->getRoles());
-
         return self::SUCCESS;
     }
 }

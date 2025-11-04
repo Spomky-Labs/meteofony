@@ -10,8 +10,6 @@ use App\Repository\RegionRepository;
 use RuntimeException;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use function count;
 use function is_string;
@@ -19,19 +17,17 @@ use function sprintf;
 use const JSON_THROW_ON_ERROR;
 
 #[AsCommand(name: 'app:init:departments', description: 'Initialisation des départements',)]
-final class InitDeparmentsCommand extends Command
+final readonly class InitDeparmentsCommand
 {
     public function __construct(
-        private readonly string $projectDirectory,
-        private readonly DepartmentRepository $departmentRepository,
-        private readonly RegionRepository $regionRepository,
+        private string $projectDirectory,
+        private DepartmentRepository $departmentRepository,
+        private RegionRepository $regionRepository
     ) {
-        parent::__construct();
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): int
+    public function __invoke(SymfonyStyle $io): int
     {
-        $io = new SymfonyStyle($input, $output);
         $data = file_get_contents($this->projectDirectory . '/data/departments.json');
         is_string($data) || throw new RuntimeException(
             'Impossible de trouver les données concernant les départements.'
@@ -79,7 +75,6 @@ final class InitDeparmentsCommand extends Command
         }
         $io->progressFinish();
         $this->departmentRepository->flush();
-
         return Command::SUCCESS;
     }
 }

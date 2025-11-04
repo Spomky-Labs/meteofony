@@ -161,7 +161,7 @@ final class ResetPasswordController extends AbstractController
             return $this->redirectToRoute('app_check_email');
         }
 
-        $email = (new TemplatedEmail())
+        $email = new TemplatedEmail()
             ->from(new Address('do-not-reply@meteofony.io', 'Météofony'))
             ->to($user->getEmail())
             ->subject('Your password reset request')

@@ -104,9 +104,11 @@ final class DashboardController extends AbstractController
             ->center(new Point($city->gpsLat, $city->gpsLng))
             ->zoom(2)
             ->fitBoundsToMarkers()
-            ->addMarker(new Marker(
-                new Point($city->gpsLat, $city->gpsLng),
-                icon: Icon::ux('fa:map-marker')->width(24)->height(24))
+            ->addMarker(
+                new Marker(
+                    new Point($city->gpsLat, $city->gpsLng),
+                    icon: Icon::ux('fa:map-marker')->width(24)->height(24)
+                )
             )
         ;
 
