@@ -323,6 +323,27 @@
     "symfony/ux-chartjs": {
         "version": "v2.12.0"
     },
+    "symfony/ux-icons": {
+        "version": "2.31",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "2.17",
+            "ref": "803a3bbd5893f9584969ab8670290cdfb6a0a5b5"
+        },
+        "files": [
+            "assets/icons/symfony.svg"
+        ]
+    },
+    "symfony/ux-leaflet-map": {
+        "version": "2.31",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "2.19",
+            "ref": "bed7e7f6d7c04e0de9665859ddbf0e842e5323e3"
+        }
+    },
     "symfony/ux-live-component": {
         "version": "2.7",
         "recipe": {
@@ -333,6 +354,18 @@
         },
         "files": [
             "config/routes/ux_live_component.yaml"
+        ]
+    },
+    "symfony/ux-map": {
+        "version": "2.31",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "2.19",
+            "ref": "04de870967555f00bd82f542e9e2d29683c3d39e"
+        },
+        "files": [
+            "config/packages/ux_map.yaml"
         ]
     },
     "symfony/ux-turbo": {

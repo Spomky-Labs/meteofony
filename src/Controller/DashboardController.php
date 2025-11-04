@@ -12,6 +12,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
 use Symfony\UX\Chartjs\Model\Chart;
+use Symfony\UX\Map\Icon\Icon;
+use Symfony\UX\Map\Map;
+use Symfony\UX\Map\Marker;
+use Symfony\UX\Map\Point;
 
 final class DashboardController extends AbstractController
 {
@@ -94,9 +98,21 @@ final class DashboardController extends AbstractController
             ],
         ]);
 
+        $map = new Map();
+        $map
+            // Explicitly set the center and zoom
+            ->center(new Point($city->gpsLat, $city->gpsLng))
+            ->fitBoundsToMarkers()
+            ->addMarker(new Marker(
+                new Point($city->gpsLat, $city->gpsLng),
+                icon: Icon::ux('fa:map-marker')->width(24)->height(24))
+            )
+        ;
+
         return $this->render('dashboard/city.html.twig', [
             'city' => $city,
             'chart' => $chart,
+            'map' => $map,
         ]);
     }
 }

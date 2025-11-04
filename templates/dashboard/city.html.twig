@@ -24,16 +24,16 @@
                                 <i class="fa-solid fa-map-location-dot text-secondary"></i>
                                 Location
                             </h2>
-                            <div
-                                id="map"
-                                class="rounded-lg overflow-hidden"
-                                {{ stimulus_controller('map', {
-                                    latitude: city.gpsLat,
-                                    longitude: city.gpsLng,
-                                    iconUrl: asset('images/marker-icon.png'),
-                                    shadowUrl: asset('images/marker-shadow.png')
-                                }) }}
-                            ></div>
+                            <div id="map" class="rounded-lg overflow-hidden">
+                                {{ ux_map(
+                                    map,
+                                    attributes: {
+                                        id: "map",
+                                        class: 'rounded-lg overflow-hidden',
+                                        style: 'height: 300px'
+                                    }
+                                ) }}
+                            </div>
                         </div>
                     </div>
 
