@@ -18,6 +18,7 @@ composer.lock text eol=lf merge=ours
 
 /.ci-tools export-ignore
 /.github export-ignore
+/CLAUDE.md export-ignore
 /tests export-ignore
 /.env.dev export-ignore
 /.env.test export-ignore
