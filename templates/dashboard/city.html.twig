@@ -24,16 +24,11 @@
                                 <i class="fa-solid fa-map-location-dot text-secondary"></i>
                                 Location
                             </h2>
-                            <div id="map" class="rounded-lg overflow-hidden">
-                                {{ ux_map(
-                                    map,
-                                    attributes: {
-                                        id: "map",
-                                        class: 'rounded-lg overflow-hidden',
-                                        style: 'height: 300px'
-                                    }
-                                ) }}
-                            </div>
+                            {{ ux_map(map, {
+                                id: 'map',
+                                class: 'rounded-lg overflow-hidden w-full h-96',
+                                style: 'height: 400px; width: 100%;'
+                            }) }}
                         </div>
                     </div>
 

@@ -102,6 +102,7 @@ final class DashboardController extends AbstractController
         $map
             // Explicitly set the center and zoom
             ->center(new Point($city->gpsLat, $city->gpsLng))
+            ->zoom(2)
             ->fitBoundsToMarkers()
             ->addMarker(new Marker(
                 new Point($city->gpsLat, $city->gpsLng),

@@ -60,4 +60,11 @@ return [
     'daisyui/theme' => [
         'version' => '5.4.3',
     ],
+    'leaflet/dist/leaflet.min.css' => [
+        'version' => '1.9.4',
+        'type' => 'css',
+    ],
+    'leaflet' => [
+        'version' => '1.9.4',
+    ],
 ];
