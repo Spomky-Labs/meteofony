@@ -9,6 +9,7 @@ deptrac:
         - name: 'vendors'
           collectors:
               - { type: classLike, value: '^Aws\\' }
+              - { type: classLike, value: '^ApiPlatform' }
               - { type: classLike, value: '^BrowscapPHP' }
               - { type: classLike, value: '^DH\\Auditor' }
               - { type: classLike, value: '^GeoIp2\\' }
@@ -17,12 +18,14 @@ deptrac:
               - { type: classLike, value: '^Knp\\' }
               - { type: classLike, value: '^Jose\\' }
               - { type: classLike, value: '^KnpU\\' }
+              - { type: classLike, value: '^SymfonyCasts\\' }
               - { type: classLike, value: '^Stevenmaguire\\' }
               - { type: classLike, value: '^Doctrine\\' }
               - { type: classLike, value: '^Yceruto\\' }
               - { type: classLike, value: '^Symfony\\' }
               - { type: classLike, value: '^Twig\\' }
               - { type: classLike, value: '^Psr\\' }
+              - { type: classLike, value: '^Webauthn\\' }
               - { type: classLike, value: '^Zenstruck\\' }
     ruleset:
         application:
