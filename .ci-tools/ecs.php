@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use PhpCsFixer\Fixer\Alias\MbStrFunctionsFixer;
 use PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer;
 use PhpCsFixer\Fixer\ClassNotation\ProtectedToPrivateFixer;
 use PhpCsFixer\Fixer\Comment\HeaderCommentFixer;
@@ -26,28 +25,26 @@ use PhpCsFixer\Fixer\Strict\DeclareStrictTypesFixer;
 use PhpCsFixer\Fixer\Strict\StrictComparisonFixer;
 use PhpCsFixer\Fixer\Strict\StrictParamFixer;
 use PhpCsFixer\Fixer\Whitespace\ArrayIndentationFixer;
-use PhpCsFixer\Fixer\Whitespace\CompactNullableTypehintFixer;
+use PhpCsFixer\Fixer\Whitespace\MethodChainingIndentationFixer;
+use Symplify\CodingStandard\Fixer\Spacing\MethodChainingNewlineFixer;
 use Symplify\EasyCodingStandard\Config\ECSConfig;
 use Symplify\EasyCodingStandard\ValueObject\Set\SetList;
 
 return static function (ECSConfig $config): void {
     $header = '';
-
-    $config->sets([
-        SetList::PSR_12,
-        SetList::CLEAN_CODE,
-        SetList::DOCTRINE_ANNOTATIONS,
-        SetList::SPACES,
-        SetList::PHPUNIT,
-        SetList::SYMPLIFY,
-        SetList::ARRAY,
-        SetList::COMMON,
-        SetList::COMMENTS,
-        SetList::CONTROL_STRUCTURES,
-        SetList::DOCBLOCK,
-        SetList::NAMESPACES,
-        SetList::STRICT,
-    ]);
+    $config->import(SetList::PSR_12);
+    $config->import(SetList::CLEAN_CODE);
+    $config->import(SetList::DOCTRINE_ANNOTATIONS);
+    $config->import(SetList::SPACES);
+    $config->import(SetList::PHPUNIT);
+    $config->import(SetList::SYMPLIFY);
+    $config->import(SetList::ARRAY);
+    $config->import(SetList::COMMON);
+    $config->import(SetList::COMMENTS);
+    $config->import(SetList::CONTROL_STRUCTURES);
+    $config->import(SetList::DOCBLOCK);
+    $config->import(SetList::NAMESPACES);
+    $config->import(SetList::STRICT);
 
     $config->rule(StrictParamFixer::class);
     $config->rule(StrictComparisonFixer::class);
@@ -56,11 +53,9 @@ return static function (ECSConfig $config): void {
     $config->rule(ProtectedToPrivateFixer::class);
     $config->rule(DeclareStrictTypesFixer::class);
     $config->rule(NativeConstantInvocationFixer::class);
-    $config->rule(MbStrFunctionsFixer::class);
     $config->rule(LinebreakAfterOpeningTagFixer::class);
     $config->rule(CombineConsecutiveIssetsFixer::class);
     $config->rule(CombineConsecutiveUnsetsFixer::class);
-    $config->rule(CompactNullableTypehintFixer::class);
     $config->rule(NoSuperfluousElseifFixer::class);
     $config->rule(NoSuperfluousPhpdocTagsFixer::class);
     $config->rule(PhpdocTrimConsecutiveBlankLineSeparationFixer::class);
@@ -70,14 +65,11 @@ return static function (ECSConfig $config): void {
     $config->ruleWithConfiguration(ArraySyntaxFixer::class, [
         'syntax' => 'short',
     ]);
-    $config->ruleWithConfiguration(
-        NativeFunctionInvocationFixer::class,
-        [
-            'include' => ['@compiler_optimized'],
-            'scope' => 'namespaced',
-            'strict' => true,
-        ]
-    );
+    $config->ruleWithConfiguration(NativeFunctionInvocationFixer::class, [
+        'include' => ['@compiler_optimized'],
+        'scope' => 'namespaced',
+        'strict' => true,
+    ]);
     $config->ruleWithConfiguration(HeaderCommentFixer::class, [
         'header' => $header,
     ]);
@@ -87,24 +79,24 @@ return static function (ECSConfig $config): void {
     $config->ruleWithConfiguration(PhpUnitTestAnnotationFixer::class, [
         'style' => 'annotation',
     ]);
-    $config->ruleWithConfiguration(
-        GlobalNamespaceImportFixer::class,
-        [
-            'import_classes' => true,
-            'import_constants' => true,
-            'import_functions' => true,
-        ]
-    );
+    $config->ruleWithConfiguration(GlobalNamespaceImportFixer::class, [
+        'import_classes' => true,
+        'import_constants' => true,
+        'import_functions' => true,
+    ]);
+
+    $config->skip([
+        PhpUnitTestClassRequiresCoversFixer::class,
+        MethodChainingIndentationFixer::class => [__DIR__ . '/src/Resources/config'],
+        MethodChainingNewlineFixer::class => [__DIR__ . '/src/Resources/config'],
+    ]);
 
     $config->parallel();
     $config->paths([
-        __DIR__ . '/src',
-        __DIR__ . '/tests',
-        __DIR__ . '/config',
-        __DIR__ . '/castor.php',
-        __DIR__ . '/rector.php',
+        __DIR__ . '/../src',
+        __DIR__ . '/../tests',
+        __DIR__ . '/../castor.php',
         __DIR__ . '/ecs.php',
+        __DIR__ . '/rector.php',
     ]);
-    $config->skip([__DIR__ . '/src/Kernel.php', PhpUnitTestClassRequiresCoversFixer::class])
-    ;
 };

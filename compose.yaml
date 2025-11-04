@@ -1,6 +1,6 @@
 services:
   php:
-    image: ${IMAGES_PREFIX:-}meteofony
+    image: ${IMAGES_PREFIX:-}meteofony:${TAG:-latest}
     restart: unless-stopped
     environment:
       SERVER_NAME: ${SERVER_NAME:-localhost, php:80}
@@ -10,17 +10,14 @@ services:
       DATABASE_URL: postgresql://${POSTGRES_USER:-app}:${POSTGRES_PASSWORD:-!ChangeMe!}@database:5432/${POSTGRES_DB:-app}?serverVersion=${POSTGRES_VERSION:-15}&charset=${POSTGRES_CHARSET:-utf8}
       # Run "composer require symfony/mercure-bundle" to install and configure the Mercure integration
       MERCURE_URL: ${CADDY_MERCURE_URL:-http://php/.well-known/mercure}
-      MERCURE_PUBLIC_URL: ${CADDY_MERCURE_PUBLIC_URL:-https://${SERVER_NAME:-localhost}:${HTTPS_PORT:-9443}/.well-known/mercure}
+      MERCURE_PUBLIC_URL: ${CADDY_MERCURE_PUBLIC_URL:-https://${SERVER_NAME:-localhost}:${HTTPS_PORT:-443}/.well-known/mercure}
       MERCURE_JWT_SECRET: ${CADDY_MERCURE_JWT_SECRET:-!ChangeThisMercureHubJWTSecretKey!}
-      CORS_ALLOW_ORIGIN: '^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$'
       # The two next lines can be removed after initial installation
       SYMFONY_VERSION: ${SYMFONY_VERSION:-}
       STABILITY: ${STABILITY:-stable}
-      MESSENGER_TRANSPORT_DSN: amqp://${RABBITMQ_DEFAULT_USER:-guest}:${RABBITMQ_DEFAULT_PASS:-guest}@rabbitmq:${RABBITMQ_PORT:-5672}/%2f/messages
     volumes:
       - caddy_data:/data
       - caddy_config:/config
-      - ./frankenphp/custom-pages:/etc/caddy/custom-pages:ro
     ports:
       # HTTP
       - target: 80
@@ -34,18 +31,24 @@ services:
       - target: 443
         published: ${HTTP3_PORT:-443}
         protocol: udp
+
 ###> doctrine/doctrine-bundle ###
   database:
-      image: postgres:${POSTGRES_VERSION:-16}-alpine
-      environment:
-          POSTGRES_DB: ${POSTGRES_DB:-app}
-          # You should definitely change the password in production
-          POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-!ChangeMe!}
-          POSTGRES_USER: ${POSTGRES_USER:-app}
-      volumes:
-          - database_data:/var/lib/mysql:rw
+    image: postgres:${POSTGRES_VERSION:-16}-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-app}
+      # You should definitely change the password in production
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-!ChangeMe!}
+      POSTGRES_USER: ${POSTGRES_USER:-app}
+    healthcheck:
+      test: ["CMD", "pg_isready", "-d", "${POSTGRES_DB:-app}", "-U", "${POSTGRES_USER:-app}"]
+      timeout: 5s
+      retries: 5
+      start_period: 60s
+    volumes:
+      - database_data:/var/lib/postgresql/data:rw
       # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
-      # - ./docker/db/data:/var/lib/mysql:rw
+      # - ./docker/db/data:/var/lib/postgresql/data:rw
 ###< doctrine/doctrine-bundle ###
 
 # Mercure is installed as a Caddy module, prevent the Flex recipe from installing another service
@@ -53,11 +56,11 @@ services:
 ###< symfony/mercure-bundle ###
 
 volumes:
-    caddy_data:
-    caddy_config:
-    ###> symfony/mercure-bundle ###
-    ###< symfony/mercure-bundle ###
-    
-    ###> doctrine/doctrine-bundle ###
-    database_data:
+  caddy_data:
+  caddy_config:
+###> symfony/mercure-bundle ###
+###< symfony/mercure-bundle ###
+
+###> doctrine/doctrine-bundle ###
+  database_data:
 ###< doctrine/doctrine-bundle ###

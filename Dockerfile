@@ -5,24 +5,26 @@ LABEL builder=true
 
 COPY --from=caddy:builder /usr/bin/xcaddy /usr/bin/xcaddy
 
+ENV GOTOOLCHAIN=auto
+
 # CGO must be enabled to build FrankenPHP
 RUN CGO_ENABLED=1 \
-    XCADDY_SETCAP=1 \
-    XCADDY_GO_BUILD_FLAGS="-ldflags='-w -s' -tags=nobadger,nomysql,nopgx" \
-    CGO_CFLAGS=$(php-config --includes) \
-    CGO_LDFLAGS="$(php-config --ldflags) $(php-config --libs)" \
-    xcaddy build \
-        --output /usr/local/bin/frankenphp \
-        --with github.com/dunglas/frankenphp=./ \
-        --with github.com/dunglas/frankenphp/caddy=./caddy/ \
-        --with github.com/dunglas/caddy-cbrotli \
-        # Mercure and Vulcain are included in the official build, but feel free to remove them
-        --with github.com/dunglas/mercure/caddy \
-        --with github.com/dunglas/vulcain/caddy \
-        # Add extra Caddy modules here
-        --with github.com/corazawaf/coraza-caddy/v2
+	XCADDY_SETCAP=1 \
+	XCADDY_GO_BUILD_FLAGS="-ldflags='-w -s' -tags=nobadger,nomysql,nopgx" \
+	CGO_CFLAGS=$(php-config --includes) \
+	CGO_LDFLAGS="$(php-config --ldflags) $(php-config --libs)" \
+	xcaddy build \
+		--output /usr/local/bin/frankenphp \
+		--with github.com/dunglas/frankenphp=./ \
+		--with github.com/dunglas/frankenphp/caddy=./caddy/ \
+		--with github.com/dunglas/caddy-cbrotli \
+		# Mercure and Vulcain are included in the official build, but feel free to remove them
+		--with github.com/dunglas/mercure/caddy \
+		--with github.com/dunglas/vulcain/caddy \
+		# Add extra Caddy modules here
+		--with github.com/corazawaf/coraza-caddy/v2
 
-FROM dunglas/frankenphp AS frankenphp_runner
+FROM dunglas/frankenphp:1 AS frankenphp_runner
 LABEL builder=true
 
 # Replace the official binary by the one contained your custom modules
@@ -63,11 +65,30 @@ RUN set -eux; \
 		opcache \
 		zip \
 		pdo_pgsql \
+		gmp \
 		gd \
+		imagick \
+		amqp \
+		fileinfo \
+		iconv \
+		exif \
+		gettext \
+		sodium \
+		opcache \
+		redis \
+		uuid \
+		xsl \
+		xml \
+		zip \
+		brotli \
+		zstd \
 	;
 
 # https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
 ENV COMPOSER_ALLOW_SUPERUSER=1
+
+# Transport to use by Mercure (default to Bolt)
+ENV MERCURE_TRANSPORT_URL=bolt:///data/mercure.db
 
 ENV PHP_INI_SCAN_DIR=":$PHP_INI_DIR/app.conf.d"
 
@@ -130,4 +151,7 @@ RUN set -eux; \
 	composer dump-env prod; \
 	composer run-script --no-dev post-install-cmd; \
 	npm install && npm run build; \
-	chmod +x bin/console; sync;
+	chmod +x bin/console; sync; \
+	bin/console importmap:install --no-interaction; \
+	bin/console tailwind:build; \
+	bin/console asset-map:compile;

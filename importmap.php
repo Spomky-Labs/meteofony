@@ -47,4 +47,21 @@ return [
     '@hotwired/turbo' => [
         'version' => '8.0.12',
     ],
+    'tailwindcss' => [
+        'version' => '4.1.16',
+    ],
+    'tailwindcss/index.min.css' => [
+        'version' => '4.1.16',
+        'type' => 'css',
+    ],
+    'daisyui' => [
+        'version' => '5.3.10',
+    ],
+    'daisyui/daisyui.min.css' => [
+        'version' => '5.3.10',
+        'type' => 'css',
+    ],
+    'daisyui/theme' => [
+        'version' => '5.3.10',
+    ],
 ];

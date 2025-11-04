@@ -8,3 +8,26 @@ services:
       APP_SECRET: ${APP_SECRET}
       MERCURE_PUBLISHER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET}
       MERCURE_SUBSCRIBER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET}
+      APP_RUNTIME: Runtime\FrankenPhpSymfony\Runtime
+      FRANKENPHP_CONFIG: "worker ./public/index.php"
+      CADDY_GLOBAL_OPTIONS: "order coraza_waf first"
+      CADDY_SERVER_EXTRA_DIRECTIVES: |
+        coraza_waf {
+        load_owasp_crs
+        directives `
+        Include @coraza.conf-recommended
+        Include @crs-setup.conf.example
+        Include @owasp_crs/*.conf
+        # Bypass WAF for /csp/report POST requests
+        SecRule REQUEST_URI "@beginsWith /csp/report" "id:1000001,phase:1,pass,nolog,ctl:ruleEngine=Off"
+        SecRule REQUEST_URI "@beginsWith /csp/report" "id:1000002,phase:2,pass,nolog,ctl:ruleEngine=Off"
+        SecRuleEngine On
+        `
+        }
+        handle_errors 403 {
+        header X-Blocked "true"
+        root * /etc/caddy/custom-pages
+        rewrite * /{err.status_code}.html
+        file_server
+        templates
+        }

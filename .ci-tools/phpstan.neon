@@ -1,0 +1,36 @@
+parameters:
+	level: max
+	scanDirectories:
+		- %rootDir%/../../../../phpunit/vendor
+		- %currentWorkingDirectory%/vendor
+	paths:
+		- %currentWorkingDirectory%/src
+	banned_code:
+		non_ignorable: false
+	checkUninitializedProperties: true
+	treatPhpDocTypesAsCertain: true
+	ergebnis:
+		noExtends:
+			enabled: false
+		noNamedArgument:
+			enabled: false
+		noParameterWithNullDefaultValue:
+			enabled: false
+		noParameterWithNullableTypeDeclaration:
+			enabled: false
+		noConstructorParameterWithDefaultValue:
+			enabled: false
+		noNullableReturnTypeDeclaration:
+			enabled: false
+
+includes:
+	- %currentWorkingDirectory%/.ci-tools/phpstan-baseline.neon
+	- %rootDir%/conf/bleedingEdge.neon
+	- %rootDir%/../../ekino/phpstan-banned-code/extension.neon
+	- %rootDir%/../phpstan-beberlei-assert/extension.neon
+	- %rootDir%/../phpstan-deprecation-rules/rules.neon
+	- %rootDir%/../phpstan-doctrine/extension.neon
+	- %rootDir%/../../ergebnis/phpstan-rules/rules.neon
+	- %rootDir%/../phpstan-phpunit/extension.neon
+	- %rootDir%/../phpstan-strict-rules/rules.neon
+	- %rootDir%/../phpstan-symfony/extension.neon

@@ -1,0 +1,799 @@
+parameters:
+	ignoreErrors:
+		-
+			rawMessage: 'Parameter #4 of function sprintf is expected to be int by placeholder #3 ("%%d"), string given.'
+			identifier: argument.type
+			count: 1
+			path: ../src/Command/DrawingNameCommand.php
+
+		-
+			rawMessage: 'Parameter #1 $message of method Symfony\Component\Console\Style\SymfonyStyle::error() expects array|string, string|Stringable given.'
+			identifier: argument.type
+			count: 1
+			path: ../src/Command/Init/ImportMaintenancePrograms.php
+
+		-
+			rawMessage: 'Call to an undefined method App\Repository\InventorySheetRepository::findOneByPhase().'
+			identifier: method.notFound
+			count: 1
+			path: ../src/Command/Init/ImportOpeningInventorySheet.php
+
+		-
+			rawMessage: 'Method App\Command\Init\ImportOpeningInventorySheet::getInventorySheet() should return App\Entity\InventorySheet but returns mixed.'
+			identifier: return.type
+			count: 1
+			path: ../src/Command/Init/ImportOpeningInventorySheet.php
+
+		-
+			rawMessage: 'Parameter #3 $attribute of class App\Entity\InventorySheet constructor expects App\Entity\Attribute, string given.'
+			identifier: argument.type
+			count: 1
+			path: ../src/Command/Init/ImportOpeningInventorySheet.php
+
+		-
+			rawMessage: Cannot cast mixed to string.
+			identifier: cast.string
+			count: 4
+			path: ../src/Command/User/CreateUser.php
+
+		-
+			rawMessage: 'Parameter #1 $username of static method App\Message\Command\User\Create::new() expects string, mixed given.'
+			identifier: argument.type
+			count: 1
+			path: ../src/Command/User/CreateUser.php
+
+		-
+			rawMessage: 'Parameter #3 $firstName of static method App\Message\Command\User\Create::new() expects string, mixed given.'
+			identifier: argument.type
+			count: 1
+			path: ../src/Command/User/CreateUser.php
+
+		-
+			rawMessage: 'Parameter #3 $length of function substr expects int|null, int<0, max>|false given.'
+			identifier: argument.type
+			count: 1
+			path: ../src/Command/User/CreateUser.php
+
+		-
+			rawMessage: 'Parameter #4 $lastName of static method App\Message\Command\User\Create::new() expects string, mixed given.'
+			identifier: argument.type
+			count: 1
+			path: ../src/Command/User/CreateUser.php
+
+		-
+			rawMessage: 'Parameter #5 $role of static method App\Message\Command\User\Create::new() expects string, mixed given.'
+			identifier: argument.type
+			count: 1
+			path: ../src/Command/User/CreateUser.php
+
+		-
+			rawMessage: 'Method App\Controller\Intervention\AddController::render() has parameter $parameters with no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: ../src/Controller/Intervention/AddController.php
+
+		-
+			rawMessage: 'Property App\DTO\InventoryStep::$nextSteps (list<string>) does not accept array<int<0, max>, non-empty-string>.'
+			identifier: assign.propertyType
+			count: 1
+			path: ../src/DTO/InventoryStep.php
+
+		-
+			rawMessage: 'Property App\DTO\MaintenanceStep::$nextSteps (list<string>) does not accept array<int<0, max>, non-empty-string>.'
+			identifier: assign.propertyType
+			count: 1
+			path: ../src/DTO/MaintenanceStep.php
+
+		-
+			rawMessage: 'Offset ''part3'' might not exist on array{0?: string, part1?: non-empty-string, 1?: non-empty-string, part2?: non-empty-string, 2?: non-empty-string, part3?: non-empty-string, 3?: non-empty-string, part4?: numeric-string, ...}.'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: ../src/Entity/Asset.php
+
+		-
+			rawMessage: 'Offset ''part4'' might not exist on array{0?: string, part1?: non-empty-string, 1?: non-empty-string, part2?: non-empty-string, 2?: non-empty-string, part3: non-falsy-string, 3?: non-empty-string, part4?: numeric-string, ...}.'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: ../src/Entity/Asset.php
+
+		-
+			rawMessage: 'Offset ''part5'' might not exist on array{0?: string, part1?: non-empty-string, 1?: non-empty-string, part2?: non-empty-string, 2?: non-empty-string, part3?: non-empty-string, 3?: non-empty-string, part4?: numeric-string, ...}.'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: ../src/Entity/Asset.php
+
+		-
+			rawMessage: 'Offset ''part6'' might not exist on array{0?: string, part1?: non-empty-string, 1?: non-empty-string, part2?: non-empty-string, 2?: non-empty-string, part3: non-falsy-string, 3?: non-empty-string, part4: non-falsy-string&numeric-string, ...}.'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: ../src/Entity/Asset.php
+
+		-
+			rawMessage: 'Method App\Entity\MaintenanceProgramItem::__construct() has parameter $functionalRequirements with no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: ../src/Entity/MaintenanceProgramItem.php
+
+		-
+			rawMessage: 'Method App\Entity\MaintenanceProgramItem::__construct() has parameter $maintenanceSheets with no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: ../src/Entity/MaintenanceProgramItem.php
+
+		-
+			rawMessage: 'Offset ''part3'' might not exist on array{0?: string, part1?: non-empty-string, 1?: non-empty-string, part2?: non-empty-string, 2?: non-empty-string, part3?: non-empty-string, 3?: non-empty-string, part4: non-falsy-string&numeric-string, ...}.'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: ../src/Entity/Room.php
+
+		-
+			rawMessage: 'Offset ''part3'' might not exist on array{0?: string, part1?: non-empty-string, 1?: non-empty-string, part2?: non-empty-string, 2?: non-empty-string, part3?: string, 3?: non-empty-string, part4: non-falsy-string&numeric-string, ...}.'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: ../src/Entity/Room.php
+
+		-
+			rawMessage: 'Offset ''part4'' might not exist on array{0?: string, part1?: non-empty-string, 1?: non-empty-string, part2?: non-empty-string, 2?: non-empty-string, part3?: non-empty-string, 3?: non-empty-string, part4?: numeric-string, ...}.'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: ../src/Entity/Room.php
+
+		-
+			rawMessage: 'Offset ''part3'' might not exist on array{0?: string, part1?: non-empty-string, 1?: non-empty-string, part2?: non-empty-string, 2?: non-empty-string, part3?: non-empty-string, 3?: non-empty-string, part4?: numeric-string, ...}.'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: ../src/Entity/Volume.php
+
+		-
+			rawMessage: 'Offset ''part4'' might not exist on array{0?: string, part1?: non-empty-string, 1?: non-empty-string, part2?: non-empty-string, 2?: non-empty-string, part3?: non-empty-string, 3?: non-empty-string, part4?: numeric-string, ...}.'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: ../src/Entity/Volume.php
+
+		-
+			rawMessage: 'Offset ''rest'' might not exist on array{0?: string, part1?: non-empty-string, 1?: non-empty-string, part2?: non-empty-string, 2?: non-empty-string, part3?: non-empty-string, 3?: non-empty-string, part4?: numeric-string, ...}.'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: ../src/Entity/Volume.php
+
+		-
+			rawMessage: Cannot access offset 'plant_id' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: ../src/Form/Asset/AssetAutocompleteType.php
+
+		-
+			rawMessage: 'Method App\Form\Intervention\InterventionFormHandler::createForm() should return Yceruto\FormFlowBundle\Form\Flow\FormFlowInterface but returns Symfony\Component\Form\FormInterface<mixed>.'
+			identifier: return.type
+			count: 1
+			path: ../src/Form/Intervention/InterventionFormHandler.php
+
+		-
+			rawMessage: 'Parameter #1 $maintenanceProgramId of method App\Repository\MaintenanceProgramRepository::findOneById() expects string, string|null given.'
+			identifier: argument.type
+			count: 1
+			path: ../src/Form/Intervention/InterventionFormHandler.php
+
+		-
+			rawMessage: 'Parameter #4 $internalReference of class App\Entity\Intervention constructor expects string, string|null given.'
+			identifier: argument.type
+			count: 1
+			path: ../src/Form/Intervention/InterventionFormHandler.php
+
+		-
+			rawMessage: 'Parameter #5 $expectedStartDate of class App\Entity\Intervention constructor expects DateTimeImmutable, DateTimeImmutable|null given.'
+			identifier: argument.type
+			count: 1
+			path: ../src/Form/Intervention/InterventionFormHandler.php
+
+		-
+			rawMessage: 'Parameter #6 $expectedEndDate of class App\Entity\Intervention constructor expects DateTimeImmutable, DateTimeImmutable|null given.'
+			identifier: argument.type
+			count: 1
+			path: ../src/Form/Intervention/InterventionFormHandler.php
+
+		-
+			rawMessage: 'Parameter #7 $externalReference of class App\Entity\Intervention constructor expects string, string|null given.'
+			identifier: argument.type
+			count: 1
+			path: ../src/Form/Intervention/InterventionFormHandler.php
+
+		-
+			rawMessage: 'Parameter #8 $type of class App\Entity\Intervention constructor expects App\Entity\InterventionType, App\Entity\InterventionType|null given.'
+			identifier: argument.type
+			count: 1
+			path: ../src/Form/Intervention/InterventionFormHandler.php
+
+		-
+			rawMessage: 'Class App\Form\Intervention\InterventionNavigatorType extends generic class Symfony\Component\Form\AbstractType but does not specify its types: TData'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Intervention/InterventionNavigatorType.php
+
+		-
+			rawMessage: 'Class App\Form\Intervention\Steps\CustomerType extends generic class Symfony\Component\Form\AbstractType but does not specify its types: TData'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Intervention/Steps/CustomerType.php
+
+		-
+			rawMessage: 'Class App\Form\Intervention\Steps\DetailType extends generic class Symfony\Component\Form\AbstractType but does not specify its types: TData'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Intervention/Steps/DetailType.php
+
+		-
+			rawMessage: 'Class App\Form\Intervention\Steps\ImportType extends generic class Symfony\Component\Form\AbstractType but does not specify its types: TData'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Intervention/Steps/ImportType.php
+
+		-
+			rawMessage: 'Class App\Form\Intervention\Steps\MaintenanceProgramType extends generic class Symfony\Component\Form\AbstractType but does not specify its types: TData'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Intervention/Steps/MaintenanceProgramType.php
+
+		-
+			rawMessage: 'Class App\Form\Intervention\Steps\PlantType extends generic class Symfony\Component\Form\AbstractType but does not specify its types: TData'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Intervention/Steps/PlantType.php
+
+		-
+			rawMessage: 'Class App\Form\Intervention\Steps\ReviewType extends generic class Symfony\Component\Form\AbstractType but does not specify its types: TData'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Intervention/Steps/ReviewType.php
+
+		-
+			rawMessage: 'Class App\Form\Intervention\Steps\SiteType extends generic class Symfony\Component\Form\AbstractType but does not specify its types: TData'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Intervention/Steps/SiteType.php
+
+		-
+			rawMessage: 'Class App\Form\Stakeholder\StakeholderAutocompleteType extends generic class Symfony\Component\Form\AbstractType but does not specify its types: TData'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Stakeholder/StakeholderAutocompleteType.php
+
+		-
+			rawMessage: 'Class App\Form\Stakeholder\StakeholderType extends generic class Symfony\Component\Form\AbstractType but does not specify its types: TData'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Stakeholder/StakeholderType.php
+
+		-
+			rawMessage: Cannot cast mixed to string.
+			identifier: cast.string
+			count: 1
+			path: ../src/Http/ClientIpResolver.php
+
+		-
+			rawMessage: 'Method App\Http\ClientIpResolver::resolve() should return string but returns string|null.'
+			identifier: return.type
+			count: 1
+			path: ../src/Http/ClientIpResolver.php
+
+		-
+			rawMessage: 'Parameter #1 $locale of method Symfony\Component\HttpFoundation\Request::setLocale() expects string, mixed given.'
+			identifier: argument.type
+			count: 1
+			path: ../src/Listener/StickyLocale.php
+
+		-
+			rawMessage: 'Parameter #1 $child of method Knp\Menu\ItemInterface::addChild() expects Knp\Menu\ItemInterface|string, Symfony\Component\Translation\TranslatableMessage given.'
+			identifier: argument.type
+			count: 4
+			path: ../src/Menu/MenuBuilder.php
+
+		-
+			rawMessage: Control structures using switch should not be used.
+			identifier: ergebnis.noSwitch
+			count: 1
+			path: ../src/MessageHandler/Command/Asset/CreatePenetrationHandler.php
+
+		-
+			rawMessage: 'Offset ''part3'' might not exist on array{0?: string, part1?: non-empty-string, 1?: non-empty-string, part2?: non-empty-string, 2?: non-empty-string, part3?: non-empty-string, 3?: non-empty-string, part4?: numeric-string, ...}.'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: ../src/MessageHandler/Command/Asset/CreatePenetrationHandler.php
+
+		-
+			rawMessage: 'Offset ''part4'' might not exist on array{0?: string, part1?: non-empty-string, 1?: non-empty-string, part2?: non-empty-string, 2?: non-empty-string, part3: non-falsy-string, 3?: non-empty-string, part4?: numeric-string, ...}.'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: ../src/MessageHandler/Command/Asset/CreatePenetrationHandler.php
+
+		-
+			rawMessage: 'Offset ''part5'' might not exist on array{0?: string, part1?: non-empty-string, 1?: non-empty-string, part2?: non-empty-string, 2?: non-empty-string, part3?: non-empty-string, 3?: non-empty-string, part4?: numeric-string, ...}.'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: ../src/MessageHandler/Command/Asset/CreatePenetrationHandler.php
+
+		-
+			rawMessage: 'Offset ''part6'' might not exist on array{0?: string, part1?: non-empty-string, 1?: non-empty-string, part2?: non-empty-string, 2?: non-empty-string, part3: non-falsy-string, 3?: non-empty-string, part4: non-falsy-string&numeric-string, ...}.'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: ../src/MessageHandler/Command/Asset/CreatePenetrationHandler.php
+
+		-
+			rawMessage: 'Parameter #2 $room of method App\MessageHandler\Command\Asset\CreatePenetrationHandler::processPenetration() expects App\Entity\Room, App\Entity\Room|null given.'
+			identifier: argument.type
+			count: 1
+			path: ../src/MessageHandler/Command/Asset/CreatePenetrationHandler.php
+
+		-
+			rawMessage: Control structures using switch should not be used.
+			identifier: ergebnis.noSwitch
+			count: 1
+			path: ../src/MessageHandler/Command/Asset/CreateStructuralSurfaceHandler.php
+
+		-
+			rawMessage: 'Offset ''part3'' might not exist on array{0?: string, part1?: non-empty-string, 1?: non-empty-string, part2?: non-empty-string, 2?: non-empty-string, part3?: non-empty-string, 3?: non-empty-string, part4?: numeric-string, ...}.'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: ../src/MessageHandler/Command/Asset/CreateStructuralSurfaceHandler.php
+
+		-
+			rawMessage: 'Offset ''part4'' might not exist on array{0?: string, part1?: non-empty-string, 1?: non-empty-string, part2?: non-empty-string, 2?: non-empty-string, part3: non-falsy-string, 3?: non-empty-string, part4?: numeric-string, ...}.'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: ../src/MessageHandler/Command/Asset/CreateStructuralSurfaceHandler.php
+
+		-
+			rawMessage: 'Offset ''part5'' might not exist on array{0?: string, part1?: non-empty-string, 1?: non-empty-string, part2?: non-empty-string, 2?: non-empty-string, part3: non-falsy-string, 3?: non-empty-string, part4: non-falsy-string&numeric-string, ...}.'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: ../src/MessageHandler/Command/Asset/CreateStructuralSurfaceHandler.php
+
+		-
+			rawMessage: 'Parameter #2 $reference of static method App\Message\Command\Asset\AssociateFunctionalRequirement::new() expects string, mixed given.'
+			identifier: argument.type
+			count: 1
+			path: ../src/MessageHandler/Command/InspectedAsset/CreateInspectedAssetHandler.php
+
+		-
+			rawMessage: 'Parameter #2 $reference of static method App\Message\Command\Asset\AssociateMaintenanceSheet::new() expects string, mixed given.'
+			identifier: argument.type
+			count: 1
+			path: ../src/MessageHandler/Command/InspectedAsset/CreateInspectedAssetHandler.php
+
+		-
+			rawMessage: 'Method App\MessageHandler\Command\Room\CreateRoomHandler::getVolumes() should return array<App\Entity\Volume> but returns list<App\Entity\Volume|null>.'
+			identifier: return.type
+			count: 1
+			path: ../src/MessageHandler/Command/Room/CreateRoomHandler.php
+
+		-
+			rawMessage: 'Parameter #1 $id of class App\Entity\User constructor expects non-empty-string, string given.'
+			identifier: argument.type
+			count: 1
+			path: ../src/MessageHandler/Command/User/CreateHandler.php
+
+		-
+			rawMessage: 'Parameter #2 $username of class App\Entity\User constructor expects non-empty-string, string given.'
+			identifier: argument.type
+			count: 1
+			path: ../src/MessageHandler/Command/User/CreateHandler.php
+
+		-
+			rawMessage: 'Parameter #3 $email of class App\Entity\User constructor expects non-empty-string, string given.'
+			identifier: argument.type
+			count: 1
+			path: ../src/MessageHandler/Command/User/CreateHandler.php
+
+		-
+			rawMessage: 'Parameter #4 $firstName of class App\Entity\User constructor expects non-empty-string, string given.'
+			identifier: argument.type
+			count: 1
+			path: ../src/MessageHandler/Command/User/CreateHandler.php
+
+		-
+			rawMessage: 'Parameter #5 $lastName of class App\Entity\User constructor expects non-empty-string, string given.'
+			identifier: argument.type
+			count: 1
+			path: ../src/MessageHandler/Command/User/CreateHandler.php
+
+		-
+			rawMessage: Match arm comparison between 'low' and 'low' is always true.
+			identifier: match.alwaysTrue
+			count: 1
+			path: ../src/MessageStamp/PriorityStampHandler.php
+
+		-
+			rawMessage: Cannot access offset 'id' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: ../src/Repository/AssetRepository.php
+
+		-
+			rawMessage: Cannot cast mixed to string.
+			identifier: cast.string
+			count: 1
+			path: ../src/Repository/AssetRepository.php
+
+		-
+			rawMessage: 'Method App\Repository\AssetRepository::applyJoins() has parameter $joins with no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: ../src/Repository/AssetRepository.php
+
+		-
+			rawMessage: 'Method App\Repository\AssetRepository::findAllSystems() should return array<App\Entity\Asset> but returns mixed.'
+			identifier: return.type
+			count: 1
+			path: ../src/Repository/AssetRepository.php
+
+		-
+			rawMessage: 'Method App\Repository\AssetRepository::findAllTypes() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: ../src/Repository/AssetRepository.php
+
+		-
+			rawMessage: 'Method App\Repository\AssetRepository::findAllTypes() should return array but returns mixed.'
+			identifier: return.type
+			count: 1
+			path: ../src/Repository/AssetRepository.php
+
+		-
+			rawMessage: 'Method App\Repository\AssetRepository::findLastMatchingId() has parameter $joins with no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: ../src/Repository/AssetRepository.php
+
+		-
+			rawMessage: 'Method App\Repository\AssetRepository::findOneByRoomAndCode() should return App\Entity\Asset|null but returns mixed.'
+			identifier: return.type
+			count: 1
+			path: ../src/Repository/AssetRepository.php
+
+		-
+			rawMessage: 'Method App\Repository\AssetRepository::findWithRoom() should return App\Entity\Asset|null but returns mixed.'
+			identifier: return.type
+			count: 1
+			path: ../src/Repository/AssetRepository.php
+
+		-
+			rawMessage: 'Method App\Repository\AssetRepository::searchAssets() should return array<App\Entity\Asset> but returns mixed.'
+			identifier: return.type
+			count: 1
+			path: ../src/Repository/AssetRepository.php
+
+		-
+			rawMessage: 'Method App\Repository\FolioRepository::findLastOneByReferenceAndNumber() should return App\Entity\Folio|null but returns mixed.'
+			identifier: return.type
+			count: 1
+			path: ../src/Repository/FolioRepository.php
+
+		-
+			rawMessage: Cannot access offset 'id' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: ../src/Repository/InspectedAssetRepository.php
+
+		-
+			rawMessage: Cannot cast mixed to string.
+			identifier: cast.string
+			count: 1
+			path: ../src/Repository/InspectedAssetRepository.php
+
+		-
+			rawMessage: 'Method App\Repository\InspectedAssetRepository::applyJoins() has parameter $joins with no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: ../src/Repository/InspectedAssetRepository.php
+
+		-
+			rawMessage: 'Method App\Repository\InspectedAssetRepository::findLastMatchingId() has parameter $joins with no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: ../src/Repository/InspectedAssetRepository.php
+
+		-
+			rawMessage: Cannot access offset 'id' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: ../src/Repository/InterventionRepository.php
+
+		-
+			rawMessage: Cannot cast mixed to string.
+			identifier: cast.string
+			count: 1
+			path: ../src/Repository/InterventionRepository.php
+
+		-
+			rawMessage: 'Method App\Repository\InterventionRepository::applyJoins() has parameter $joins with no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: ../src/Repository/InterventionRepository.php
+
+		-
+			rawMessage: 'Method App\Repository\InterventionRepository::findLastMatchingId() has parameter $joins with no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: ../src/Repository/InterventionRepository.php
+
+		-
+			rawMessage: 'Method App\Repository\InterventionRepository::findOneById() should return App\Entity\Intervention|null but returns mixed.'
+			identifier: return.type
+			count: 1
+			path: ../src/Repository/InterventionRepository.php
+
+		-
+			rawMessage: 'Method App\Repository\InterventionRepository::findPaginated() should return array{results: list<App\Entity\Intervention>, total: int, maxResults: int} but returns array{results: mixed, total: int, maxResults: int}.'
+			identifier: return.type
+			count: 1
+			path: ../src/Repository/InterventionRepository.php
+
+		-
+			rawMessage: 'Method App\Repository\InventorySheetRepository::findOneByAttributeReference() should return App\Entity\InventorySheet|null but returns mixed.'
+			identifier: return.type
+			count: 1
+			path: ../src/Repository/InventorySheetRepository.php
+
+		-
+			rawMessage: 'Method App\Repository\InventoryStepRepository::findOneByInventorySheetAndStepId() should return App\Entity\InventoryStep|null but returns mixed.'
+			identifier: return.type
+			count: 1
+			path: ../src/Repository/InventoryStepRepository.php
+
+		-
+			rawMessage: 'Method App\Repository\InventoryStepRepository::findOneByInventorySheetAttributeAndStepId() should return App\Entity\InventoryStep|null but returns mixed.'
+			identifier: return.type
+			count: 1
+			path: ../src/Repository/InventoryStepRepository.php
+
+		-
+			rawMessage: 'Method App\Repository\MaintenanceProgramItemRepository::findAllWithoutFolio() should return array<App\Entity\MaintenanceProgramItem> but returns mixed.'
+			identifier: return.type
+			count: 1
+			path: ../src/Repository/MaintenanceProgramItemRepository.php
+
+		-
+			rawMessage: 'Method App\Repository\MaintenanceProgramRepository::findOneByReferenceAndRevision() should return App\Entity\MaintenanceProgram|null but returns mixed.'
+			identifier: return.type
+			count: 1
+			path: ../src/Repository/MaintenanceProgramRepository.php
+
+		-
+			rawMessage: 'Method App\Repository\MaintenanceSheetRepository::findOneByAttributeReference() should return App\Entity\MaintenanceSheet|null but returns mixed.'
+			identifier: return.type
+			count: 1
+			path: ../src/Repository/MaintenanceSheetRepository.php
+
+		-
+			rawMessage: 'Method App\Repository\MaintenanceStepRepository::findOneByMaintenanceSheetAndStepId() should return App\Entity\MaintenanceStep|null but returns mixed.'
+			identifier: return.type
+			count: 1
+			path: ../src/Repository/MaintenanceStepRepository.php
+
+		-
+			rawMessage: 'Method App\Repository\MaintenanceStepRepository::findOneByMaintenanceSheetAttributeAndStepId() should return App\Entity\MaintenanceStep|null but returns mixed.'
+			identifier: return.type
+			count: 1
+			path: ../src/Repository/MaintenanceStepRepository.php
+
+		-
+			rawMessage: 'Method App\Repository\PlantRepository::findByCustomerName() should return array<App\Entity\Plant> but returns mixed.'
+			identifier: return.type
+			count: 1
+			path: ../src/Repository/PlantRepository.php
+
+		-
+			rawMessage: 'Method App\Repository\RoomRepository::findOneByCode() should return App\Entity\Room|null but returns mixed.'
+			identifier: return.type
+			count: 1
+			path: ../src/Repository/RoomRepository.php
+
+		-
+			rawMessage: 'Method App\Repository\SecurityEventRepository::getUserEvents() should return array<App\Entity\SecurityEvent> but returns mixed.'
+			identifier: return.type
+			count: 1
+			path: ../src/Repository/SecurityEventRepository.php
+
+		-
+			rawMessage: 'Method App\Repository\SiteRepository::findAllOrdered() should return array<App\Entity\Site> but returns mixed.'
+			identifier: return.type
+			count: 1
+			path: ../src/Repository/SiteRepository.php
+
+		-
+			rawMessage: 'Method App\Repository\SiteRepository::findByCustomerName() should return array<App\Entity\Site> but returns mixed.'
+			identifier: return.type
+			count: 1
+			path: ../src/Repository/SiteRepository.php
+
+		-
+			rawMessage: 'Method App\Repository\UserSessionRepository::findAllUserSessions() should return array<App\Entity\UserSession> but returns mixed.'
+			identifier: return.type
+			count: 1
+			path: ../src/Repository/UserSessionRepository.php
+
+		-
+			rawMessage: 'Method App\Repository\VolumeRepository::findOneByCode() should return App\Entity\Volume|null but returns mixed.'
+			identifier: return.type
+			count: 1
+			path: ../src/Repository/VolumeRepository.php
+
+		-
+			rawMessage: Control structures using switch should not be used.
+			identifier: ergebnis.noSwitch
+			count: 1
+			path: ../src/Security/KeycloakAuthenticator.php
+
+		-
+			rawMessage: 'Method App\Service\HttpClientAdapter::request() has parameter $options with no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: ../src/Service/HttpClientAdapter.php
+
+		-
+			rawMessage: 'Method App\Service\HttpClientAdapter::requestAsync() has parameter $options with no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: ../src/Service/HttpClientAdapter.php
+
+		-
+			rawMessage: 'Method App\Service\HttpClientAdapter::send() has parameter $options with no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: ../src/Service/HttpClientAdapter.php
+
+		-
+			rawMessage: 'Method App\Service\HttpClientAdapter::sendAsync() has parameter $options with no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: ../src/Service/HttpClientAdapter.php
+
+		-
+			rawMessage: Cannot cast mixed to string.
+			identifier: cast.string
+			count: 1
+			path: ../src/Twig/Components/Asset/Overview.php
+
+		-
+			rawMessage: 'Class App\Twig\Components\Asset\Overview uses generic trait App\Twig\Components\LivePaginationTrait but does not specify its types: T'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Twig/Components/Asset/Overview.php
+
+		-
+			rawMessage: 'Method App\Twig\Components\Asset\Overview::getCriteria() should return array{joins: list<string>, criteria: Doctrine\Common\Collections\Criteria} but returns array{joins: array{customer: bool, site: bool, plant: bool, room: bool}, criteria: Doctrine\Common\Collections\Criteria}.'
+			identifier: return.type
+			count: 1
+			path: ../src/Twig/Components/Asset/Overview.php
+
+		-
+			rawMessage: 'Method App\Twig\Components\Asset\Overview::getCustomers() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: ../src/Twig/Components/Asset/Overview.php
+
+		-
+			rawMessage: 'Method App\Twig\Components\Asset\Overview::getPlants() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: ../src/Twig/Components/Asset/Overview.php
+
+		-
+			rawMessage: 'Method App\Twig\Components\Asset\Overview::getSites() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: ../src/Twig/Components/Asset/Overview.php
+
+		-
+			rawMessage: Cannot cast mixed to string.
+			identifier: cast.string
+			count: 1
+			path: ../src/Twig/Components/InspectedAsset/Overview.php
+
+		-
+			rawMessage: 'Class App\Twig\Components\InspectedAsset\Overview uses generic trait App\Twig\Components\LivePaginationTrait but does not specify its types: T'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Twig/Components/InspectedAsset/Overview.php
+
+		-
+			rawMessage: 'Method App\Twig\Components\InspectedAsset\Overview::getCriteria() should return array{joins: list<string>, criteria: Doctrine\Common\Collections\Criteria} but returns array{joins: array{room: false}|array{room: true}, criteria: Doctrine\Common\Collections\Criteria}.'
+			identifier: return.type
+			count: 1
+			path: ../src/Twig/Components/InspectedAsset/Overview.php
+
+		-
+			rawMessage: 'Method App\Twig\Components\InspectedAsset\Overview::getCustomers() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: ../src/Twig/Components/InspectedAsset/Overview.php
+
+		-
+			rawMessage: 'Method App\Twig\Components\InspectedAsset\Overview::getPaginated() should return array{results: list<App\Entity\InspectedAsset>, total: int, maxResults: int, hasMore: bool, nextCursor: string|null} but returns array{results: list<App\Entity\Asset>, total: int, maxResults: 25, hasMore: bool, nextCursor: string|null}.'
+			identifier: return.type
+			count: 1
+			path: ../src/Twig/Components/InspectedAsset/Overview.php
+
+		-
+			rawMessage: Cannot access offset 'assets' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: ../src/Twig/Components/Intervention/AssetSelection.php
+
+		-
+			rawMessage: 'Method App\Twig\Components\Intervention\AssetSelection::getInspectedAssets() should return Doctrine\Common\Collections\Collection<int, App\Entity\Asset> but returns Doctrine\Common\Collections\Collection<int, App\Entity\InspectedAsset>.'
+			identifier: return.type
+			count: 1
+			path: ../src/Twig/Components/Intervention/AssetSelection.php
+
+		-
+			rawMessage: 'Method App\Twig\Components\Intervention\AssetSelection::instantiateForm() return type with generic interface Symfony\Component\Form\FormInterface does not specify its types: TData'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Twig/Components/Intervention/AssetSelection.php
+
+		-
+			rawMessage: 'Parameter #1 $inspectedAsset of method App\Entity\Intervention::addInspectedElement() expects App\Entity\InspectedAsset, App\Entity\Asset given.'
+			identifier: argument.type
+			count: 1
+			path: ../src/Twig/Components/Intervention/AssetSelection.php
+
+		-
+			rawMessage: 'Parameter #1 $p of method Doctrine\Common\Collections\Collection<int,App\Entity\InspectedAsset>::filter() expects Closure(App\Entity\InspectedAsset, int): bool, Closure(App\Entity\Asset): bool given.'
+			identifier: argument.type
+			count: 1
+			path: ../src/Twig/Components/Intervention/AssetSelection.php
+
+		-
+			rawMessage: Cannot cast mixed to string.
+			identifier: cast.string
+			count: 1
+			path: ../src/Twig/Components/Intervention/Overview.php
+
+		-
+			rawMessage: 'Class App\Twig\Components\Intervention\Overview uses generic trait App\Twig\Components\LivePaginationTrait but does not specify its types: T'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Twig/Components/Intervention/Overview.php
+
+		-
+			rawMessage: 'Method App\Twig\Components\Intervention\Overview::getCriteria() should return array{joins: list<string>, criteria: Doctrine\Common\Collections\Criteria} but returns array{joins: array{customer: bool, site: bool, plant: bool}, criteria: Doctrine\Common\Collections\Criteria}.'
+			identifier: return.type
+			count: 1
+			path: ../src/Twig/Components/Intervention/Overview.php
+
+		-
+			rawMessage: 'Method App\Twig\Components\Intervention\Overview::getCustomers() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: ../src/Twig/Components/Intervention/Overview.php
+
+		-
+			rawMessage: 'Method App\Twig\Components\Intervention\Overview::getPlants() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: ../src/Twig/Components/Intervention/Overview.php
+
+		-
+			rawMessage: 'Method App\Twig\Components\Intervention\Overview::getSites() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: ../src/Twig/Components/Intervention/Overview.php
+
+		-
+			rawMessage: 'Method App\Twig\Components\Intervention\StakeholderSelection::instantiateForm() should return Symfony\Component\Form\FormInterface<App\Form\Stakeholder\StakeholderType> but returns Symfony\Component\Form\FormInterface<mixed>.'
+			identifier: return.type
+			count: 1
+			path: ../src/Twig/Components/Intervention/StakeholderSelection.php
+
+		-
+			rawMessage: 'Method App\Twig\Extension\BrowserInfoExtension::getBrowserInfo() should return array<string, mixed> but returns array.'
+			identifier: return.type
+			count: 1
+			path: ../src/Twig/Extension/BrowserInfoExtension.php
+
+		-
+			rawMessage: 'PHPDoc tag @return with type array<string, mixed> is incompatible with native type Doctrine\Common\Collections\Criteria.'
+			identifier: return.phpDocType
+			count: 1
+			path: ../src/Twig/Extension/DoctrineExtension.php

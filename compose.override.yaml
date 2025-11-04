@@ -13,10 +13,16 @@ services:
       #  from the bind-mount for better performance by enabling the next line:
       #- /app/vendor
     environment:
-      SERVER_NAME: ${SERVER_NAME:-localhost, php:443}
       MERCURE_EXTRA_DIRECTIVES: demo
       # See https://xdebug.org/docs/all_settings#mode
-      XDEBUG_MODE: "${XDEBUG_MODE:-develop}"
+      XDEBUG_MODE: "${XDEBUG_MODE:-off}"
+      CADDY_GLOBAL_OPTIONS: "debug"
+      MAILER_DSN: smtp://mailer:1025
+#      CADDY_SERVER_EXTRA_DIRECTIVES: |
+#        tls /etc/caddy/certs/tls.pem /etc/caddy/certs/tls.key {
+#          protocols tls1.3
+#          ca_root /etc/caddy/certs/ca.pem
+#        }
     extra_hosts:
       # Ensure that host.docker.internal is correctly defined on Linux
       - host.docker.internal:host-gateway
@@ -24,8 +30,5 @@ services:
 ###> symfony/mercure-bundle ###
 ###< symfony/mercure-bundle ###
 
-###> doctrine/doctrine-bundle ###
-  database:
-    ports:
-      - "3306:3306"
-###< doctrine/doctrine-bundle ###
+volumes:
+  aws:
