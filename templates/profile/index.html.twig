@@ -3,46 +3,91 @@
 {% block title %}My Profile{% endblock %}
 
 {% block content %}
-    <div class="container mx-auto px-4 py-8">
-        <div class="card bg-base-100 shadow-xl">
-            <div class="card-body">
-                <div class="text-center mb-8">
-                    <h1 class="text-5xl font-bold text-base-content mb-4">
-                        <i class="fa-solid fa-user text-primary"></i>
-                        My Profile
-                    </h1>
-                    <div class="divider max-w-md mx-auto"></div>
+    <div class="container mx-auto px-4 py-12 max-w-4xl">
+        <div class="text-center mb-10">
+            <div class="avatar placeholder mb-4">
+                <div class="bg-primary text-primary-content rounded-full w-24">
+                    <span class="text-3xl">{{ app.user.username|first|upper }}</span>
                 </div>
+            </div>
+            <h1 class="text-4xl font-bold text-base-content mb-2">
+                My Profile
+            </h1>
+            <p class="text-base-content/60">Manage your account details</p>
+            <div class="divider max-w-xs mx-auto"></div>
+        </div>
 
-                <div class="alert alert-info mb-6">
-                    <i class="fa-solid fa-circle-info"></i>
-                    <div>
-                        <h3 class="font-bold">Profile Information</h3>
-                        <p>View and manage your account details below.</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div class="card bg-base-100 shadow-lg">
+                <div class="card-body">
+                    <h2 class="card-title text-xl mb-4">
+                        <i class="fa-solid fa-user text-primary"></i>
+                        Account Information
+                    </h2>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center py-2 border-b border-base-200">
+                            <span class="text-base-content/60 font-medium">Username</span>
+                            <span class="font-semibold">{{ app.user.username }}</span>
+                        </div>
+                        <div class="flex justify-between items-center py-2 border-b border-base-200">
+                            <span class="text-base-content/60 font-medium">Roles</span>
+                            <div class="flex gap-1 flex-wrap justify-end">
+                                {% for role in app.user.roles %}
+                                    <span class="badge badge-primary badge-sm">{{ role }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="mockup-code bg-base-200">
+            <div class="card bg-base-100 shadow-lg">
+                <div class="card-body">
+                    <h2 class="card-title text-xl mb-4">
+                        <i class="fa-solid fa-shield-halved text-secondary"></i>
+                        Security
+                    </h2>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center py-2 border-b border-base-200">
+                            <span class="text-base-content/60 font-medium">Authentication</span>
+                            <span class="badge badge-success badge-sm">Active</span>
+                        </div>
+                        <div class="flex justify-between items-center py-2 border-b border-base-200">
+                            <span class="text-base-content/60 font-medium">Token</span>
+                            <span class="text-sm font-mono truncate max-w-[150px]">{{ app.token.class|split('\\')|last }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card bg-base-200 shadow-lg">
+            <div class="card-body">
+                <h2 class="card-title text-xl mb-4">
+                    <i class="fa-solid fa-terminal text-accent"></i>
+                    Debug Information
+                </h2>
+                <div class="mockup-code text-sm">
                     <pre><code>{{ dump(app.user, app.token) }}</code></pre>
                     {# {{ dump(credentials) }} #}
                 </div>
-
-                {# <div class="card-actions justify-center mt-6">
-                    <button
-                        {{ stimulus_controller(
-                            '@web-auth/webauthn-stimulus',
-                            {
-                                creationResultUrl: path('webauthn.controller.creation.response.from_user_account'),
-                                creationOptionsUrl: path('webauthn.controller.creation.request.from_user_account')
-                            }
-                        ) }}
-                        {{ stimulus_action('@web-auth/webauthn-stimulus', 'signup') }}
-                        class="btn btn-primary btn-lg gap-2">
-                        <i class="fa-solid fa-key"></i>
-                        Add a Webauthn Authenticator
-                    </button>
-                </div> #}
             </div>
         </div>
+
+        {# <div class="card-actions justify-center mt-6">
+            <button
+                {{ stimulus_controller(
+                    '@web-auth/webauthn-stimulus',
+                    {
+                        creationResultUrl: path('webauthn.controller.creation.response.from_user_account'),
+                        creationOptionsUrl: path('webauthn.controller.creation.request.from_user_account')
+                    }
+                ) }}
+                {{ stimulus_action('@web-auth/webauthn-stimulus', 'signup') }}
+                class="btn btn-primary btn-lg gap-2">
+                <i class="fa-solid fa-key"></i>
+                Add a Webauthn Authenticator
+            </button>
+        </div> #}
     </div>
 {% endblock %}

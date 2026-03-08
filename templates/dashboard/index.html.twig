@@ -3,28 +3,24 @@
 {% block title %}Community Records{% endblock %}
 
 {% block content %}
-    <div class="container mx-auto px-4 py-8">
-        <div class="card bg-base-100 shadow-xl">
+    <div class="container mx-auto px-4 py-12 max-w-4xl">
+        <div class="text-center mb-10">
+            <h1 class="text-4xl font-bold text-base-content mb-2">
+                <i class="fa-solid fa-location-dot text-primary"></i>
+                Choose a City
+            </h1>
+            <p class="text-base-content/60">Search for any city in France to access real-time weather measurements</p>
+            <div class="divider max-w-xs mx-auto"></div>
+        </div>
+
+        <div class="card bg-base-100 shadow-lg">
             <div class="card-body">
-                <div class="text-center mb-8">
-                    <h1 class="text-5xl font-bold text-base-content mb-4">
-                        <i class="fa-solid fa-location-dot text-primary"></i>
-                        Choose a City
-                    </h1>
-                    <div class="divider max-w-md mx-auto"></div>
+                <div class="alert alert-info mb-6">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <p>View temperature, humidity, wind speed, and more from local weather stations across our community network.</p>
                 </div>
 
-                <div class="max-w-3xl mx-auto">
-                    <div class="alert alert-info mb-8">
-                        <i class="fa-solid fa-circle-info"></i>
-                        <div>
-                            <h3 class="font-bold">Explore Weather Data</h3>
-                            <p>Search for any city in France to access real-time weather measurements from our community network. View temperature, humidity, wind speed, and more from local weather stations.</p>
-                        </div>
-                    </div>
-
-                    {{ component('search_cities') }}
-                </div>
+                {{ component('search_cities') }}
             </div>
         </div>
     </div>

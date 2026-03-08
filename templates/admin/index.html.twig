@@ -3,50 +3,58 @@
 {% block title %}Admin Dashboard{% endblock %}
 
 {% block content %}
-    <div class="container mx-auto px-4 py-8">
-        <div class="card bg-base-100 shadow-xl">
+    <div class="container mx-auto px-4 py-12 max-w-6xl">
+        <div class="text-center mb-10">
+            <h1 class="text-4xl font-bold text-base-content mb-2">
+                <i class="fa-solid fa-shield-halved text-warning"></i>
+                Admin Dashboard
+            </h1>
+            <p class="text-base-content/60">System overview and administration tools</p>
+            <div class="divider max-w-xs mx-auto"></div>
+        </div>
+
+        <div class="alert alert-warning mb-8">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <div>
+                <h3 class="font-bold">Administrative Access</h3>
+                <p>You have full administrative privileges. Use with caution.</p>
+            </div>
+        </div>
+
+        <div class="stats stats-vertical lg:stats-horizontal shadow-lg w-full mb-8 bg-base-100">
+            <div class="stat">
+                <div class="stat-figure text-primary">
+                    <i class="fa-solid fa-users text-3xl"></i>
+                </div>
+                <div class="stat-title">Total Users</div>
+                <div class="stat-value text-primary">N/A</div>
+                <div class="stat-desc">Registered accounts</div>
+            </div>
+            <div class="stat">
+                <div class="stat-figure text-secondary">
+                    <i class="fa-solid fa-database text-3xl"></i>
+                </div>
+                <div class="stat-title">Data Points</div>
+                <div class="stat-value text-secondary">N/A</div>
+                <div class="stat-desc">Weather measurements</div>
+            </div>
+            <div class="stat">
+                <div class="stat-figure text-accent">
+                    <i class="fa-solid fa-city text-3xl"></i>
+                </div>
+                <div class="stat-title">Cities</div>
+                <div class="stat-value text-accent">N/A</div>
+                <div class="stat-desc">Monitored locations</div>
+            </div>
+        </div>
+
+        <div class="card bg-base-200 shadow-lg">
             <div class="card-body">
-                <div class="text-center mb-8">
-                    <h1 class="text-5xl font-bold text-base-content mb-4">
-                        <i class="fa-solid fa-shield-halved text-warning"></i>
-                        Admin Dashboard
-                    </h1>
-                    <div class="divider max-w-md mx-auto"></div>
-                </div>
-
-                <div class="alert alert-warning mb-6">
-                    <i class="fa-solid fa-triangle-exclamation"></i>
-                    <div>
-                        <h3 class="font-bold">Administrative Access</h3>
-                        <p>You have full administrative privileges. Use with caution.</p>
-                    </div>
-                </div>
-
-                <div class="stats stats-vertical lg:stats-horizontal shadow w-full mb-6">
-                    <div class="stat">
-                        <div class="stat-figure text-primary">
-                            <i class="fa-solid fa-users text-3xl"></i>
-                        </div>
-                        <div class="stat-title">Total Users</div>
-                        <div class="stat-value text-primary">N/A</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-figure text-secondary">
-                            <i class="fa-solid fa-database text-3xl"></i>
-                        </div>
-                        <div class="stat-title">Data Points</div>
-                        <div class="stat-value text-secondary">N/A</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-figure text-accent">
-                            <i class="fa-solid fa-city text-3xl"></i>
-                        </div>
-                        <div class="stat-title">Cities</div>
-                        <div class="stat-value text-accent">N/A</div>
-                    </div>
-                </div>
-
-                <div class="mockup-code bg-base-200">
+                <h2 class="card-title text-xl mb-4">
+                    <i class="fa-solid fa-terminal text-accent"></i>
+                    Debug Information
+                </h2>
+                <div class="mockup-code text-sm">
                     <pre><code>{{ dump(app.user, app.token) }}</code></pre>
                 </div>
             </div>
