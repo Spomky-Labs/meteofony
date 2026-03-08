@@ -67,4 +67,7 @@ return [
     'leaflet' => [
         'version' => '1.9.4',
     ],
+    '@simplewebauthn/browser' => [
+        'version' => '13.2.2',
+    ],
 ];
