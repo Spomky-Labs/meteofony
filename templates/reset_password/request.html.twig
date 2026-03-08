@@ -7,7 +7,7 @@
         <div class="hero-content flex-col lg:flex-row-reverse max-w-6xl w-full">
             <div class="flex-1 text-center lg:text-left">
                 <img
-                    src="{{ asset('images/undraw_forgot_password_re_hxwm.svg') }}"
+                    src="{{ asset('images/Authentication-bro.svg') }}"
                     class="max-w-lg mx-auto drop-shadow-2xl"
                     alt="Forgot password illustration"
                 />
@@ -36,9 +36,10 @@
 
                         {{ form_start(requestForm) }}
                             <div class="form-control">
-                                {{ form_label(requestForm.username, null, {label_attr: {class: 'label'}}) }}
-                                <span class="label-text font-semibold">{{ form_label(requestForm.username) }}</span>
-                                {{ form_widget(requestForm.username, {attr: {autofocus: 'autofocus', class: 'input input-bordered input-primary', placeholder: 'Enter your email'}}) }}
+                                <label class="label">
+                                    <span class="label-text font-semibold">Username</span>
+                                </label>
+                                {{ form_widget(requestForm.username, {attr: {autofocus: 'autofocus', class: 'input input-bordered input-primary', placeholder: 'Enter your username'}}) }}
                             </div>
 
                             <div class="form-control mt-6">
