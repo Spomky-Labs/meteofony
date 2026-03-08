@@ -41,24 +41,24 @@ return [
         'version' => '4.5.1',
     ],
     '@hotwired/turbo' => [
-        'version' => '8.0.20',
+        'version' => '8.0.23',
     ],
     'tailwindcss' => [
-        'version' => '4.1.16',
+        'version' => '4.2.1',
     ],
     'tailwindcss/index.min.css' => [
-        'version' => '4.1.16',
+        'version' => '4.2.1',
         'type' => 'css',
     ],
     'daisyui' => [
-        'version' => '5.4.3',
+        'version' => '5.5.19',
     ],
     'daisyui/daisyui.min.css' => [
-        'version' => '5.4.3',
+        'version' => '5.5.19',
         'type' => 'css',
     ],
     'daisyui/theme' => [
-        'version' => '5.4.3',
+        'version' => '5.5.19',
     ],
     'leaflet/dist/leaflet.min.css' => [
         'version' => '1.9.4',
