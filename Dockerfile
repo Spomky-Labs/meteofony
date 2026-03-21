@@ -1,6 +1,6 @@
 #syntax=docker/dockerfile:1
 
-FROM dunglas/frankenphp:builder AS frankenphp_builder
+FROM dunglas/frankenphp:1-builder AS frankenphp_builder
 LABEL builder=true
 
 COPY --from=caddy:builder /usr/bin/xcaddy /usr/bin/xcaddy
