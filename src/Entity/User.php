@@ -11,11 +11,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Stringable;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Scheb\TwoFactorBundle\Model\Email\TwoFactorInterface;
 use function sprintf;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`users`')]
-class User implements UserInterface, PasswordAuthenticatedUserInterface, Stringable
+class User implements UserInterface, PasswordAuthenticatedUserInterface, Stringable, TwoFactorInterface
 {
     /**
      * @var array<string>
@@ -42,6 +43,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Stringa
         private string $password,
         #[ORM\Column(type: 'datetime_immutable', nullable: true)]
         private ?\DateTimeImmutable $passwordChangedAt,
+        #[ORM\Column(length: 10, nullable: true)]
+        private ?string $totp,
     ) {
         $this->accessTokens = new ArrayCollection();
     }
@@ -173,5 +176,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Stringa
     {
         $this->passwordChangedAt = $passwordChangedAt;
         return $this;
+    }
+
+    public function isEmailAuthEnabled(): bool
+    {
+        return true;
+    }
+
+    public function getEmailAuthRecipient(): string
+    {
+        return $this->email;
+    }
+
+    public function getEmailAuthCode(): string|null
+    {
+        return $this->totp;
+    }
+
+    public function setEmailAuthCode(string $authCode): void
+    {
+        $this->totp = $authCode;
     }
 }
