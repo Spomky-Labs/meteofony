@@ -40,6 +40,7 @@
     <div class="navbar-end">
         {% if is_granted('ROLE_USER') %}
             <form action="{{ logout_path('main') }}" method="post">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('logout') }}" />
                 <button class="btn btn-primary btn-sm">
                     <i class="fa-solid fa-right-from-bracket"></i>
                     Logout

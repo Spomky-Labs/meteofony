@@ -44,6 +44,9 @@ security:
             custom_authenticator: App\Security\UsernamePasswordAuthenticator
             logout:
                 path: /logout
+                enable_csrf: true
+                csrf_parameter: _csrf_token
+                csrf_token_id: logout
                 # where to redirect after logout
                 target: app_homepage
                 clear_site_data:
