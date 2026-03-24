@@ -39,7 +39,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Stringa
         #[ORM\Column(length: 200, unique: true)]
         private string $username,
         #[ORM\Column]
-        private string $password
+        private string $password,
+        #[ORM\Column(type: 'datetime_immutable', nullable: true)]
+        private ?\DateTimeImmutable $passwordChangedAt,
     ) {
         $this->accessTokens = new ArrayCollection();
     }
@@ -160,5 +162,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Stringa
     public function getAccessTokens(): Collection
     {
         return $this->accessTokens;
+    }
+
+    public function getPasswordChangedAt(): ?\DateTimeImmutable
+    {
+        return $this->passwordChangedAt;
+    }
+
+    public function setPasswordChangedAt(?\DateTimeImmutable $passwordChangedAt): self
+    {
+        $this->passwordChangedAt = $passwordChangedAt;
+        return $this;
     }
 }
