@@ -16,6 +16,7 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordC
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\SecurityRequestAttributes;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
+use function Symfony\Component\String\u;
 
 final class UsernamePasswordAuthenticator extends AbstractLoginFormAuthenticator
 {
@@ -31,6 +32,7 @@ final class UsernamePasswordAuthenticator extends AbstractLoginFormAuthenticator
     public function authenticate(Request $request): Passport
     {
         $username = $request->request->get('username', '');
+        $username = str($username)->lower();
 
         $request->getSession()
             ->set(SecurityRequestAttributes::LAST_USERNAME, $username);
@@ -38,7 +40,11 @@ final class UsernamePasswordAuthenticator extends AbstractLoginFormAuthenticator
         return new Passport(
             new UserBadge($username),
             new PasswordCredentials($request->request->get('password', '')),
-            [new CsrfTokenBadge('authenticate', $request->request->get('_csrf_token'))]
+            [
+                new CsrfTokenBadge('authenticate', $request->request->get('_csrf_token')),
+                //new NotCompromisedBadge($request->request->get('password', '')),
+                new OldPasswordBadge()
+            ]
         );
     }
 
