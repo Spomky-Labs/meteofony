@@ -20,7 +20,7 @@ use Symfony\Component\Uid\Uuid;
 
 #[Table(name: 'webauthn_credentials')]
 #[Entity(repositoryClass: WebauthnCredentialRepository::class)]
-#[Index(name: 'idx_webauthn_credentials_user_handle', columns: ['user_handle'])]
+//#[Index(name: 'idx_webauthn_credentials_user_handle', columns: ['user_handle'])]
 class WebauthnCredential /* extends PublicKeyCredentialSource*/
 {
     #[Id]
