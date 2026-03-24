@@ -1,0 +1,88 @@
+nelmio_security:
+    # prevents framing of the entire site
+    clickjacking:
+        paths:
+            '^/.*': DENY
+
+    # disables content type sniffing for script resources
+    content_type:
+        nosniff: true
+
+    # Send a full URL in the `Referer` header when performing a same-origin request,
+    # only send the origin of the document to secure destination (HTTPS->HTTPS),
+    # and send no header to a less secure destination (HTTPS->HTTP).
+    # If `strict-origin-when-cross-origin` is not supported, use `no-referrer` policy,
+    # no referrer information is sent along with requests.
+    referrer_policy:
+        enabled: true
+        policies:
+            - 'no-referrer'
+            - 'strict-origin-when-cross-origin'
+    
+    forced_ssl:
+        enabled: true
+        hsts_max_age: 31536000 # 1 year
+        #hsts_preload: true
+        hsts_subdomains: true
+
+    cross_origin_isolation:
+        enabled: true
+        paths:
+            '^/.*':
+                coop: same-origin
+                corp: same-origin
+
+    csp:
+        enabled: true
+        report_endpoint:
+            log_level: "notice" # Use the appropriate log_level
+            filters:
+                domains: true
+                schemes: true
+                browser_bugs: true
+                injected_scripts: true
+            dismiss:
+                '/^data:/': 'script-src'
+                '/^https?:\/\/\d+\.\d+\.\d+\.\d+(:\d+)*/': '*'
+                'maxcdn.bootstrapcdn.com': '*'
+                'www.gstatic.com': ['media-src', 'img-src']
+        hash:
+            algorithm: sha512
+        hosts: []
+        content_types: []
+        #report: ~
+        enforce:
+            level1_fallback: false
+            browser_adaptive:
+                enabled: false
+            default-src:
+                - 'none'
+            img-src:
+                - 'self'
+                - 'data:'
+                - 'blob:'
+                - 'https://frankenphp.dev'
+                - 'https://symfony.com'
+            script-src:
+                - 'self'
+                - 'data:'
+                - 'https://cdnjs.cloudflare.com'
+            form-action:
+                - 'self'
+            font-src:
+                - 'self'
+                - 'https://cdn.jsdelivr.net'
+                - 'https://cdnjs.cloudflare.com'
+            media-src:
+                - 'self'
+                - 'blob:'
+            connect-src:
+                - 'self'
+                - 'https://cdn.jsdelivr.net'
+            style-src:
+                - 'self'
+                - 'https://cdn.jsdelivr.net'
+                - 'https://cdnjs.cloudflare.com'
+            block-all-mixed-content: true
+            upgrade-insecure-requests: true
+    
