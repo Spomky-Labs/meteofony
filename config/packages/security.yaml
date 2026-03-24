@@ -21,6 +21,13 @@ security:
             pattern: ^/(_profiler|_wdt|assets|build)/
             security: false
 
+        api:
+            pattern: ^/api
+            stateless: false
+            access_token:
+                token_handler: App\Security\AccessTokenHandler
+                token_extractors: query_string
+
         main:
             pattern: ^/
             lazy: true
@@ -57,7 +64,7 @@ security:
         - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/login, roles: PUBLIC_ACCESS }
         - { path: ^/2fa, role: IS_AUTHENTICATED_2FA_IN_PROGRESS }
-        #- { path: ^/api, roles: ROLE_USER }
+        - { path: ^/api, roles: ROLE_USER }
         - { path: ^/, roles: PUBLIC_ACCESS }
 
 when@test:
