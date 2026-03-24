@@ -25,6 +25,7 @@ security:
             pattern: ^/
             lazy: true
             provider: app_user_provider
+            login_throttling: null
 
             custom_authenticator: App\Security\UsernamePasswordAuthenticator
             logout:
