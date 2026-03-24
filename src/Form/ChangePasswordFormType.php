@@ -30,12 +30,12 @@ final class ChangePasswordFormType extends AbstractType
                     'constraints' => [
                         new NotBlank(message: 'Votre mot de passe'),
                         new Length(
-                            min: 12,
+                            min: 2,
                             minMessage: 'Votre mot de passe doit avoir au moins {{ limit }} charactères',
                             max: 4096
                         ),
-                        new PasswordStrength(minScore: 2),
-                        new NotCompromisedPassword()
+                        //new PasswordStrength(minScore: 2),
+                        //new NotCompromisedPassword()
                     ],
                     'label' => 'Nouveau mot de passe',
                 ],
