@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 /**
  * @implements UserProviderInterface<User>
  */
-final readonly class AdminProvider /* implements UserProviderInterface*/
+final readonly class AdminProvider implements UserProviderInterface
 {
     public function loadUserByIdentifier(string $identifier): UserInterface
     {

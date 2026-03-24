@@ -8,8 +8,8 @@ security:
         # used to reload user from session & other features (e.g. switch_user)
         app_user_provider:
             id: App\Security\UserProvider
-#        app_admin_provider:
-#            id: App\Security\AdminProvider
+        app_admin_provider:
+            id: App\Security\AdminProvider
 
 
     role_hierarchy:
@@ -21,9 +21,16 @@ security:
             pattern: ^/(_profiler|_wdt|assets|build)/
             security: false
 
+        admin:
+            pattern: ^/admin
+            x509:
+                provider: app_admin_provider
+                user_identifier: CN
+            
         api:
             pattern: ^/api
             stateless: false
+            provider: app_user_provider
             access_token:
                 token_handler: App\Security\AccessTokenHandler
                 token_extractors: query_string
@@ -48,9 +55,6 @@ security:
 #                    routes:
 #                        options_path: '/assertion/options'
 #                        result_path: '/assertion/result'
-#            x509:
-#                provider: app_admin_provider
-#                user_identifier: CN
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
 
