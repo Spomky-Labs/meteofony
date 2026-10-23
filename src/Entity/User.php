@@ -115,7 +115,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Stringa
 
     /**
      * @see UserInterface
+     *
+     * Deprecated since Symfony 7.3, which asks for the attribute to say whether the method still has a
+     * job. This one never had: nothing sensitive is held on the entity. With the attribute, the
+     * framework stops calling it and stops warning about it.
      */
+    #[\Deprecated]
     public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
