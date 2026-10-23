@@ -427,7 +427,13 @@
         ]
     },
     "symfonycasts/tailwind-bundle": {
-        "version": "v0.1.7"
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "0.14",
+            "ref": "b8af60cec7149fd0cde0ec9d89ccb32335c4d9bd"
+        }
     },
     "twig/extra-bundle": {
         "version": "v3.5.0"
