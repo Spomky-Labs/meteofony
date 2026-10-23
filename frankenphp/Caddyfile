@@ -42,15 +42,21 @@
 	# Disable Topics tracking if not enabled explicitly: https://github.com/jkarlin/topics
 	header ?Permissions-Policy "browsing-topics=()"
 
-	coraza_waf {
-		load_owasp_crs
-		directives `
-			Include @coraza.conf-recommended
-			Include @crs-setup.conf.example
-			Include @owasp_crs/*.conf
-			SecRuleEngine On
-		`
-	}
+	# Coraza is off in the development stack. With SecRuleEngine On and the whole OWASP CRS loaded,
+	# it answered 403 with an empty body to every HTML page while letting /api through, and without
+	# naming a rule in the log, which makes it impossible to develop against. The block is kept here,
+	# commented, rather than dropped. compose.prod.yaml brings its own coraza_waf through
+	# CADDY_SERVER_EXTRA_DIRECTIVES, so production keeps the WAF — and that also ends the duplicate
+	# the two declarations made there.
+#	coraza_waf {
+#		load_owasp_crs
+#		directives `
+#			Include @coraza.conf-recommended
+#			Include @crs-setup.conf.example
+#			Include @owasp_crs/*.conf
+#			SecRuleEngine On
+#		`
+#	}
 
 	handle_errors 403 {
 		header X-Blocked "true"
