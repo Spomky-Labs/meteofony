@@ -94,7 +94,7 @@ Example: See `src/ApiResource/Measure.php` + `src/State/MeasureProvider.php`
 ## Docker Environment
 
 - **FrankenPHP** replaces traditional PHP-FPM (worker mode in production)
-- **Caddy** provides web server + Mercure hub for real-time features
+- **Caddy** provides the web server, with Vulcain and the Coraza WAF compiled into the binary
 - **PostgreSQL 16** for database
 - All services defined in `compose.yaml` and `compose.override.yaml`
 
@@ -129,7 +129,7 @@ Create in `src/Twig/Components/`, extend `AbstractController` or use `#[AsLiveCo
 - `config/packages/security.yaml` - Authentication & authorization
 - `config/routes.yaml` - Additional route configuration
 - `compose.yaml` - Docker services configuration
-- `frankenphp/Caddyfile` - Web server + Mercure configuration
+- `frankenphp/Caddyfile` - Web server configuration (TLS and X509, Coraza WAF, error pages)
 - `importmap.php` - Frontend dependencies (no package.json needed)
 
 ## Notes

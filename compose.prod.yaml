@@ -6,8 +6,6 @@ services:
       target: frankenphp_prod
     environment:
       APP_SECRET: ${APP_SECRET}
-      MERCURE_PUBLISHER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET}
-      MERCURE_SUBSCRIBER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET}
       # Selects the FrankenPHP worker runner that symfony/runtime 8 now carries, in place of the
       # APP_RUNTIME of runtime/frankenphp-symfony. FRANKENPHP_CONFIG below puts Caddy in worker
       # mode, so this file needs the variable too and not only worker.Caddyfile.

@@ -15,8 +15,7 @@ use function Castor\run;
  * What the fallbacks cost: the X509 client-certificate authentication of the ^/admin firewall
  * (config/packages/security.yaml) is handed to PHP by Caddy's `client_auth` (frankenphp/Caddyfile), so it
  * exists only under Docker. Nothing else of the application depends on the stack — the messenger routes
- * everything through `sync://`, MAILER_DSN is already `null://null`, and Mercure is configured but never
- * published to.
+ * everything through `sync://` and MAILER_DSN is already `null://null`.
  */
 
 const RUNTIME_DOCKER = 'docker';
