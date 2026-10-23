@@ -29,3 +29,5 @@ vendor/
 .env.local
 .env.local.php
 .env.test
+.castor
+scripts
