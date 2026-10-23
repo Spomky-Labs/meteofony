@@ -32,18 +32,25 @@
 	root * /app/public
 	encode zstd br gzip
 
-	mercure {
-		# Publisher JWT key
-		publisher_jwt {env.MERCURE_PUBLISHER_JWT_KEY} {env.MERCURE_PUBLISHER_JWT_ALG}
-		# Subscriber JWT key
-		subscriber_jwt {env.MERCURE_SUBSCRIBER_JWT_KEY} {env.MERCURE_SUBSCRIBER_JWT_ALG}
-		# Allow anonymous subscribers (double-check that it's what you want)
-		# anonymous
-		# Enable the subscription API (double-check that it's what you want)
-		# subscriptions
-		# Extra directives
-		{$MERCURE_EXTRA_DIRECTIVES}
-	}
+	# The embedded Mercure hub is off: this Caddy module is 1.1.4 now, and it dropped the shape of
+	# the configuration below. `demo` became `playground`, and `publisher_jwt`/`subscriber_jwt` live
+	# only in compatibility mode, which still demands an issuer identifier — so the hub refused to
+	# provision and FrankenPHP exited 1 on every boot. Nothing in src/ or templates/ publishes to
+	# Mercure, so this costs the application nothing today. Turning it back on means an `issuer`
+	# block here, a `transport` directive in place of the Dockerfile's MERCURE_TRANSPORT_URL, and
+	# symfony/mercure-bundle 0.6.
+#	mercure {
+#		# Publisher JWT key
+#		publisher_jwt {env.MERCURE_PUBLISHER_JWT_KEY} {env.MERCURE_PUBLISHER_JWT_ALG}
+#		# Subscriber JWT key
+#		subscriber_jwt {env.MERCURE_SUBSCRIBER_JWT_KEY} {env.MERCURE_SUBSCRIBER_JWT_ALG}
+#		# Allow anonymous subscribers (double-check that it's what you want)
+#		# anonymous
+#		# Enable the subscription API (double-check that it's what you want)
+#		# subscriptions
+#		# Extra directives
+#		{$MERCURE_EXTRA_DIRECTIVES}
+#	}
 
 	vulcain
 
