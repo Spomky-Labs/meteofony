@@ -1,4 +1,7 @@
 worker {
 	file ./public/index.php
-	env APP_RUNTIME Runtime\FrankenPhpSymfony\Runtime
+	# symfony/runtime 8 carries the FrankenPHP worker runner itself, and this variable is what
+	# selects it. It replaces the APP_RUNTIME that pointed at runtime/frankenphp-symfony, a package
+	# that never supported Symfony 8 and is gone from composer.json.
+	env FRANKENPHP_WORKER 1
 }

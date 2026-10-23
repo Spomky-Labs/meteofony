@@ -8,7 +8,10 @@ services:
       APP_SECRET: ${APP_SECRET}
       MERCURE_PUBLISHER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET}
       MERCURE_SUBSCRIBER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET}
-      APP_RUNTIME: Runtime\FrankenPhpSymfony\Runtime
+      # Selects the FrankenPHP worker runner that symfony/runtime 8 now carries, in place of the
+      # APP_RUNTIME of runtime/frankenphp-symfony. FRANKENPHP_CONFIG below puts Caddy in worker
+      # mode, so this file needs the variable too and not only worker.Caddyfile.
+      FRANKENPHP_WORKER: "1"
       FRANKENPHP_CONFIG: "worker ./public/index.php"
       CADDY_GLOBAL_OPTIONS: "order coraza_waf first"
       CADDY_SERVER_EXTRA_DIRECTIVES: |
