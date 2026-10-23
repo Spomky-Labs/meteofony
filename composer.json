@@ -11,7 +11,7 @@
         "ext-iconv": "*",
         "ext-sodium": "*",
         "ext-zip": "*",
-        "api-platform/core": "^4.0",
+        "api-platform/core": "^5.0",
         "doctrine/doctrine-bundle": "^3.0",
         "doctrine/doctrine-migrations-bundle": "^4.0",
         "doctrine/orm": "^2.14|^3.0",
