@@ -15,5 +15,12 @@ api_platform:
         extra_properties:
             standard_put: true
             rfc_7807_compliant_errors: true
+    swagger:
+        persist_authorization: true
+        http_auth:
+            bearer:
+                scheme: bearer
+                bearerFormat: JWT
+
     show_webby: false
     use_symfony_listeners: true

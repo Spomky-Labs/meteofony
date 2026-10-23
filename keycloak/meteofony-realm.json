@@ -1,0 +1,64 @@
+{
+    "realm": "meteofony",
+    "enabled": true,
+    "displayName": "Meteofony",
+    "sslRequired": "none",
+    "clients": [
+        {
+            "clientId": "meteofony-app",
+            "enabled": true,
+            "protocol": "openid-connect",
+            "publicClient": false,
+            "secret": "meteofony-dev-secret",
+            "standardFlowEnabled": true,
+            "directAccessGrantsEnabled": true,
+            "redirectUris": [
+                "https://localhost:8443/oidc/callback"
+            ],
+            "webOrigins": [
+                "https://localhost:8443"
+            ],
+            "protocolMappers": [
+                {
+                    "name": "meteofony-api-audience",
+                    "protocol": "openid-connect",
+                    "protocolMapper": "oidc-audience-mapper",
+                    "consentRequired": false,
+                    "config": {
+                        "included.client.audience": "meteofony-api",
+                        "access.token.claim": "true",
+                        "id.token.claim": "false"
+                    }
+                }
+            ]
+        },
+        {
+            "clientId": "meteofony-api",
+            "name": "Meteofony API",
+            "enabled": true,
+            "protocol": "openid-connect",
+            "publicClient": false,
+            "secret": "meteofony-api-secret",
+            "standardFlowEnabled": false,
+            "implicitFlowEnabled": false,
+            "directAccessGrantsEnabled": false,
+            "serviceAccountsEnabled": false
+        }
+    ],
+    "users": [
+        {
+            "username": "alice",
+            "enabled": true,
+            "emailVerified": true,
+            "email": "alice@meteofony.test",
+            "firstName": "Alice",
+            "lastName": "Durand",
+            "credentials": [
+                {
+                    "type": "password",
+                    "value": "alice"
+                }
+            ]
+        }
+    ]
+}

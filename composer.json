@@ -4,6 +4,7 @@
     "license": "MIT",
     "description": "A minimal Symfony project recommended to create bare bones applications",
     "prefer-stable": true,
+    "minimum-stability": "dev",
     "require": {
         "php": ">=8.4",
         "ext-ctype": "*",
@@ -19,33 +20,33 @@
         "nelmio/cors-bundle": "^2.3",
         "phpdocumentor/reflection-docblock": "^5.3|^6.0",
         "phpstan/phpdoc-parser": "^2.0",
-        "symfony/asset": "8.1.*",
-        "symfony/asset-mapper": "8.1.*",
-        "symfony/console": "8.1.*",
-        "symfony/doctrine-messenger": "8.1.*",
-        "symfony/dotenv": "8.1.*",
-        "symfony/expression-language": "8.1.*",
+        "symfony/asset": "8.2.*",
+        "symfony/asset-mapper": "8.2.*",
+        "symfony/console": "8.2.*",
+        "symfony/doctrine-messenger": "8.2.*",
+        "symfony/dotenv": "8.2.*",
+        "symfony/expression-language": "8.2.*",
         "symfony/flex": "^2",
-        "symfony/form": "8.1.*",
-        "symfony/framework-bundle": "8.1.*",
-        "symfony/http-client": "8.1.*",
-        "symfony/intl": "8.1.*",
-        "symfony/mailer": "8.1.*",
-        "symfony/messenger": "8.1.*",
-        "symfony/mime": "8.1.*",
+        "symfony/form": "8.2.*",
+        "symfony/framework-bundle": "8.2.*",
+        "symfony/http-client": "8.2.*",
+        "symfony/intl": "8.2.*",
+        "symfony/mailer": "8.2.*",
+        "symfony/messenger": "8.2.*",
+        "symfony/mime": "8.2.*",
         "symfony/monolog-bundle": "^4.0",
-        "symfony/notifier": "8.1.*",
-        "symfony/process": "8.1.*",
-        "symfony/property-access": "8.1.*",
-        "symfony/property-info": "8.1.*",
-        "symfony/runtime": "8.1.*",
-        "symfony/security-bundle": "8.1.*",
-        "symfony/serializer": "8.1.*",
+        "symfony/notifier": "8.2.*",
+        "symfony/process": "8.2.*",
+        "symfony/property-access": "8.2.*",
+        "symfony/property-info": "8.2.*",
+        "symfony/runtime": "8.2.*",
+        "symfony/security-bundle": "dev-features/oidc-login-discovery-uri as 8.2.x-dev",
+        "symfony/serializer": "8.2.*",
         "symfony/stimulus-bundle": "^3.0",
-        "symfony/string": "8.1.*",
-        "symfony/translation": "8.1.*",
-        "symfony/twig-bundle": "8.1.*",
-        "symfony/uid": "8.1.*",
+        "symfony/string": "8.2.*",
+        "symfony/translation": "8.2.*",
+        "symfony/twig-bundle": "8.2.*",
+        "symfony/uid": "8.2.*",
         "symfony/ux-chartjs": "^3.0",
         "symfony/ux-icons": "^3.0",
         "symfony/ux-leaflet-map": "^3.0",
@@ -53,13 +54,14 @@
         "symfony/ux-map": "^3.0",
         "symfony/ux-turbo": "^3.0",
         "symfony/ux-twig-component": "^3.0",
-        "symfony/validator": "8.1.*",
-        "symfony/web-link": "8.1.*",
-        "symfony/yaml": "8.1.*",
+        "symfony/validator": "8.2.*",
+        "symfony/web-link": "8.2.*",
+        "symfony/yaml": "8.2.*",
         "symfonycasts/reset-password-bundle": "^1.17",
         "symfonycasts/tailwind-bundle": "^1.0",
         "twig/extra-bundle": "^2.12|^3.0",
-        "twig/twig": "^2.12|^3.0"
+        "twig/twig": "^2.12|^3.0",
+        "web-token/jwt-library": "*"
     },
     "config": {
         "allow-plugins": {
@@ -112,18 +114,27 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "8.1.*",
+            "require": "8.2.*",
             "docker": true
         }
     },
     "require-dev": {
         "roave/security-advisories": "dev-latest",
-        "symfony/browser-kit": "8.1.*",
-        "symfony/css-selector": "8.1.*",
-        "symfony/debug-bundle": "8.1.*",
+        "symfony/browser-kit": "8.2.*",
+        "symfony/css-selector": "8.2.*",
+        "symfony/debug-bundle": "8.2.*",
         "symfony/maker-bundle": "^1.48",
-        "symfony/phpunit-bridge": "8.1.*",
-        "symfony/stopwatch": "8.1.*",
-        "symfony/web-profiler-bundle": "8.1.*"
-    }
+        "symfony/phpunit-bridge": "8.2.*",
+        "symfony/stopwatch": "8.2.*",
+        "symfony/web-profiler-bundle": "8.2.*"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "/home/florent/Projects/symfony/src/Symfony/Bundle/SecurityBundle",
+            "options": {
+                "symlink": false
+            }
+        }
+    ]
 }

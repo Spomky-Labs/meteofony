@@ -7,7 +7,7 @@
         <div class="text-center mb-10">
             <div class="avatar placeholder mb-4">
                 <div class="bg-primary text-primary-content rounded-full w-24">
-                    <span class="text-3xl">{{ app.user.username|first|upper }}</span>
+                    <span class="text-3xl">{{ display_name|first|upper }}</span>
                 </div>
             </div>
             <h1 class="text-4xl font-bold text-base-content mb-2">
@@ -27,7 +27,7 @@
                     <div class="space-y-3">
                         <div class="flex justify-between items-center py-2 border-b border-base-200">
                             <span class="text-base-content/60 font-medium">Username</span>
-                            <span class="font-semibold">{{ app.user.username }}</span>
+                            <span class="font-semibold">{{ display_name }}</span>
                         </div>
                         <div class="flex justify-between items-center py-2 border-b border-base-200">
                             <span class="text-base-content/60 font-medium">Roles</span>
@@ -56,10 +56,35 @@
                             <span class="text-base-content/60 font-medium">Token</span>
                             <span class="text-sm font-mono truncate max-w-[150px]">{{ token_class|split('\\')|last }}</span>
                         </div>
+                        <div class="flex justify-between items-center py-2">
+                            <span class="text-base-content/60 font-medium">Access token</span>
+                            <span class="badge badge-sm {{ access_token ? 'badge-success' : 'badge-ghost' }}">
+                                {{ access_token ? 'obtained' : 'none' }}
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        {% if claims is not empty %}
+            <div class="card bg-base-100 shadow-lg mb-8">
+                <div class="card-body">
+                    <h2 class="card-title text-xl mb-4">
+                        <i class="fa-solid fa-id-card text-primary"></i>
+                        ID Token Claims
+                    </h2>
+                    <div class="space-y-2">
+                        {% for name, value in claims %}
+                            <div class="flex justify-between items-start gap-4 py-2 border-b border-base-200">
+                                <span class="text-base-content/60 font-mono text-sm">{{ name }}</span>
+                                <span class="font-mono text-sm text-right break-all">{{ value is iterable ? value|json_encode : (value is same as(true) ? 'true' : (value is same as(false) ? 'false' : value)) }}</span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
 
         <div class="card bg-base-200 shadow-lg">
             <div class="card-body">

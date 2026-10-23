@@ -74,7 +74,14 @@
 
                         <div class="divider">OR</div>
 
-                        <p class="text-center text-sm">
+                        <div class="form-control">
+                            <a href="{{ path('_oidc_login_start_main') }}" class="btn btn-outline btn-secondary btn-lg">
+                                <i class="fa-solid fa-key"></i>
+                                Login with Keycloak
+                            </a>
+                        </div>
+
+                        <p class="text-center text-sm mt-4">
                             <a href="{{ path('app_homepage') }}" class="link link-hover link-primary">
                                 <i class="fa-solid fa-house"></i>
                                 Back to Homepage

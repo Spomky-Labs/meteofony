@@ -1,3 +1,6 @@
-_security_logout:
-    resource: security.route_loader.logout
+# The generic loader, which `security.route_loader.logout` is deprecated in favour of since
+# symfony/security-bundle 8.2. It declares more than the logout path: the `check_path` of an
+# `oidc_login` firewall is routed from here too.
+_security:
+    resource: security.route_loader
     type: service

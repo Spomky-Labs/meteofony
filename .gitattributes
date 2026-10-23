@@ -17,6 +17,7 @@ composer.lock text eol=lf merge=ours
 *.png binary
 
 /.castor export-ignore
+/keycloak export-ignore
 /scripts export-ignore
 /.ci-tools export-ignore
 /.github export-ignore

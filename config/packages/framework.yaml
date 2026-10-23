@@ -15,6 +15,15 @@ framework:
 
     #esi: true
     #fragments: true
+    http_client:
+        scoped_clients:
+            keycloak.client:
+                scope: '^https://keycloak:8443/'
+                cafile: '/etc/caddy/certs/keycloak.pem'
+            keycloak.introspection:
+                base_uri: '%env(OIDC_INTROSPECTION_URI)%'
+                auth_basic: '%env(OIDC_API_CLIENT_ID)%:%env(OIDC_API_CLIENT_SECRET)%'
+
     php_errors:
         log: true
 

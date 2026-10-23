@@ -43,6 +43,28 @@ services:
       MP_SMTP_AUTH_ACCEPT_ANY: 1
       MP_SMTP_AUTH_ALLOW_INSECURE: 1
 ###< symfony/mailer ###
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.8.1
+    command: start-dev --import-realm
+    restart: unless-stopped
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: ${KEYCLOAK_ADMIN_USER:-admin}
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD:-admin}
+      KC_HEALTH_ENABLED: "true"
+      # `oidc_login` refuses an announced endpoint on plain HTTP outside a loopback host, and the
+      # backchannel one is `keycloak`
+      KC_HTTPS_CERTIFICATE_FILE: /etc/keycloak/certs/keycloak.pem
+      KC_HTTPS_CERTIFICATE_KEY_FILE: /etc/keycloak/certs/keycloak.key
+      KC_HOSTNAME: https://localhost:${KEYCLOAK_PORT:-8444}
+      KC_HOSTNAME_BACKCHANNEL_DYNAMIC: "true"
+    volumes:
+      - ./frankenphp/certs/keycloak.pem:/etc/keycloak/certs/keycloak.pem:ro
+      - ./frankenphp/certs/keycloak.key:/etc/keycloak/certs/keycloak.key:ro
+      - ./keycloak/meteofony-realm.json:/opt/keycloak/data/import/meteofony-realm.json:ro
+    ports:
+      - target: 8443
+        published: ${KEYCLOAK_PORT:-8444}
+        protocol: tcp
 
 volumes:
   aws:
