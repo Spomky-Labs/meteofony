@@ -6,3 +6,12 @@ mercure:
             jwt:
                 secret: '%env(MERCURE_JWT_SECRET)%'
                 publish: '*'
+                # Required by the RFC 9068 access tokens of protocol_version 1.0, which is what
+                # symfony/mercure-bundle 0.6 defaults to. The application signs its own publisher token,
+                # so it is issuer, subject and client at once. `iss` is also the string a hub running in
+                # modern mode matches its `issuer` identifier against, which is what re-enabling the
+                # embedded Caddy hub will need (frankenphp/Caddyfile).
+                claims:
+                    iss: meteofony
+                    sub: meteofony
+                    client_id: meteofony
