@@ -30,6 +30,29 @@ const DEV_ENV = [
 /** Where the two Docker-less servers listen. */
 const LOCAL_SERVER_PORT = 8000;
 
+/**
+ * The environment every `docker compose` call is made with: the image tag, and the env files compose reads
+ * when it interpolates compose.yaml.
+ *
+ * compose only reads `.env`, where Symfony reads `.env.local` on top of it. Naming both here lets a
+ * developer override what compose interpolates from a file that is not versioned — the published ports,
+ * typically, when another stack on the machine already holds 80 and 443. `.env.local` is listed only when
+ * it is there, because compose stops on an env file it cannot find.
+ *
+ * @param array<string, string> $extra
+ *
+ * @return array<string, string>
+ */
+function composeEnvironment(array $extra = DEV_ENV): array
+{
+    $envFiles = ['.env'];
+    if (is_file('.env.local')) {
+        $envFiles[] = '.env.local';
+    }
+
+    return [...$extra, 'COMPOSE_ENV_FILES' => implode(',', $envFiles)];
+}
+
 #[AsTask(description: 'Restart the containers.')]
 function restart(?string $runtime = null): void
 {
@@ -69,7 +92,7 @@ function destroy(bool $force = false): void
     // more. `-v` already removes the named volumes, so the `--volumes` that followed it was a duplicate.
     run(
         ['docker', 'compose', 'down', '-v', '--remove-orphans', '--rmi', 'local'],
-        context: context()->withEnvironment(DEV_ENV)
+        context: context()->withEnvironment(composeEnvironment())
     );
     notify('The infrastructure has been destroyed.');
 }
@@ -82,7 +105,7 @@ function stop(?string $runtime = null): void
     }
 
     match (runtime()) {
-        RUNTIME_DOCKER => run(['docker', 'compose', 'down'], context: context()->withEnvironment(DEV_ENV)),
+        RUNTIME_DOCKER => run(['docker', 'compose', 'down'], context: context()->withEnvironment(composeEnvironment())),
         RUNTIME_SYMFONY => run(['symfony', 'server:stop']),
         // `php -S` is the foreground process of `castor start` in this mode, so there is nothing running
         // in the background to stop: whoever started it stops it with Ctrl+C.
@@ -108,10 +131,10 @@ function startDocker(bool $pull = false): void
 {
     if ($pull) {
         io()->note('Pulling latest images...');
-        run(['docker', 'compose', 'pull'], context: context()->withEnvironment(DEV_ENV));
+        run(['docker', 'compose', 'pull'], context: context()->withEnvironment(composeEnvironment()));
     }
 
-    run(['docker', 'compose', 'up', '-d'], context: context()->withEnvironment(DEV_ENV));
+    run(['docker', 'compose', 'up', '-d'], context: context()->withEnvironment(composeEnvironment()));
     frontend(true);
 }
 
@@ -214,9 +237,9 @@ function build(bool $prod = false, bool $noCache = false, bool $pull = false): v
     io()
         ->note(sprintf('Target: %s', $prod ? 'frankenphp_prod' : 'frankenphp_dev'));
 
-    run($command, context: context()->withEnvironment($prod ? [
+    run($command, context: context()->withEnvironment(composeEnvironment($prod ? [
         'TAG' => 'prod',
-    ] : DEV_ENV));
+    ] : DEV_ENV)));
 
     if ($prod) {
         io()->success('Production build complete.');
@@ -262,7 +285,7 @@ function php(#[AsRawTokens] array $args = []): void
 function phpProcess(array $args, bool $quiet = false): Process
 {
     $context = context()
-        ->withEnvironment(DEV_ENV);
+        ->withEnvironment(composeEnvironment());
     if ($quiet) {
         $context = $context->withQuiet();
     }
