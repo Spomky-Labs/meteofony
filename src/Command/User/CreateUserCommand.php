@@ -7,6 +7,7 @@ namespace App\Command\User;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use Symfony\Component\Console\Attribute\AsCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
@@ -35,9 +36,9 @@ final readonly class CreateUserCommand
             $this->userRepository->save($user, true);
         } catch (Throwable $e) {
             $io->error(sprintf('An error has occurred : %s', $e->getMessage()));
-            return self::FAILURE;
+            return Command::FAILURE;
         }
         $io->success('The user has been successfully created');
-        return self::SUCCESS;
+        return Command::SUCCESS;
     }
 }

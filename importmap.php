@@ -10,64 +10,36 @@
  *     be used as an "entrypoint" (and passed to the importmap() Twig function).
  *
  * The "importmap:require" command can be used to add new entries to this file.
+ *
+ * @return array<string, array{    // Import name as key, description of the imported file as value
+ *     path: string,               // Logical, relative or absolute path to the file
+ *     type?: 'js'|'css'|'json',   // Type of the file, defaults to 'js'
+ *     entrypoint?: bool,          // Whether the file is an entrypoint, for 'js' only
+ * }|array{
+ *     version: string,            // Version of the remote package
+ *     package_specifier?: string, // Remote "package-name/path" specifier, defaults to the import name
+ *     type?: 'js'|'css'|'json',
+ *     entrypoint?: bool,
+ * }>
  */
 return [
-    'app' => [
-        'path' => './assets/app.js',
-        'entrypoint' => true,
-    ],
-    '@symfony/stimulus-bundle' => [
-        'path' => '@symfony/stimulus-bundle/loader.js',
-    ],
-    '@symfony/ux-live-component' => [
-        'path' => './vendor/symfony/ux-live-component/assets/dist/live_controller.js',
-    ],
-    '@symfony/ux-leaflet-map' => [
-        'path' => './vendor/symfony/ux-leaflet-map/assets/dist/map_controller.js',
-    ],
-    '@hotwired/stimulus' => [
-        'version' => '3.2.2',
-    ],
-    '@symfony/stimulus-bridge' => [
-        'version' => '4.0.1',
-    ],
-    'chart.js/auto' => [
-        'version' => '4.5.1',
-    ],
-    '@kurkle/color' => [
-        'version' => '0.4.0',
-    ],
-    'chart.js' => [
-        'version' => '4.5.1',
-    ],
-    '@hotwired/turbo' => [
-        'version' => '8.0.23',
-    ],
-    'tailwindcss' => [
-        'version' => '4.2.1',
-    ],
-    'tailwindcss/index.min.css' => [
-        'version' => '4.2.1',
-        'type' => 'css',
-    ],
-    'daisyui' => [
-        'version' => '5.5.19',
-    ],
-    'daisyui/daisyui.min.css' => [
-        'version' => '5.5.19',
-        'type' => 'css',
-    ],
-    'daisyui/theme' => [
-        'version' => '5.5.19',
-    ],
-    'leaflet/dist/leaflet.min.css' => [
-        'version' => '1.9.4',
-        'type' => 'css',
-    ],
-    'leaflet' => [
-        'version' => '1.9.4',
-    ],
-    '@simplewebauthn/browser' => [
-        'version' => '13.2.2',
-    ],
+    'app' => ['path' => './assets/app.js', 'entrypoint' => true],
+    '@symfony/stimulus-bundle' => ['path' => '@symfony/stimulus-bundle/loader.js'],
+    '@symfony/ux-live-component' => ['path' => './vendor/symfony/ux-live-component/assets/dist/live_controller.js'],
+    '@symfony/ux-leaflet-map' => ['path' => './vendor/symfony/ux-leaflet-map/assets/dist/map_controller.js'],
+    '@hotwired/stimulus' => ['version' => '3.2.2'],
+    '@symfony/stimulus-bridge' => ['version' => '4.0.1'],
+    'chart.js/auto' => ['version' => '4.5.1'],
+    '@kurkle/color' => ['version' => '0.4.0'],
+    'chart.js' => ['version' => '4.5.1'],
+    '@hotwired/turbo' => ['version' => '8.0.23'],
+    'tailwindcss' => ['version' => '4.2.1'],
+    'tailwindcss/index.min.css' => ['version' => '4.2.1', 'type' => 'css'],
+    'daisyui' => ['version' => '5.5.19'],
+    'daisyui/daisyui.min.css' => ['version' => '5.5.19', 'type' => 'css'],
+    'daisyui/theme' => ['version' => '5.5.19'],
+    'leaflet/dist/leaflet.min.css' => ['version' => '1.9.4', 'type' => 'css'],
+    'leaflet' => ['version' => '1.9.4'],
+    '@simplewebauthn/browser' => ['version' => '13.3.0'],
+    '@web-auth/webauthn-stimulus' => ['version' => '5.3.12'],
 ];

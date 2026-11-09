@@ -16,4 +16,9 @@ api_platform:
             standard_put: true
             rfc_7807_compliant_errors: true
     show_webby: false
+    # The "Authorize" button of the documentation, for the bearer tokens of the `api` firewall.
+    swagger:
+        http_auth:
+            bearerAuth:
+                scheme: bearer
     use_symfony_listeners: true

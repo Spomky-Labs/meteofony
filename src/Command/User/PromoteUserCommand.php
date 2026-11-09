@@ -7,6 +7,7 @@ namespace App\Command\User;
 use App\Repository\UserRepository;
 use Symfony\Component\Console\Attribute\Argument;
 use Symfony\Component\Console\Attribute\AsCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use function is_array;
 use function sprintf;
@@ -31,11 +32,11 @@ final readonly class PromoteUserCommand
         ]);
         if ($user === null) {
             $io->error('User not found');
-            return self::FAILURE;
+            return Command::FAILURE;
         }
         if (! is_array($roles)) {
             $io->error('A list of roles must be chosen');
-            return self::FAILURE;
+            return Command::FAILURE;
         }
         $roles = array_map(static function (string $role): string {
             if (str_starts_with($role, 'ROLE_')) {
@@ -48,6 +49,6 @@ final readonly class PromoteUserCommand
         $this->userRepository->save($user, true);
         $io->success('The user now has the following roles');
         $io->listing($user->getRoles());
-        return self::SUCCESS;
+        return Command::SUCCESS;
     }
 }

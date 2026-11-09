@@ -8,7 +8,11 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use App\State\UserDtoProvider;
 
-#[ApiResource(operations: [new Get('/me', provider: UserDtoProvider::class)],)]
+/**
+ * The authenticated user. Without one there is nothing to return, so the operation asks for an
+ * authenticated request, and an anonymous one gets a 401 where the provider used to fail with a 500.
+ */
+#[ApiResource(operations: [new Get('/me', security: "is_granted('IS_AUTHENTICATED')", provider: UserDtoProvider::class)],)]
 final readonly class User
 {
     public function __construct(

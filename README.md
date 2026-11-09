@@ -5,10 +5,10 @@ weather measures, and a few users with different roles. It is the playground of 
 Symfony security, where we audit it, find the gaps and harden its authentication.
 
 > [!IMPORTANT]
-> **Coming to the SymfonyCon Warsaw 2026 workshop?** Please go through [Getting started](#getting-started)
-> at home, before you travel. The first start downloads close to 1 GB (Docker images, PHP dependencies,
-> the Tailwind CLI), and conference Wi-Fi will not cope with a whole room doing it at the same time.
-> Once it works, `castor stop`: everything stays on your disk for the day of the workshop.
+> **Coming to a workshop?** Please go through [Getting started](#getting-started) at home, before the
+> day. The first start downloads close to 1 GB (Docker images, PHP dependencies, the Tailwind CLI), and
+> the venue Wi-Fi will not cope with a whole room doing it at the same time. Once it works,
+> `castor stop`: everything stays on your disk for the day of the workshop.
 
 ## Getting started
 

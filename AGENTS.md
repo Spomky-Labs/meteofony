@@ -72,21 +72,33 @@ FrankenPHP. `castor start` waits for that before running `bin/console`.
 
 The state of `main`, in `config/packages/security.yaml`:
 
-- One firewall, `main`, with a custom authenticator (`src/Security/UsernamePasswordAuthenticator.php`:
-  username, password, CSRF) and the `App\Security\UserProvider` provider. Logout is on `/logout`.
+- Two firewalls besides `dev`:
+  - `api` (`^/api`, stateless) reads `Authorization: Bearer <token>` through
+    `src/Security/AccessTokenHandler.php`, with the tokens that `app:access_token:create` issues. A valid
+    token authenticates the request as its owner, and an unknown one gets a 401. A request without a
+    token, or with one outside the RFC 6750 alphabet (which the extractor ignores), goes through
+    anonymously. The API documentation has an "Authorize" button for it (`api_platform.swagger.http_auth`).
+    The firewall has no entry point, so its 401 responses to anonymous requests carry no
+    `WWW-Authenticate` challenge.
+  - `main` uses a custom authenticator (`src/Security/UsernamePasswordAuthenticator.php`: username,
+    password, CSRF) and the `App\Security\UserProvider` provider. Logout is on `/logout`.
 - Access control: `/admin` needs `ROLE_ADMIN`, `/dashboard` and `/profile` need `ROLE_USER`, everything
-  else is public, `/api` included (its rule is commented out). The role hierarchy is
-  `ROLE_ADMIN` → `ROLE_USER`. `ROLE_MODERATOR` exists only in the seed data.
+  else is public. That includes `/api`: its rule is commented out, and the only operation that needs
+  authentication is `/api/me`, which returns the current user. The role hierarchy is `ROLE_ADMIN` → `ROLE_USER`. `ROLE_MODERATOR` exists only in the seed data.
+- Access tokens are stored as issued, in clear, with no expiry and no scope.
 - CSRF tokens are stateless (`config/packages/csrf.yaml`, `assets/controllers/csrf_protection_controller.js`).
 - Password reset uses `symfonycasts/reset-password-bundle`.
-- Partially wired, as workshop material:
-  - **WebAuthn**: the `WebauthnCredential` entity and repositories exist, the config is commented out,
-    and no WebAuthn bundle is installed.
+- Prepared but not enabled, as workshop material:
+  - **WebAuthn**: `web-auth/webauthn-symfony-bundle` is installed and wired to
+    `WebauthnCredentialRepository` and `WebauthnUserRepository`, with the Relying Party ID from
+    `RELYING_PARTY_ID`. The `webauthn_credentials` table is migrated, and the Stimulus controllers of
+    `@web-auth/webauthn-stimulus` are registered in `assets/stimulus_bootstrap.js`. Its controllers are
+    off, so no route exists, and no firewall uses it. Enabling it means turning `controllers` on in
+    `config/packages/webauthn.yaml`, adding `webauthn` to the `main` firewall, and putting the buttons in
+    the templates (a commented example sits in `templates/profile/index.html.twig`).
   - **X509** for `/admin`: `AdminProvider` and the `Admin` user (not a Doctrine entity) exist. The
     firewall and Caddy's `client_auth` (`frankenphp/Caddyfile`) are commented out, and the certificates
     are in `frankenphp/certs/`.
-  - **Access tokens**: the `AccessToken` entity and `app:access_token:create` exist, but no firewall
-    reads them on `main`.
 - Coraza WAF: off in the development Caddyfile (the comment there says why), on in production through
   `compose.prod.yaml`.
 - `.env` is committed and holds defaults only. Real secrets go in `.env.local` (ignored) or in the
@@ -111,8 +123,10 @@ each run, and they don't need the stack to be up. Their configuration lives in `
 
 `.github/workflows/ci.yml` calls these tasks by name, so renaming a task function renames a CI step.
 
-Tests live in `tests/Functional/` (`WebTestCase`). `tests/Benchmark/` holds PHPBench benchmarks of the
-password hashers (`.ci-tools/phpbench.json`). A feature isn't done until a test exercises it the way a
+Tests live in `tests/Functional/` (`WebTestCase`). The test environment has no database, so a test that
+goes through a repository replaces it in the test container (`ApiBearerTokenTest` shows how). PHPStan
+analyses `src/` only. `tests/Benchmark/` holds PHPBench benchmarks of the password hashers
+(`.ci-tools/phpbench.json`). A feature isn't done until a test exercises it the way a
 caller would: an HTTP request for a controller, a service call for a service, and not just "it didn't
 throw".
 

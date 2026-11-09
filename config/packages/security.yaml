@@ -21,6 +21,17 @@ security:
             pattern: ^/(_profiler|_wdt|assets|build)/
             security: false
 
+        # The API reads `Authorization: Bearer <token>` (tokens from `app:access_token:create`). A request
+        # with a valid token is authenticated as the token's owner, one with an invalid token gets a 401,
+        # and one without a token goes through anonymously: nothing requires authentication on ^/api
+        # yet (see access_control below).
+        api:
+            pattern: ^/api
+            stateless: true
+            provider: app_user_provider
+            access_token:
+                token_handler: App\Security\AccessTokenHandler
+
         main:
             pattern: ^/
             lazy: true

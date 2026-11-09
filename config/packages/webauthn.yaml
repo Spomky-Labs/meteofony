@@ -1,16 +1,19 @@
-# Please see the following page for more information: https://webauthn-doc.spomky-labs.com/the-webauthn-server/the-symfony-way#configuration
-
-#webauthn:
-#    credential_repository: 'App\Repository\WebauthnCredentialRepository'
-#    user_repository: 'App\Repository\WebauthnUserRepository'
-#    creation_profiles:
-#        default:
-#            rp:
-#                name: '%env(RELYING_PARTY_NAME)%'
-#                id: '%env(RELYING_PARTY_ID)%'
-#    request_profiles:
-#        default:
-#            rp_id: '%env(RELYING_PARTY_ID)%'
+# https://webauthn-doc.spomky-labs.com/symfony-bundle/configuration-references/
+#
+# WebAuthn is installed and wired to the application, but nothing uses it yet: the controllers below are
+# off, so no route exists, and no firewall authenticates with it (config/packages/security.yaml). Turning
+# it on is a workshop exercise.
+webauthn:
+    credential_repository: App\Repository\WebauthnCredentialRepository
+    user_repository: App\Repository\WebauthnUserRepository
+    creation_profiles:
+        default:
+            # No `name`: it is deprecated since 5.3.0, and the options then name the RP after its ID.
+            rp:
+                id: '%env(RELYING_PARTY_ID)%'
+    request_profiles:
+        default:
+            rp_id: '%env(RELYING_PARTY_ID)%'
 #    controllers:
 #        enabled: true
 #        creation:

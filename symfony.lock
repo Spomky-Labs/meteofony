@@ -426,5 +426,18 @@
     },
     "twig/extra-bundle": {
         "version": "v3.5.0"
+    },
+    "web-auth/webauthn-symfony-bundle": {
+        "version": "5.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "3.0",
+            "ref": "a5dff33bd46575bea263af94069650af7742dcb6"
+        },
+        "files": [
+            "config/packages/webauthn.yaml",
+            "config/routes/webauthn_routes.yaml"
+        ]
     }
 }

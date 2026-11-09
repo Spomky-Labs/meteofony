@@ -59,7 +59,8 @@
         "symfonycasts/reset-password-bundle": "^1.17",
         "symfonycasts/tailwind-bundle": "^1.0",
         "twig/extra-bundle": "^2.12|^3.0",
-        "twig/twig": "^2.12|^3.0"
+        "twig/twig": "^2.12|^3.0",
+        "web-auth/webauthn-symfony-bundle": "^5.3"
     },
     "config": {
         "allow-plugins": {
