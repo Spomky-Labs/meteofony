@@ -135,7 +135,59 @@ function startDocker(bool $pull = false): void
     }
 
     run(['docker', 'compose', 'up', '-d'], context: context()->withEnvironment(composeEnvironment()));
+    waitForPhp();
     frontend();
+}
+
+/**
+ * How long `castor start` waits for the `php` service, in seconds. The first start of a fresh clone is the
+ * long one: the entrypoint runs `composer install` into the bind-mounted vendor/, then the migrations, and
+ * only then execs FrankenPHP. On a slow connection that is several minutes.
+ */
+const PHP_READY_TIMEOUT = 900;
+
+/**
+ * Waits until FrankenPHP answers inside the `php` container. `docker compose up -d` returns as soon as the
+ * container runs, which is before the entrypoint has finished: on a fresh clone frontend() then called
+ * `bin/console` while vendor/ was still empty, and `castor start` died with exit code 255.
+ *
+ * The probe is the HEALTHCHECK of the Dockerfile, run directly rather than read from `docker inspect`: the
+ * health status only moves every 30 seconds, which would hold every restart that long, and it turns
+ * "unhealthy" once start-period is over, which a long `composer install` outlasts, so `up --wait` would
+ * give up on a start that is merely slow.
+ */
+function waitForPhp(): void
+{
+    $probe = ['docker', 'compose', 'exec', '-T', 'php', 'curl', '-fs', '-o', '/dev/null', 'http://localhost:2019/metrics'];
+    $context = context()
+        ->withEnvironment(composeEnvironment())
+        ->withQuiet()
+        ->withAllowFailure();
+
+    if (run($probe, context: $context)->isSuccessful()) {
+        return;
+    }
+
+    io()
+        ->note([
+            'Waiting for the php container. On the first start it installs the Composer dependencies,',
+            'which takes a few minutes: `docker compose logs -f php` shows where it is.',
+        ]);
+
+    $deadline = time() + PHP_READY_TIMEOUT;
+    while (time() < $deadline) {
+        sleep(2);
+        if (run($probe, context: $context)->isSuccessful()) {
+            return;
+        }
+    }
+
+    io()
+        ->error([
+            sprintf('The php container did not answer within %d seconds.', PHP_READY_TIMEOUT),
+            '`docker compose logs php` says why.',
+        ]);
+    exit(1);
 }
 
 /**
