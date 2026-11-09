@@ -135,7 +135,7 @@ function startDocker(bool $pull = false): void
     }
 
     run(['docker', 'compose', 'up', '-d'], context: context()->withEnvironment(composeEnvironment()));
-    frontend(true);
+    frontend();
 }
 
 /**
@@ -161,7 +161,7 @@ function startSymfony(): void
             LOCAL_SERVER_PORT
         ));
 
-    frontend(true);
+    frontend();
 }
 
 /**
